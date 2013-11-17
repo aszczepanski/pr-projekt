@@ -22,7 +22,7 @@ T3 > tk12 + tk23 + tk34 + A3*d3 + tk24 - M*y1;
 T3 > tk12 + tk23 + tk34 + A3*d3;
 T3 > tk12 + tk23 + tk34 + tk24 - M + M*y2;
 
-T4 > tk12 + tk24 + tk34 + tk23 - M + M*y1 + 10*d4;
+T4 > tk12 + tk24 + tk34 + tk23 - M + M*y1 + A4*d4;
 T4 > tk12 + tk24 + tk34 - M*y1 + A4*d4;
 T4 > tk12 + tk24 + tk34 + tk23 - M*y1 + A4*d42;
 
