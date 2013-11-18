@@ -41,6 +41,8 @@ x34 < 1;
 V*x34 > d43;
 
 bg24 < 1;
+M*bg24 > tk24 - tk23 - tk34;
+M - M*bg24 > tk23 + tk34 - tk24;
 
 int d1, d2, d3, d42, d43;
 int x12, x23, x24, x34;
