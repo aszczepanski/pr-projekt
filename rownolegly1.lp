@@ -17,14 +17,14 @@ T1 > A1*d1;
 T1 > tk12;
 
 T2 > tk12 + A2*d2;
-T2 > tk12 + tk24;
-T2 > tk12 + tk23;
+T2 > tk12 + tk24 - M + M*bg24;
+T2 > tk12 + tk23 - M*bg24;
 
 T3 > tk12 + tk23 + A3*d3;
 T3 > tk12 + tk23 + tk34;
 
-T4 > tk12 + tk23 + tk34;
-T4 > tk12 + tk24;
+T4 > tk12 + tk23 + tk34 - M*bg24;
+T4 > tk12 + tk24 - M + M*bg24;
 T4 > tk12 + tk24 + A4*d4 - M*bg24;
 T4 > tk12 + tk23 + tk34 + A4*d43 - M*bg24;
 T4 > tk12 + tk23 + tk34 + A4*d4 - M + M*bg24;
