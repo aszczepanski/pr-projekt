@@ -12,8 +12,18 @@ Notacja dotycząca modelu.
 \begin{tabular}{|c|l|}
 \hline
 $T$ & minimalizowany czas zakończenia wszystkich dzialań \\ \hline
-$T_{x}$ & najpóźniejszy czas zakończenia działań na procesorze x \\ \hline
-$A_{x}$ & czas potrzebny na obliczenie jednej porcji danych na procesorze x \\ \hline
+$T_{a}$ & najpóźniejszy czas zakończenia działań na procesorze $a$ \\ \hline
+$A_{a}$ & czas potrzebny na obliczenie jednej porcji danych na procesorze $a$ \\ \hline
+$S_{ab}$ & czas potrzebny na zainicjowanie połączenia między procesorami $a$ i $b$ \\ \hline
+$C_{ab}$ & czas potrzebny na przesłanie jednej porcji danych na łączu między procesorami $a$ i $b$ \\ \hline
+$V$ & suma wszystkich danych do obliczenia \\ \hline
+$d_{a}$ & dane obliczane na procesorze $a$ \\ \hline
+$d_{ab}$ & dane obliczne na procesorze $a$ otrzymane z procesora $b$ \\ \hline
+$d_{abx}$ & część $x$ danych obliczanych na procesorze $a$ otrzymanych z procesora $b$ ($x = 1, 2$) \\ \hline
+$t_{kab}$ & czas komunikacji na łączu pomiędzy procesorami $a$ i $b$ \\ \hline
+$x_{ab}$ & zmienna binarna opisana w równaniu (\ref{eq:x}) \\ \hline
+$bg24$ & zmienna binarna opisana w równaniu (\ref{eq:bg24}) \\ \hline
+$M$ & duża liczba wyznaczona w równaniu (\ref{eq:M}) \\ \hline
 \end{tabular}
 \caption{Notacja wykorzystywana w raporcie}
 \label{tab:notacja}
@@ -58,7 +68,7 @@ t_{k34} = S_{34}x_{34} + C_{34}d_{43}
 \end{equation}
 
 W powyższych wzorach wykorzystywane są zmienne binarne. Są one tak dobrane, że jeśli między procesorami $a$ i $b$ występuje komunikacja,
-to $t_{kab} = 1$, w przeciwnym wypadku solver może przypisać im wartość $0$ w celu optymalizacji rozwiązania.
+to $x_{ab} = 1$, w przeciwnym wypadku solver może przypisać im wartość $0$ w celu optymalizacji rozwiązania.
 
 \begin{equation} \label{eq:x}
 \begin{array}{l}
@@ -73,7 +83,14 @@ V_{x34} > d_{43}
 \end{array}
 \end{equation}
 
-Istotne jest, żeby zmienne dotyczące ilości danych oraz zmienne binarna były całkowite.
+Istotne jest, żeby zmienne dotyczące ilości danych oraz zmienne binarne były całkowite. \\
+
+Dla analizowanej architektury zawsze da się znaleźć rozwiązanie, które niegorsze od
+przetworzenia wszystkich danych przez procesor $P1$ bez komunikacji. Można zatem przyjąć:
+
+\begin{equation} \label{eq:M}
+M = d_{1}A_{1}
+\end{equation}
 
 \subsection{Modele sekwencyjne}
 
