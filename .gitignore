@@ -54,6 +54,8 @@ out.lp
 *.ps
 *.eps
 doc/document.pdf
+doc/TSW*
+doc/tex/TSW*
 
 ## Bibliography auxiliary files (bibtex/biblatex/biber):
 *.bbl
