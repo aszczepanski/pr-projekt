@@ -72,14 +72,14 @@ to $x_{ab} = 1$, w przeciwnym wypadku solver może przypisać im wartość $0$ w
 
 \begin{equation} \label{eq:x}
 \begin{array}{l}
-x_{12} < 1 \\
-Vx_{12} > d_{2} + d_{3} + d_{4} \\
-x_{23} < 1 \\
-Vx_{23} > d_{3} + d_{43} \\
-x_{24} < 1 \\
-Vx_{24} > d_{42} \\
-x_{34} < 1 \\
-V_{x34} > d_{43}
+x_{12} \leq 1 \\
+Vx_{12} \geq d_{2} + d_{3} + d_{4} \\
+x_{23} \leq 1 \\
+Vx_{23} \geq d_{3} + d_{43} \\
+x_{24} \leq 1 \\
+Vx_{24} \geq d_{42} \\
+x_{34} \leq 1 \\
+V_{x34} \geq d_{43}
 \end{array}
 \end{equation}
 
@@ -133,18 +133,19 @@ Model równoległy można przedstawić z wykorzystaniem zmiennyj binarnej $bg24$
 
 \begin{equation} \label{eq:bg24}
 \begin{array}{l}
-t_{k24} > t_{k23} + t_{k34} \iff bg24 = 1 \\
-t_{k24} \leq t_{k23} + t_{k34} \iff bg24 = 0
+t_{k24} > t_{k23} + t_{k34} \Rightarrow bg24 = 1 \\
+t_{k24} < t_{k23} + t_{k34} \Rightarrow bg24 = 0
 \end{array}
 \end{equation}
 
+Jeśli $t_{k24} = t_{k23} + t_{k34}$ solver może przypisać zmiennej $bg24$ wartość $0$ lub $1$.
 Powyższe fakty można zapisać w następującej postaci:
 
 \begin{equation}
 \begin{array}{l}
-bg24 < 1 \\
+bg24 \leq 1 \\
 Mbg24 \geq t_{k24} - t_{k23} - t_{k34} \\
-M(1 - bg24) > t_{k23} + t_{k34} - t_{k24}
+M(1 - bg24) \geq t_{k23} + t_{k34} - t_{k24}
 \end{array}
 \end{equation}
 
