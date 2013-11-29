@@ -19,3 +19,160 @@ $A_{x}$ & czas potrzebny na obliczenie jednej porcji danych na procesorze x \\ \
 \label{tab:notacja}
 \end{table}
 
+\subsection{Wzory wspólne dla wszystkich modeli}
+
+We wszystkich modelach minimalizujemy najdłuższy czas obliczeń
+
+\begin{equation} \label{eq:min}
+\begin{array}{l}
+min T \\
+T \geq T_{1} \\
+T \geq T_{2} \\
+T \geq T_{3} \\
+T \geq T_{4}
+\end{array}
+\end{equation}
+
+Istotne są założenia odnośnie danych
+
+\begin{equation} \label{eq:data}
+\begin{array}{l}
+d_{1} + d_{2} + d_{3} + d_{4} = V \\
+d_{211} + d_{212} = d_{2} \\
+d_{321} + d_{322} = d_{3} \\
+d_{43} + d_{42} = d_{4} \\
+d_{421} + d_{422} = d_{42} \\
+d_{431} + d_{432} = d_{43}
+\end{array}
+\end{equation}
+
+Dla wszystkich modeli można zastosować te same wzory na czas komunikacji na poszczególnych łączach.
+
+\begin{equation} \label{eq:tk}
+\begin{array}{l}
+t_{k12} = S_{12}x_{12} + (V - d_{1})C_{12} \\
+t_{k23} = S_{23}x_{23} + C_{23}d_{3} + C_{23}d_{43} \\
+t_{k24} = S_{24}x_{24} + C_{24}d_{42} \\
+t_{k34} = S_{34}x_{34} + C_{34}d_{43}
+\end{array}
+\end{equation}
+
+W powyższych wzorach wykorzystywane są zmienne binarne. Są one tak dobrane, że jeśli między procesorami $a$ i $b$ występuje komunikacja,
+to $t_{kab} = 1$, w przeciwnym wypadku solver może przypisać im wartość $0$ w celu optymalizacji rozwiązania.
+
+\begin{equation} \label{eq:x}
+\begin{array}{l}
+x_{12} < 1 \\
+Vx_{12} > d_{2} + d_{3} + d_{4} \\
+x_{23} < 1 \\
+Vx_{23} > d_{3} + d_{43} \\
+x_{24} < 1 \\
+Vx_{24} > d_{42} \\
+x_{34} < 1 \\
+V_{x34} > d_{43}
+\end{array}
+\end{equation}
+
+Istotne jest, żeby zmienne dotyczące ilości danych oraz zmienne binarna były całkowite.
+
+\subsection{Modele sekwencyjne}
+
+\subsubsection{Pierwszy model sekwencyjny}
+
+\begin{equation} \label{eq:sek1}
+\begin{array}{l}
+T_{1} \geq t_{k12} + d_{1}A_{2} \\
+T_{2} \geq t_{k12} + t_{k24} + t_{k23} + d_{2}A_{2} \\
+T_{3} \geq t_{k12} + t_{k24} + max(t_{k23} + d_{321}A_{3}, d_{421}A_{4}) + t_{k34} + d_{322}A_{3} \\
+T_{4} \geq t_{k12} + t_{k24} + max(t_{k23} + d_{321}A_{3}, d_{421}A_{4}) + t_{k34} + (d_{422} + d_{43})A_{4}
+\end{array} 
+\end{equation}
+
+\subsubsection{Drugi model sekwencyjny}
+
+\begin{equation} \label{eq:sek2}
+\begin{array}{l}
+T_{1} \geq t_{k12} + d_{1}A_{2} \\
+T_{2} \geq t_{k12} + t_{k23} + max(d_{211}A_{2}, t_{k34} + d_{431}A_{4}) + t_{k24} + d_{212}A_{2} \\
+T_{3} \geq t_{k12} + t_{k23} + t_{k34} + d_{3}A_{3} \\
+T_{4} \geq t_{k12} + t_{k23} + max(d_{211}A_{2}, t_{k34} + d_{431}A_{4}) + t_{k24} + (d_{432} + d_{42})A_{4}
+\end{array} 
+\end{equation}
+
+\subsubsection{Trzeci model sekwencyjny}
+
+\begin{equation} \label{eq:sek3}
+\begin{array}{l}
+T_{1} \geq t_{k12} + d_{1}A_{2} \\
+T_{2} \geq t_{k12} + t_{k23} + t_{k24} + d_{2}A_{2} \\
+T_{3} \geq t_{k12} + t_{k23} + max(d_{321}A_{3}, t_{k24} + d_{421}A_{4}) + t_{k34} + d_{322}A_{3} \\
+T_{4} \geq t_{k12} + t_{k23} + max(d_{321}A_{3}, t_{k24} + d_{421}A_{4}) + t_{k34} + (d_{422} + d_{43})A_{4}
+\end{array}
+\end{equation}
+
+\subsection{Model równoległy}
+
+Model równoległy można przedstawić z wykorzystaniem zmiennyj binarnej $bg24$.
+
+\begin{equation} \label{eq:bg24}
+\begin{array}{l}
+t_{k24} > t_{k23} + t_{k34} \iff bg24 = 1 \\
+t_{k24} \leq t_{k23} + t_{k34} \iff bg24 = 0
+\end{array}
+\end{equation}
+
+Powyższe fakty można zapisać w następującej postaci:
+
+\begin{equation}
+\begin{array}{l}
+bg24 < 1 \\
+Mbg24 \geq t_{k24} - t_{k23} - t_{k34} \\
+M(1 - bg24) > t_{k23} + t_{k34} - t_{k24}
+\end{array}
+\end{equation}
+
+Na procesorze $P1$ obliczenia rozpoczynają się równocześnie z komunikacją $t_{k12}$ od razu po starcie systemu.
+
+\begin{equation}
+\begin{array}{l}
+T_{1} \geq d_{1}A_{1} \\
+T_{1} \geq t_{k12}
+\end{array}
+\end{equation}
+
+Na procesorze $P2$ obliczenia rozpoczynają się po zakończeniu komunikacji $t_{k12}$.
+W tym samym momencie rozpoczyna się komunikacja $t_{k23}$ oraz $t_{k24}$.
+
+\begin{equation}
+\begin{array}{l}
+T_{2} \geq t_{k12} + d_{2}A_{2} \\
+T_{2} \geq t_{k12} + max(t_{k23}, t_{k24})
+\end{array}
+\end{equation}
+
+Na procesorze $P3$ obliczenie i komunikacja rozpoczynają się równolegle po zakończeniu komunikacji $t_{k23}$.
+
+\begin{equation}
+\begin{array}{l}
+T_{3} \geq t_{k12} + t_{k23} + d_{3}A_{3} \\
+T_{3} \geq t_{k12} + t_{k23} + t_{k34}
+\end{array}
+\end{equation}
+
+Na procesorze $P4$ sytuacja jest bardziej złożona. W zależności kolejności otrzymania danych procesor ten rozpocznie stosowne obliczenia.
+Warto zauważyć, że $P4$ nie wysyła danych, a jedynie odbiera je.
+Jeśli zajdzie warunek $t_{k24} \leq t_{k23} + t_{k34}$ to zastosowane zostanie równanie (\ref{eq:row41}), w przeciwnym wypadku równanie (\ref{eq:row42}).
+
+\begin{equation} \label{eq:row41}
+\begin{array}{rl}
+T_{4} \geq &t_{k12} + max(t_{k24} + d_{421}A_{4}, t_{k23} + t_{k34}) \\
+&+ (d_{422} + d_{43})A_{4} - Mbg24 \\
+\end{array}
+\end{equation}
+
+\begin{equation} \label{eq:row42}
+\begin{array}{rl}
+T_{4} \geq &t_{k12} + max(t_{k23} + t_{k34} + d_{431}A_{4}, t_{k24}) \\
+&+ (d_{432} + d_{42})A_{4} - (1-bg24)M
+\end{array}
+\end{equation}
