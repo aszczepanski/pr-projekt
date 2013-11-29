@@ -16,9 +16,13 @@ Biorąc pod uwagę fakt, że węzeł P1 jako jedyny  posiada dane w stanie pocz�
 \begin{figure}[!ht]
 \centering
 \includegraphics[width=0.5\textwidth]{symetry.pdf}
-\caption{Symetria w analizowanym systemie oznaczona linią przerywaną}
+\caption{Symetria w analizowanym systemie (oznaczona linią przerywaną)}
 \label{fig:symetry}
 \end{figure}
+
+W przypadku modeli sekwencyjnych transmisja pomiędzy urządzeniami może się odbyć tylko i wyłącznie gdy oba nie wykonują żadnych obliczeń i nie uczestniczą w innej komunikacji. W przypadku zrównoleglenia obliczeń dopuszczalna jest jednoczesna komunikacja danego procesora z więcej niż jednym urządzeniem oraz dokonywania obliczeń na danych znajdujących się na tymże procesorze. Zważając na fakt, że porcje danych są liczbami całkowitymi należy mieć na uwadze konieczność synchronizacji urządzeń.
+
+Dla każdego z modeli minimalizowana jest wartość $T$, która jest większa bądź równa od wszystkich wartości $T_x$ (czas zakończenia wszystkich działań na procesorze $Px$) gdzie $x = 1, 2, 3, 4$.
  
 \subsection{Analiza modelu sekwencyjnego}
 
