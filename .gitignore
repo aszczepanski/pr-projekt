@@ -53,7 +53,7 @@ out.lp
 # these rules might exclude image files for figures etc.
 *.ps
 *.eps
-*.pdf
+doc/document.pdf
 
 ## Bibliography auxiliary files (bibtex/biblatex/biber):
 *.bbl
