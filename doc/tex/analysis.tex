@@ -59,7 +59,7 @@ Model ten zakłada kolejność komunikacji: $P1 \to P2$, $P2 \to P4$, $P2 \to P3
 Działanie procesora $P1$ polega na wysłaniu do $P2$ danych przetwarzanych przez inne procesory a następnie przetworzeniu pozostałych danych.
 Jeśli prędkość komunikacji na tym łączu będzie odpowiednio mała lub pozostałe procesory będą wolne to komunikacja na tym łączu nie wystąpi
 i $P1$ przetworzy wszystkie dane w systemie. Jeśli z kolei łącze 1 będzie szybkie lub procesory $P2$, $P3$, $P4$ będą szybkie
-lub procesor $P1$ będzie wolny to czas pracy procesora $P1$ może sprowadzić się do wysłania danych do procesora $P2$.
+lub procesor $P1$ będzie ekstremalnie wolny to czas pracy procesora $P1$ może sprowadzić się do wysłania danych do procesora $P2$.
 
 \item[Węzeł $P2$] \hfill \\
 
@@ -117,7 +117,11 @@ Konieczna jest zatem synchronizacja między procesorami (możliwe, że kosztem c
 
 \item[Węzeł $P3$] \hfill \\
 
+Procesor $P3$ otrzymuje dane z procesora $P2$ (uprzednio musi zakończyć się komunikacja pomiędzy procesorami $P1$ i $P2$). W momencie zakończenia przesyłania danych z procesora $P2$ procesor $P3$ pełni rolę nadawcy w komunikacji z procesorem $P4$. Po zakończeniu tej komunikacji następują obliczenia na danych. Czas zakończenia tych obliczeń to górna granica zakończenia przetwarzania na tym procesorze.
+
 \item[Węzeł $P4$] \hfill \\
+
+W tym modelu procesor $P4$ jako ostatni otrzymuje jakiekolwiek dane. Moment ten to czas zakończenia komunikacji z procesorem $P3$ (poprzedzony komunikacją $P1 \to P2$ oraz $P2 \to P3$). Po zakończeniu odbioru danych od $P3$ procesor może rozpocząć obliczenia, ponieważ konieczna jest synchroniazacja z $P2$ (możliwe, że kosztem bezczynności). Po synchronizacji procesor $P4$ pełni rolę odbiorcy w komunikacji z $P2$. Zakończenie tej komunikacji umożliwia dalsze przetwarzanie danych. 
 
 \end{description}
 
