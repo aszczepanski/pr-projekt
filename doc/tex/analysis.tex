@@ -53,63 +53,31 @@ Działanie procesora $P1$ polega na wysłaniu do $P2$ danych przetwarzanych prze
 Jeśli prędkość komunikacji na tym łączu będzie odpowiednio mała lub pozostałe procesory będą wolne to komunikacja na tym łączu nie wystąpi
 i $P1$ przetworzy wszystkie dane w systemie. Jeśli z kolei łącze 1 będzie szybkie lub procesory $P2$, $P3$, $P4$ będą szybkie
 lub procesor $P1$ będzie wolny to czas pracy procesora $P1$ może sprowadzić się do wysłania danych do procesora $P2$.
-Można zatem wyróżnić przypadki:
-
-\begin{enumerate}
-\item wysłanie danych do $P2$, obliczenia
-\item wysłanie danych do $P2$, brak obliczeń
-\item obliczenia, brak komunikacji z $P2$
-\end{enumerate}
 
 \item[Węzeł $P2$] \hfill \\
 
 Jeśli wystąpi komunikacja między $P1$ i $P2$ to w ogólnym przypadku czas zakończenia pracy procesora $P2$ można ustalić jako sumę czasu komunikacji na łączu $P1 \to P2$,
 czasu komunikacji na łączu $P2 \to P4$, czasu komunikacji na łączu $P2 \to P3$ oraz obliczeń na tym procesorze.
-Jeśli któraś z tych komunikacji nie wystąpi do czas pracy tego procesora będzie odpowiednio krótszy.
-Zakładając, że najpierw procesor odbiera dane od $P1$ można następnie wyróżnić następujące przypadki:
-
-\begin{enumerate}
-\item obliczenia, brak komunikacji z $P3$ i $P4$
-\item wysłanie danych do $P4$, obliczenia
-\item wysłanie danych do $P4$, brak obliczeń
-\item wysłanie danych do $P3$, obliczenia
-\item wysłanie danych do $P3$, brak obliczeń
-\item wysłanie danych do $P4$, wysłanie danych do $P3$, obliczenia
-\item wysłanie danych do $P4$, wysłanie danych do $P3$, brak obliczeń
-\end{enumerate}
+Jeśli któraś z tych komunikacji nie wystąpi to czas pracy tego procesora będzie odpowiednio krótszy.
 
 \item[Węzeł $P3$] \hfill \\
 
 Jeżeli wystąpi komunikacja między $P2$ i $P3$ to czas zakończenia pracy $P3$ można ustalić jako sumę czasu komunikacji na łączu $P1 \to P2$,
-czasu komunikacji na łączu $P2 \to P3$, obliczeń pomiędzy komunikacjami, komunikacji $P3 \to P4$ oraz obliczeń po komunikacji.
+czasu komunikacji na łączu $P2 \to P3$, obliczeń pomiędzy komunikacjami, czasu bezczynności (koniecznego do synchronizacji z $P4$), komunikacji $P3 \to P4$ oraz obliczeń po komunikacji.
 Obliczenia między komunikacjami wynikają z faktu, że jednocześnie z komunikacją $P2 \to P3$ mogą odbywać się obliczenia na procesorze $P4$
 które muszą zakończyć się po obliczeniu całkowitej porcji danych i jednocześnie przed rozpoczęciem komunikacji $P3 \to P4$.
-Opłacalne może okazać się obliczenie części danych na procesorze $P3$ przed rozpoczęciem nadawania danych do $P4$.
-Po odebraniu danych od $P2$ można wyróżnić następujące przypadki:
+Opłacalne może okazać się obliczenie części danych na procesorze $P3$ przed rozpoczęciem nadawania danych do $P4$. \\
 
-\begin{enumerate}
-\item obliczenia, brak komunikacji z $P4$ \label{sek1p31}
-\item wysłanie danych do $P4$, obliczenia
-\item obliczenia 1 części danych, wysłanie danych do $P4$, obliczenia 2 części danych
-\item wysłanie danych do $P4$, brak obliczeń \label{sek1p32}
-\end{enumerate}
-
-Podczas analizy systemu łatwo zauważyć, że przypadek z \ref{sek1p31} występuje najczęściej, gdyż między $P2$ i $P4$ jest bezpośrednie połączenie.
-Ciekawy jest przypadek \ref{sek1p32} kiedy węzeł $P3$ nie przeprowadza żadnych obliczeń a jedynie pośredniczy w komunikacji między $P2$ i $P4$.
-Występuje on m.in. gdy łącza $P2 \to P3$ i $P3 \to P4$ są dostatecznie szybkie, a procesor $P3$ wolny.
+Podczas analizy systemu łatwo zauważyć, że gdy szybkości procesorów i łącz są zrównoważone to przypadek z pominięciem komunikacji $P3 \to P4$ występuje najczęściej,
+gdyż między $P2$ i $P4$ jest bezpośrednie połączenie.
+Ciekawy jest przypadek w którym węzeł $P3$ nie przeprowadza żadnych obliczeń, a jedynie pośredniczy w komunikacji między $P2$ i $P4$.
+Występuje on m.in. gdy łącza $P2 \to P3$ i $P3 \to P4$ są dostatecznie szybkie, a procesor $P3$ jest wolny.
 
 \item[Węzeł $P4$] \hfill \\
 
-Czas zakończenia pracy procesora $P4$ jest w dużej mierze zależny od pracy procesora $P3$. Po zakończeniu odbioru danych od $P2$ procesor może rozpocząć obliczenia.
-Pierwsza część obliczeń kończy się przed komunikacją $P3 \to P4$ (która może nie wystąpić). Po zakończeniu tej komunikacji rozpoczyna się druga część obliczeń.
-Można wyróżnić przypadki:
-
-\begin{enumerate}
-\item odbiór danych od $P2$, obliczenia
-\item odbiór danych od $P2$, obliczenia 1 części danych, odbiór danych od $P3$, obliczenia 2 części danych
-\item odbiór danych od $P2$, odbiór danych od $P3$, obliczenia
-\item odbiór danych od $P3$, obliczenia
-\end{enumerate}
+Czas zakończenia pracy procesora $P4$ jest w dużej mierze zależny od pracy procesora $P3$. Po zakończeniu odbioru danych od $P2$ procesor może rozpocząć obliczenia,
+ponieważ konieczna jest synchroniazacja z $P3$ (możliwe, że kosztem bezczynności).
+Jeśli komunikacja $P3 \to P4$ występuje, to pierwsza część obliczeń kończy się przed jej rozpoczęciem. Po zakończeniu tej komunikacji rozpoczyna się druga część obliczeń. \\
 
 Warto zauważyć, że gdyby obliczenia mogły być przerwane w dowolnym momencie (a nie tylko po obliczeniu całkowitej ilości danych),
 to obliczenia między odbiorem danych od $P2$ i odbiorem danych od $P3$ zawszy by występowały (jeśli odpowiednie komunikacje miały by miejsce).
@@ -120,13 +88,70 @@ to obliczenia między odbiorem danych od $P2$ i odbiorem danych od $P3$ zawszy b
 
 Model ten zakłada kolejność komunikacji: $P1 \to P2$, $P2 \to P3$, $P3 \to P4$ oraz $P2 \to P4$. \\
 
+\begin{description}
+
+\item[Węzeł $P1$] \hfill \\
+
+Działanie procesora $P1$ jest analogiczne do działania procesora $P1$ w modelu 1.
+
+\item[Węzeł $P2$] \hfill \\
+
+Procesor $P2$ po otrzymaniu danych od $P1$ rozpoczyna wysyłanie danych do $P3$, a następnie w czasie komunikacji $P3 \to P4$ oblicza pierwszą część danych.
+W czasie tych obliczeń ma miejsce komunikacja $P3 \to P4$. Z powodu konieczności obliczenia całkowitej porcji danych obliczenia mogą trwać dłużej niż komunikacja
+między $P3$ i $P4$. W szczególności na procesorze $P4$ po zakończeniu tej komunikacji mogą rozpocząć się obliczenia.
+Konieczna jest zatem synchronizacja między procesorami (możliwe, że kosztem chwilowej bezczynności), po której następuje komunikacja $P2 \to P4$ i pozostałe obliczenia.
+
+\item[Węzeł $P3$] \hfill \\
+
+\item[Węzeł $P4$] \hfill \\
+
+\end{description}
+
 \subsubsection{Trzeci model sekwencyjny}
+
+\begin{description}
+
+\item[Węzeł $P1$] \hfill \\
+
+Działanie procesora $P1$ jest analogiczne do działania procesora $P1$ w modelu 1.
+
+\item[Węzeł $P2$] \hfill \\
+
+\item[Węzeł $P3$] \hfill \\
+
+\item[Węzeł $P4$] \hfill \\
+
+\end{description}
 
 \subsection{Analiza modelu równoległego}
 
 Analiza modelu równoległego.
 
+
 \subsubsection{Pierwszy model równoległy}
+
+\begin{description}
+
+\item[Węzeł $P1$] \hfill \\
+
+\item[Węzeł $P2$] \hfill \\
+
+\item[Węzeł $P3$] \hfill \\
+
+\item[Węzeł $P4$] \hfill \\
+
+\end{description}
 
 \subsubsection{Drugi model równoległy}
 
+\begin{description}
+
+\item[Węzeł $P1$] \hfill \\
+
+\item[Węzeł $P2$] \hfill \\
+
+\item[Węzeł $P3$] \hfill \\
+
+\item[Węzeł $P4$] \hfill \\
+
+\end{description}
