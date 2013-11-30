@@ -39,11 +39,18 @@ Dla każdego z modeli minimalizowana jest wartość $T$, która jest większa b�
 Przetwarzanie w systemie bez zrównoleglenia podzieliliśmy na 3 modele, w zależności od kolejności przesyłania danych na poszczególnych łączach.
 W każdym z modeli jako pierwsza występuje komunikacja na łączu $P1 \to P2$. Następnie odbywają się komunikacje na łączach $P2 \to P3$, $P2 \to P4$ oraz $P3 \to P4$.
 Komunikacje te mogą występować w różnej kolejności z uwzględnieniem, że komunikacja $P2 \to P3$ musi wystąpić przed komunikacją $P3 \to P4$ (jeśli w ogóle występuje).
-W analizowanym systemie w danej chwili komunikacja może odbywać się jedynie na jednym łączu, ponieważ w każdej z komunikacji bierze udział węzeł $P2$.
+W analizowanym systemie w danej chwili komunikacja może odbywać się jedynie na jednym łączu.
 
 \subsubsection{Pierwszy model sekwencyjny}
 
-Model ten zakłada kolejność komunikacji: $P1 \to P2$, $P2 \to P4$, $P2 \to P3$ oraz $P3 \to P4$. \\
+Model ten zakłada kolejność komunikacji: $P1 \to P2$, $P2 \to P4$, $P2 \to P3$ oraz $P3 \to P4$.
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=0.5\textwidth]{arrows1342.pdf}
+\caption{Kolejność komunikacji w pierwszym modelu sekwencyjnym}
+\label{fig:seq1}
+\end{figure}
 
 \begin{description}
 
@@ -88,6 +95,13 @@ to obliczenia między odbiorem danych od $P2$ i odbiorem danych od $P3$ zawszy b
 
 Model ten zakłada kolejność komunikacji: $P1 \to P2$, $P2 \to P3$, $P3 \to P4$ oraz $P2 \to P4$. \\
 
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=0.5\textwidth]{arrows1234.pdf}
+\caption{Kolejność komunikacji w drugim modelu sekwencyjnym}
+\label{fig:seq2}
+\end{figure}
+
 \begin{description}
 
 \item[Węzeł $P1$] \hfill \\
@@ -108,6 +122,13 @@ Konieczna jest zatem synchronizacja między procesorami (możliwe, że kosztem c
 \end{description}
 
 \subsubsection{Trzeci model sekwencyjny}
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=0.5\textwidth]{arrows1243.pdf}
+\caption{Kolejność komunikacji w drugim modelu sekwencyjnym}
+\label{fig:seq3}
+\end{figure}
 
 \begin{description}
 
