@@ -83,7 +83,7 @@ Występuje on m.in. gdy łącza $P2 \to P3$ i $P3 \to P4$ są dostatecznie szybk
 \item[Węzeł $P4$] \hfill \\
 
 Czas zakończenia pracy procesora $P4$ jest w dużej mierze zależny od pracy procesora $P3$. Po zakończeniu odbioru danych od $P2$ procesor może rozpocząć obliczenia,
-ponieważ konieczna jest synchroniazacja z $P3$ (możliwe, że kosztem bezczynności).
+ponieważ konieczna jest synchroniazacja z $P3$ (możliwe, że kosztem bezczynności - jak na rysunku \ref{fig:seq1b}).
 Jeśli komunikacja $P3 \to P4$ występuje, to pierwsza część obliczeń kończy się przed jej rozpoczęciem. Po zakończeniu tej komunikacji rozpoczyna się druga część obliczeń. \\
 
 Warto zauważyć, że gdyby obliczenia mogły być przerwane w dowolnym momencie (a nie tylko po obliczeniu całkowitej ilości danych),
@@ -92,14 +92,14 @@ to obliczenia między odbiorem danych od $P2$ i odbiorem danych od $P3$ zawszy b
 \begin{figure}[!ht]
 \centering
 \includegraphics[width=1.0\textwidth]{sek3a.pdf}
-\caption{Oczekiwany wykres Gantta ilustrujący 1. model sekwencyjny (procesor P4 czeka na P3).}
+\caption{Oczekiwany wykres Gantta ilustrujący 1. model sekwencyjny (procesor P3 czeka na P4).}
 \label{fig:seq1a}
 \end{figure}
 
 \begin{figure}[!ht]
 \centering
 \includegraphics[width=1.0\textwidth]{sek3b.pdf}
-\caption{Oczekiwany wykres Gantta ilustrujący 1. model sekwencyjny (procesor P3 czeka na P4).}
+\caption{Oczekiwany wykres Gantta ilustrujący 1. model sekwencyjny (procesor P4 czeka na P3).}
 \label{fig:seq1b}
 \end{figure}
 
@@ -131,7 +131,9 @@ Konieczna jest zatem synchronizacja między procesorami (możliwe, że kosztem c
 
 \item[Węzeł $P3$] \hfill \\
 
-Procesor $P3$ otrzymuje dane z procesora $P2$ (uprzednio musi zakończyć się komunikacja pomiędzy procesorami $P1$ i $P2$). W momencie zakończenia przesyłania danych z procesora $P2$ procesor $P3$ pełni rolę nadawcy w komunikacji z procesorem $P4$. Po zakończeniu tej komunikacji następują obliczenia na danych. Czas zakończenia tych obliczeń to górna granica zakończenia przetwarzania na tym procesorze.
+Procesor $P3$ otrzymuje dane z procesora $P2$ (uprzednio musi zakończyć się komunikacja pomiędzy procesorami $P1$ i $P2$).
+W momencie zakończenia przesyłania danych z procesora $P2$ procesor $P3$ pełni rolę nadawcy w komunikacji z procesorem $P4$.
+Po zakończeniu tej komunikacji następują obliczenia na danych. Czas zakończenia tych obliczeń to górna granica zakończenia przetwarzania na tym procesorze.
 
 \item[Węzeł $P4$] \hfill \\
 
@@ -200,33 +202,35 @@ Procesor $P4$ otrzymuje dane z procesora $P2$ (następuje to po zakończeniu kom
 
 \subsection{Analiza modelu równoległego}
 
-Analiza modelu równoległego.
-
-
-\subsubsection{Pierwszy model równoległy}
-
-\begin{description}
-
-\item[Węzeł $P1$] \hfill \\
-
-\item[Węzeł $P2$] \hfill \\
-
-\item[Węzeł $P3$] \hfill \\
-
-\item[Węzeł $P4$] \hfill \\
-
-\end{description}
-
-\subsubsection{Drugi model równoległy}
+Przetwarzanie w systemi ze współbieżnością z jedną komunikacją na łączu sprowadziliśmy do jednego modelu.
+W modelu tym istotne jest czy krótszy jest czas komunikacji $P2 \to P4$ czy suma czasów komunikacji $P2 \to P3$ i $P3 \to P4$.
+W zależności od powyższych czasów procesor $P4$ rozpocznie od obliczeń danych otrzymanych z $P2$ lub $P3$.
 
 \begin{description}
 
 \item[Węzeł $P1$] \hfill \\
 
+Procesor $P1$ równolegle wysyła dane potrzebne innym procesorom do procesora $P2$ i oblicza pozostałe dane.
+Podobnie jak w przypadku przetwarzania sekwencyjnego komunikacja bądź obliczenia mogą w szczególnych przypadkach nie wystąpić.
+
 \item[Węzeł $P2$] \hfill \\
+
+Jeśli wystąpi komunikacja $P1 \to P2$ procesor $P2$ rozpoczyna pracę. Równocześnie może rozpocząć obliczenia i wysyłanie danych do $P3$ i $P4$.
+Czas zakończenia jego pracy w tym przypadku to czas odbioru danych z $P1$ zsumowany z najdłuższym z czasów obliczeń, nadawania danych do $P3$ i nadawania danych do $P4$.
 
 \item[Węzeł $P3$] \hfill \\
 
+Jeśli procesor $P3$ otrzyma dane od $P2$ to może równocześnie rozpocząć obliczenia i wysyłanie danych do $P4$.
+
 \item[Węzeł $P4$] \hfill \\
 
+Działanie procesora $P4$ jest uzależnione od kolejności otrzymywania danych. \\
+
+Jeśli najpierw otrzyma dane od $P2$ to może rozpocząć obliczenia tych danych w czasie trwania komunikacji z $P3$.
+Może dojść do sytuacji, gdy danych zabraknie, wówczas konieczne okaże się oczekiwanie na zakończenie odbierania danych z $P3$. \\
+
+Jeśli najpierw otrzyma dane od $P3$ to analogicznie może rozpocząć obliczenia tych danych w czasie trwania komunikacji z $P2$
+Również może dojść do sytuacji, gdy danych zabraknie i konieczne okaże się oczekiwanie na zakończenie odbierania danych z $P2$.
+
 \end{description}
+
