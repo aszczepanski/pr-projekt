@@ -1,11 +1,7 @@
 
 \section{Model matematyczny}
 
-Model matematyczny.
-
-\subsection{Notacja}
-
-Notacja dotycząca modelu.
+Wszystkie zmienne wykorzystywane poniżej są zdefiniowane w tabeli \ref{tab:notacja}.
 
 \begin{table}[!ht]
 \centering
@@ -31,7 +27,7 @@ $M$ & duża liczba wyznaczona w równaniu (\ref{eq:M}) \\ \hline
 
 \subsection{Wzory wspólne dla wszystkich modeli}
 
-We wszystkich modelach minimalizujemy najdłuższy czas obliczeń
+We wszystkich modelach minimalizujemy najdłuższy czas zakończenia pracy procesora.
 
 \begin{equation} \label{eq:min}
 \begin{array}{l}
@@ -43,7 +39,7 @@ T \geq T_{4}
 \end{array}
 \end{equation}
 
-Istotne są założenia odnośnie danych
+Istotne są założenia wynikające z definicji zmiennych dotyczących ilości danych.
 
 \begin{equation} \label{eq:data}
 \begin{array}{l}
@@ -57,6 +53,8 @@ d_{431} + d_{432} = d_{43}
 \end{equation}
 
 Dla wszystkich modeli można zastosować te same wzory na czas komunikacji na poszczególnych łączach.
+Łączem $P1 \to P2$ należy przesłać wszystkie dane nieprzetwarzane przez $P1$.
+Łączem $P2 \to P3$ należy przesłać dane obliczane przez procesor $P3$ oraz te, które będą przesyłane na łączu $P3 \to P4$. 
 
 \begin{equation} \label{eq:tk}
 \begin{array}{l}
@@ -85,7 +83,7 @@ V_{x34} \geq d_{43}
 
 Istotne jest, żeby zmienne dotyczące ilości danych oraz zmienne binarne były całkowite. \\
 
-Dla analizowanej architektury zawsze da się znaleźć rozwiązanie, które niegorsze od
+Dla analizowanej architektury zawsze da się znaleźć rozwiązanie, które jest niegorsze od
 przetworzenia wszystkich danych przez procesor $P1$ bez komunikacji. Można zatem przyjąć:
 
 \begin{equation} \label{eq:M}
@@ -94,11 +92,16 @@ M = d_{1}A_{1}
 
 \subsection{Modele sekwencyjne}
 
+W każdym modelu sekwencyjnym czas zakończenia pracy $P1$ jest jednakowy:
+
+\begin{equation} \label{eq:sekT1}
+T_{1} \geq t_{k12} + d_{1}A_{2}
+\end{equation}
+
 \subsubsection{Pierwszy model sekwencyjny}
 
 \begin{equation} \label{eq:sek1}
 \begin{array}{l}
-T_{1} \geq t_{k12} + d_{1}A_{2} \\
 T_{2} \geq t_{k12} + t_{k24} + t_{k23} + d_{2}A_{2} \\
 T_{3} \geq t_{k12} + t_{k24} + max(t_{k23} + d_{321}A_{3}, d_{421}A_{4}) + t_{k34} + d_{322}A_{3} \\
 T_{4} \geq t_{k12} + t_{k24} + max(t_{k23} + d_{321}A_{3}, d_{421}A_{4}) + t_{k34} + (d_{422} + d_{43})A_{4}
@@ -109,7 +112,6 @@ T_{4} \geq t_{k12} + t_{k24} + max(t_{k23} + d_{321}A_{3}, d_{421}A_{4}) + t_{k3
 
 \begin{equation} \label{eq:sek2}
 \begin{array}{l}
-T_{1} \geq t_{k12} + d_{1}A_{2} \\
 T_{2} \geq t_{k12} + t_{k23} + max(d_{211}A_{2}, t_{k34} + d_{431}A_{4}) + t_{k24} + d_{212}A_{2} \\
 T_{3} \geq t_{k12} + t_{k23} + t_{k34} + d_{3}A_{3} \\
 T_{4} \geq t_{k12} + t_{k23} + max(d_{211}A_{2}, t_{k34} + d_{431}A_{4}) + t_{k24} + (d_{432} + d_{42})A_{4}
@@ -120,7 +122,6 @@ T_{4} \geq t_{k12} + t_{k23} + max(d_{211}A_{2}, t_{k34} + d_{431}A_{4}) + t_{k2
 
 \begin{equation} \label{eq:sek3}
 \begin{array}{l}
-T_{1} \geq t_{k12} + d_{1}A_{2} \\
 T_{2} \geq t_{k12} + t_{k23} + t_{k24} + d_{2}A_{2} \\
 T_{3} \geq t_{k12} + t_{k23} + max(d_{321}A_{3}, t_{k24} + d_{421}A_{4}) + t_{k34} + d_{322}A_{3} \\
 T_{4} \geq t_{k12} + t_{k23} + max(d_{321}A_{3}, t_{k24} + d_{421}A_{4}) + t_{k34} + (d_{422} + d_{43})A_{4}
