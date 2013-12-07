@@ -17,19 +17,17 @@ T1 > A1*d1;
 T1 > tk12;
 
 T2 > tk12 + A2*d2;
-T2 > tk12 + tk24 - M + M*bg24;
-T2 > tk12 + tk23 - M*bg24;
+T2 > tk12 + tk24;
+T2 > tk12 + tk23;
 
 T3 > tk12 + tk23 + A3*d3;
 T3 > tk12 + tk23 + tk34;
 
-T4 > tk12 + tk23 + tk34 - M*bg24;
-T4 > tk12 + tk24 - M + M*bg24;
-T4 > tk12 + tk24 + A4*d4 - M*bg24;
-T4 > tk12 + tk23 + tk34 + A4*d43 - M*bg24;
-T4 > tk12 + tk23 + tk34 + A4*d4 - M + M*bg24;
-T4 > tk12 + tk24 + A4*d42 - M + M*bg24;
+T4 > tk12 + tk24 + A4*d3 - M*bg24;
+T4 > tk12 + tk23 + tk34 + A4*d422 + A4*d43 - M*bg24;
 
+T4 > tk12 + tk23 + tk34 + A4*d4 - M + M*bg24;
+T4 > tk12 + tk24 + A4*d432 + A4*d42 - M + M*bg24;
 
 x12 < 1;
 V*x12 > d2 + d3 + d4;
@@ -41,7 +39,7 @@ x34 < 1;
 V*x34 > d43;
 
 bg24 < 1;
-M*bg24 >= tk24 - tk23 - tk34;
+M*bg24 > tk24 - tk23 - tk34;
 M - M*bg24 > tk23 + tk34 - tk24;
 
 int d1, d2, d3, d42, d43;
