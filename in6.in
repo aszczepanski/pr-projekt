@@ -1,0 +1,15 @@
+# second sequence model
+V 200
+A1 20
+A2 10
+A3 25
+A4 10
+S12 0
+S23 0
+S34 0
+S24 0
+C12 2
+C23 2
+C34 7
+C24 7
+M 100000
