@@ -20,6 +20,7 @@ tk34 = S34*x34 + C34*d43;
 T1 > tk12 + A1*d1;
 
 // y1 = 1, y2 = 0
+// drugi model sekwencyjny
 
 T2 > tk12 + tk23 + A2*d2 + tk24 - M*y2;
 T2 > tk12 + tk23 + tk34 + A4*d431 + tk24 + A2*d212 - M*y2;
@@ -30,6 +31,7 @@ T4 > tk12 + tk23 + A2*d211 + tk24 + A4*d432 + A4*d42 - M*y2;
 T4 > tk12 + tk23 + tk34 + A4*d4 + tk24 - M*y2;
 
 // y1 = 1, y2 = 1
+// trzeci model sekwencyjny
 
 T2 > tk12 + tk23 + tk24 + A2*d2 - M - M + M*y1 + M*y2;
 
@@ -40,6 +42,7 @@ T4 > tk12 + tk23 + tk24 + A4*d4 + tk34 - M - M + M*y1 + M*y2;
 T4 > tk12 + tk23 + A3*d321 + tk34 + A4*d422 + A4*d43 - M - M + M*y1 + M*y2;
 
 // y1 = 0, y2 = 1
+// pierwszy model sekwencyjny
 
 T2 > tk12 + tk24 + tk23 + A2*d2 - M*y1;
 
