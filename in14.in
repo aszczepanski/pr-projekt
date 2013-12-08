@@ -1,0 +1,16 @@
+# degenerated to triangle
+# https://www.cs.put.poznan.pl/rwalkowiak/pliki/pr/trojkat_procesorow_jedno_zadanie.pdf
+V 300
+A1 50
+A2 20
+A3 50
+A4 20
+S12 0
+C12 3
+S23 0
+C23 3
+S34 0
+C34 5
+S24 0
+C24 15
+M 10000000
