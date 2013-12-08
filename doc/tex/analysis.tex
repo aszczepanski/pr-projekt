@@ -1,8 +1,9 @@
 
 \section{Analiza systemu}
 
-Celem projektu była analiza możliwości przetwarzania równoległego w architekturze czwórki z początkowymi danymi w dolnym węźle $P1$ (jak pokazano na rysunku \ref{fig:schema}).
-W ramach projektu zajmowaliśmy się dwoma modelami - sekwencyjnym oraz równoległym z jedną komunikacją na łączu.
+Celem projektu była analiza możliwości przetwarzania równoległego w architekturze czwórki z początkowymi danymi w dolnym węźle $P1$
+(jak pokazano na rysunku~\ref{fig:schema}).
+W ramach projektu zajmowaliśmy się dwoma modelami -- sekwencyjnym oraz równoległym z jedną komunikacją na łączu.
 
 \begin{figure}[!ht]
 \centering
@@ -16,7 +17,7 @@ Węzeł $P2$ może zarówno otrzymywać (z węzła $P1$), jak i nadawać dane (d
 natomiast na łączach 2 i 4 będzie się odbywać w kierunku “z” węzła $P2$. Niestety, nie możemy w modelu ogólnym założyć, czy dana komunikacja wystąpi.
 Trzeba pamiętać, że komunikacja na łączach 2 i 4 ma szanse wystąpić tylko jeśli wystąpi komunikacja na łączu 1 (węzeł $P2$ otrzyma dane z węzła $P1$).
 Komunikacja na łączu 1 (pomiędzy węzłami $P1$ i $P2$) nie musi wystąpić jeśli koszt transmisji danych na tym łączy będzie stosunkowo duży.
-W przypadku węzłów $P3$ i $P4$ warto zauważyć symetrię \ref{fig:symetry}. Przyjęliśmy, że komunikacja odbywać będzie się na łączu 3 zawsze w kierunku
+W przypadku węzłów $P3$ i $P4$ warto zauważyć symetrię~\ref{fig:symetry}. Przyjęliśmy, że komunikacja odbywać będzie się na łączu 3 zawsze w kierunku
 od $P3$ do $P4$. Aby zrealizować odwrotną komunikację należy zamienić procesory $P3$ i $P4$ oraz łącza 2 i 4.
 
 
@@ -83,20 +84,20 @@ Występuje on m.in. gdy łącza $P2 \to P3$ i $P3 \to P4$ są dostatecznie szybk
 \item[Węzeł $P4$] \hfill \\
 
 Czas zakończenia pracy procesora $P4$ jest w dużej mierze zależny od pracy procesora $P3$. Po zakończeniu odbioru danych od $P2$ procesor może rozpocząć obliczenia,
-ponieważ konieczna jest synchroniazacja z $P3$ (możliwe, że kosztem bezczynności - jak na rysunku \ref{fig:seq1b}).
+ponieważ konieczna jest synchroniazacja z $P3$ (możliwe, że kosztem bezczynności - jak na rysunku~\ref{fig:seq1b}).
 Jeśli komunikacja $P3 \to P4$ występuje, to pierwsza część obliczeń kończy się przed jej rozpoczęciem. Po zakończeniu tej komunikacji rozpoczyna się druga część obliczeń. \\
 
 Warto zauważyć, że gdyby obliczenia mogły być przerwane w dowolnym momencie (a nie tylko po obliczeniu całkowitej ilości danych),
 to obliczenia między odbiorem danych od $P2$ i odbiorem danych od $P3$ zawszy by występowały (jeśli odpowiednie komunikacje miały by miejsce).
 
-\begin{figure}[!ht]
+\begin{figure}[H]
 \centering
 \includegraphics[width=1.0\textwidth]{sek3a.pdf}
 \caption{Oczekiwany wykres Gantta ilustrujący 1. model sekwencyjny (procesor P3 czeka na P4).}
 \label{fig:seq1a}
 \end{figure}
 
-\begin{figure}[!ht]
+\begin{figure}[H]
 \centering
 \includegraphics[width=1.0\textwidth]{sek3b.pdf}
 \caption{Oczekiwany wykres Gantta ilustrujący 1. model sekwencyjny (procesor P4 czeka na P3).}
@@ -133,7 +134,7 @@ Konieczna jest zatem synchronizacja między procesorami (możliwe, że kosztem c
 
 Procesor $P3$ otrzymuje dane z procesora $P2$ (uprzednio musi zakończyć się komunikacja pomiędzy procesorami $P1$ i $P2$).
 W momencie zakończenia przesyłania danych z procesora $P2$ procesor $P3$ pełni rolę nadawcy w komunikacji z procesorem $P4$.
-Po zakończeniu tej komunikacji następują obliczenia na danych. Czas zakończenia tych obliczeń to górna granica zakończenia przetwarzania na tym procesorze.
+Po zakończeniu tej komunikacji następują obliczenia danych. Czas zakończenia tych obliczeń to górna granica zakończenia przetwarzania na tym procesorze.
 
 \item[Węzeł $P4$] \hfill \\
 
@@ -141,14 +142,14 @@ W tym modelu procesor $P4$ jako ostatni otrzymuje jakiekolwiek dane. Moment ten 
 
 \end{description}
 
-\begin{figure}[!ht]
+\begin{figure}[H]
 \centering
 \includegraphics[width=1.0\textwidth]{sek2a.pdf}
 \caption{Oczekiwany wykres Gantta ilustrujący 2. model sekwencyjny (procesor P4 czeka na P2).}
 \label{fig:seq2a}
 \end{figure}
 
-\begin{figure}[!ht]
+\begin{figure}[H]
 \centering
 \includegraphics[width=1.0\textwidth]{sek2b.pdf}
 \caption{Oczekiwany wykres Gantta ilustrujący 2. model sekwencyjny (procesor P2 czeka na P4).}
@@ -162,7 +163,7 @@ Model ten zakłada kolejność komunikacji: $P1 \to P2$, $P2 \to P3$, $P2 \to P4
 \begin{figure}[!ht]
 \centering
 \includegraphics[width=0.5\textwidth]{arrows1243.pdf}
-\caption{Kolejność komunikacji w drugim modelu sekwencyjnym}
+\caption{Kolejność komunikacji w trzecim modelu sekwencyjnym}
 \label{fig:seq3}
 \end{figure}
 
@@ -174,24 +175,24 @@ Działanie procesora $P1$ jest analogiczne do działania procesora $P1$ w modelu
 
 \item[Węzeł $P2$] \hfill \\
 
-Procesor $P2$ po otrzymaniu danych z procesora $P1$ rozpoczyna przesyłanie danych do procesora $P3$. Od razu po zakończeniu tej komunikacji kontynuuje przesyłanie danych tym razem do procesora $P4$. Jest to ostatnia komunikacja odbywająca się z udziałem procesora $P2$ - po jej zakończeniu rozpoczyna przetwarzanie pozostałych danych.
+Procesor $P2$ po otrzymaniu danych z procesora $P1$ rozpoczyna przesyłanie danych do procesora $P3$. Od razu po zakończeniu tej komunikacji kontynuuje przesyłanie danych tym razem do procesora $P4$. Jest to ostatnia komunikacja odbywająca się z udziałem procesora $P2$ -- po jej zakończeniu rozpoczyna przetwarzanie pozostałych danych.
  
 \item[Węzeł $P3$] \hfill \\
 
-Procesor $P3$ standardowo otrzymuje dane z procesora $P2$ (po zakończonej komunikacji $P1 \to P2$). W tym przypadku przesyła on dane do procesora $P4$ dopiero po zakończeniu komunikacji $P2 \to P4$. Zakończenie tej komunikacji nie gwarantuje możliwości natychmiastowego startu komunikacji $P3 \to P4$ - konieczna może okazać się synchronizacja tych procesorów. Zatem czas zakończenia działań na procesorze $P3$ to suma czasów komunikacji $P1 \to P2$, komunikacji $P2 \to P3$, synchronizacji z procesorem $P4$ ($P3$ może w tym czasie przetworzyć jakąś częsć danych), komunikacji $P3 \to P4$ oraz ostatecznie przetworzenia przez procesor $P3$ pozostałych danych.
+Procesor $P3$ standardowo otrzymuje dane z procesora $P2$ (po zakończonej komunikacji $P1 \to P2$). W tym przypadku przesyła on dane do procesora $P4$ dopiero po zakończeniu komunikacji $P2 \to P4$. Zakończenie tej komunikacji nie gwarantuje możliwości natychmiastowego startu komunikacji $P3 \to P4$ -- konieczna może okazać się synchronizacja tych procesorów. Zatem czas zakończenia działań na procesorze $P3$ to suma czasów komunikacji $P1 \to P2$, komunikacji $P2 \to P3$, synchronizacji z procesorem $P4$ ($P3$ może w tym czasie przetworzyć jakąś częsć danych), komunikacji $P3 \to P4$ oraz ostatecznie przetworzenia przez procesor $P3$ pozostałych danych.
 
 \item[Węzeł $P4$] \hfill \\
 
-Procesor $P4$ otrzymuje dane z procesora $P2$ (następuje to po zakończeniu komunikacji $P1 \to P2$ oraz $P2 \to P3$). Po zakończeniu tej komunikacji może wystąpić konieczność synchronizacji z procesorem $P3$ ($P3$ w czasie komunikacji $P2 \to $P4 rozpoczął przetwarzanie danych) przed rozpoczęciem kolejnego odbioru danych (tym razem z procesora $P3$). Zakończenie komunikacji $P3 \to P4$ pozwala na realizację dalszych obliczeń na procesorze $P4$ - obliczenia te ograniczają od góry czas zakończenia wszystkich działań na tym procesorze. 
+Procesor $P4$ otrzymuje dane z procesora $P2$ (następuje to po zakończeniu komunikacji $P1 \to P2$ oraz $P2 \to P3$). Po zakończeniu tej komunikacji może wystąpić konieczność synchronizacji z procesorem $P3$ ($P3$ w czasie komunikacji $P2 \to $P4 rozpoczął przetwarzanie danych) przed rozpoczęciem kolejnego odbioru danych (tym razem z procesora $P3$). Zakończenie komunikacji $P3 \to P4$ pozwala na realizację dalszych obliczeń na procesorze $P4$ -- obliczenia te ograniczają od góry czas zakończenia wszystkich działań na tym procesorze. 
 
-\begin{figure}[!ht]
+\begin{figure}[H]
 \centering
 \includegraphics[width=1.0\textwidth]{sek1a.pdf}
 \caption{Oczekiwany wykres Gantta ilustrujący 3. model sekwencyjny (procesor P3 czeka na P4).}
 \label{fig:seq3a}
 \end{figure}
 
-\begin{figure}[!ht]
+\begin{figure}[H]
 \centering
 \includegraphics[width=1.0\textwidth]{sek1b.pdf}
 \caption{Oczekiwany wykres Gantta ilustrujący 3. model sekwencyjny (procesor P4 czeka na P3).}
@@ -200,9 +201,11 @@ Procesor $P4$ otrzymuje dane z procesora $P2$ (następuje to po zakończeniu kom
 
 \end{description}
 
+\newpage
+
 \subsection{Analiza modelu równoległego}
 
-Przetwarzanie w systemi ze współbieżnością z jedną komunikacją na łączu sprowadziliśmy do jednego modelu.
+Przetwarzanie w systemie ze współbieżnością z jedną komunikacją na łączu sprowadziliśmy do jednego modelu.
 W modelu tym istotne jest czy krótszy jest czas komunikacji $P2 \to P4$ czy suma czasów komunikacji $P2 \to P3$ i $P3 \to P4$.
 W zależności od powyższych czasów procesor $P4$ rozpocznie od obliczeń danych otrzymanych z $P2$ lub $P3$.
 
@@ -229,22 +232,24 @@ Działanie procesora $P4$ jest uzależnione od kolejności otrzymywania danych. 
 Jeśli najpierw otrzyma dane od $P2$ to może rozpocząć obliczenia tych danych w czasie trwania komunikacji z $P3$.
 Może dojść do sytuacji, gdy danych zabraknie, wówczas konieczne okaże się oczekiwanie na zakończenie odbierania danych z $P3$. \\
 
-Jeśli najpierw otrzyma dane od $P3$ to analogicznie może rozpocząć obliczenia tych danych w czasie trwania komunikacji z $P2$
+Jeśli najpierw otrzyma dane od $P3$ to analogicznie może rozpocząć obliczenia tych danych w czasie trwania komunikacji z $P2$.
 Również może dojść do sytuacji, gdy danych zabraknie i konieczne okaże się oczekiwanie na zakończenie odbierania danych z $P2$.
 
-\begin{figure}[!ht]
+\begin{figure}[H]
 \centering
 \includegraphics[width=1.0\textwidth]{par1.pdf}
-\caption{Model równoległy 1}
-\label{fig:seq1}
+\caption{Model równoległy gdy $t_{k24} < t_{k23} + t_{k34}$}
+\label{fig:par1}
 \end{figure}
 
-\begin{figure}[!ht]
+\begin{figure}[H]
 \centering
 \includegraphics[width=1.0\textwidth]{par2.pdf}
-\caption{Model równoległy 2}
-\label{fig:seq1}
+\caption{Model równoległy gdy $t_{k24} > t_{k23} + t_{k34}$}
+\label{fig:par2}
 \end{figure}
 
 \end{description}
+
+\newpage
 
