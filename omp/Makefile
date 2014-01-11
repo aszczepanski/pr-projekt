@@ -1,9 +1,8 @@
 
-all: main.o
-	g++ -o main main.o -fopenmp
+OPT_FLAGS = -O2
 
-main.o: main.cpp
-	g++ -o main.o -c main.cpp -Wall -fopenmp
+main: main.cpp
+	g++ -o main main.cpp -Wall -fopenmp -std=c++11 $(OPT_FLAGS)
 
 .PHONY: clean
 clean:

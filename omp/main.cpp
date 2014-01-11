@@ -1,46 +1,75 @@
-#include <cstdio>
 #include <omp.h>
+#include <chrono>
+#include <iostream>
 
-const int TAB_SIZE = 10000000;
+using namespace std;
+using namespace std::chrono;
 
-static int tab[TAB_SIZE];
+#define TAB_SIZE 100000000
 
-static void init_tab(); // initialize tab
-static int sums(); // sequential sum
-static int sump(); // omp sum
+typedef unsigned long long el_type;
+
+el_type tab[TAB_SIZE];
+
+// initialize tab
+void init_tab() {
+	for (size_t i=0; i<TAB_SIZE; i++) {
+		tab[i] = static_cast<el_type>(i)/1000;
+	}
+}
+
+// sequential sum
+el_type sums() {
+	el_type sum = 0;
+
+#pragma omp parallel 
+#pragma omp single
+	{
+	for (size_t i=0; i<TAB_SIZE; i++) {
+		sum += tab[i];
+	}
+	}
+
+	return sum;
+}
+
+// omp sum
+el_type sum_omp_reduction() {
+	size_t i;
+	el_type sum = 0;
+
+#pragma omp parallel for default(none) shared(tab) private(i) reduction(+:sum) // schedule(dynamic,8192)
+	for (i=0; i<TAB_SIZE; i++) {
+		sum += tab[i];
+	}
+
+	return sum;
+}
 
 int main(int argc, char* argv[]) {
-  init_tab();
+#pragma omp parallel
+	{
+#pragma omp single
+		{
+			cout << "num threads: " <<  omp_get_num_threads() << endl;
+		}
+	}
 
-  printf("sum = %d\n", sums());
+	init_tab();
+	
+	steady_clock::time_point start = steady_clock::now();
 
-  printf("sum = %d\n", sump());
+	cout << sums() << endl;
 
-  return 0;
+	steady_clock::time_point t1 = steady_clock::now();
+
+	cout << sum_omp_reduction() << endl;
+
+	steady_clock::time_point t2 = steady_clock::now();
+
+	cout << duration_cast<microseconds>(t1-start).count() << "us\n";
+	cout << duration_cast<microseconds>(t2-t1).count() << "us\n";
+
+	// system("pause");
+	return 0;
 }
-
-void init_tab() {
-  for (int i=0; i<TAB_SIZE; i++) {
-    tab[i] = i % 100000;
-  }
-}
-
-int sums() {
-  int sum = 0;
-  for (int i=0; i<TAB_SIZE; i++) {
-    sum = sum + tab[i];
-  }
-  return sum;
-}
-
-int sump() {
-  int sum = 0;
-
-#pragma omp parallel for reduction(+:sum)
-  for (int i=0; i < TAB_SIZE; i++) {
-    sum = sum + tab[i];
-  }
-
-  return sum;
-}
-
