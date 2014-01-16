@@ -1,0 +1,34 @@
+\documentclass{article}
+
+\usepackage{polski}
+\usepackage{setspace}
+\usepackage[polish]{babel}
+\usepackage[utf8]{inputenc}
+
+\usepackage{graphicx}
+\graphicspath{ {./img/} }
+
+\usepackage{float}
+\usepackage{datetime}
+\usepackage{amsmath}
+
+\setlength\parindent{0pt}
+
+\begin{document}
+
+\input{./tex/title.tex}
+
+\tableofcontents
+\newpage
+
+\input{./tex/intro.tex}
+\input{./tex/results.tex}
+\input{./tex/conclusion.tex}
+
+\listoffigures
+\addcontentsline{toc}{section}{Spis rysunków}
+\listoftables
+\addcontentsline{toc}{section}{Spis tablic}
+
+
+\end{document}
