@@ -1,215 +1,157 @@
-#include <omp.h>
-#include <iostream>
 #include <cstdio>
-#include <ctime>
 #include <cstdlib>
+#include <ctime>
 #include <Windows.h>
+#include <omp.h>
 
-using namespace std;
+// ROWS * COLS = 1<<28 = 256 MB (2^8 * 2^10 * 2^10)
+#define ROWS ((size_t) 1<<24)
+#define COLS ((size_t) 1<<4)
 
-#define TAB_SIZE ((size_t) 1<<28)
-#define X_SIZE ((size_t) 1e3)
-#define Y_SIZE ((size_t) 1e5)
-
-typedef int el_type;
-
-el_type tab[TAB_SIZE];
-el_type tab2d[Y_SIZE][X_SIZE];
-
-char empty[900000];
-
-HANDLE thread_uchwyt=GetCurrentThread();
-
+int tab[ROWS][COLS];
 double start;
+HANDLE thread_handle = GetCurrentThread();
 
-void print_elapsed_time()
-{
-        double elapsed ;
-        double resolution ;
-
-        // wyznaczenie i zapisanie czasu przetwarzania
-        elapsed = (double) clock() / CLK_TCK ;
-        resolution = 1.0 / CLK_TCK ;
-		printf("Czas: %8.4f sec \n",
-                elapsed-start) ;
+inline void start_clock() {
+	start = (double) clock() / CLK_TCK;
 }
 
-int clear_cache() {
-	int xxx;
-	for (size_t i = 0; i<900000; i++) {
-		xxx = empty[i];
-	}
-	return xxx;
+inline void print_elapsed_time(const char* operation_name) {
+        double elapsed;
+        double resolution;
+
+        elapsed = (double) clock() / CLK_TCK;
+        resolution = 1.0 / CLK_TCK;
+
+        printf("%s: %8.4f sec\n", operation_name, elapsed-start);
 }
 
-// initialize tab
 void init_tab() {
+    start_clock();    
 	int i;
 #pragma omp parallel for shared(tab) private(i)
-	for (i=0; i<TAB_SIZE; i++) {
-		tab[i] = (el_type)(i)/1000;
-	}
-}
-
-void init_tab2d() {
-	int i;
-#pragma omp parallel for shared(tab) private(i)
-	for (i=0; i<X_SIZE*Y_SIZE; i++) {
-		tab2d[i/X_SIZE][i%X_SIZE] = (el_type)(i)/1000;
-	}
-}
-
-// sequential sum
-el_type sums() {
-	el_type sum = 0;
-
-	for (size_t i=0; i<TAB_SIZE; i++) {
-		size_t& k = i;
-		sum += tab[k];
-	}
-
-	return sum;
-}
-
-
-// sekcyjnosc
-el_type sums2() {
-	el_type sum = 0;
-
-	for (int j = 0; j < 32; j++) {
-		for (size_t i=0; i<TAB_SIZE; i+=32) {
-			int k = i + j;
-			sum += tab[k];
+	for (i=0; i<ROWS; i++) {
+		for (int j=0; j<COLS; j++) {
+			tab[i][j] = rand();
 		}
 	}
+	print_elapsed_time("init");
+}
 
+typedef int (*function)();
+inline void run_function(function f, const char* operation_name) {
+	printf("-------------------------------------------\n");
+	start_clock();
+	int sum = f();
+	printf("sum: %d\n", sum);
+	print_elapsed_time(operation_name);
+}
+
+__declspec(noinline) int sum_ij() {
+	int sum = 0;
+	for (int i=0; i<ROWS; i++) {
+		for (int j=0; j<COLS; j++) {
+			sum += tab[i][j];
+		}
+	}
 	return sum;
 }
 
+__declspec(noinline) int sum_ji() {
+	int sum = 0;
+	for (int j=0; j<COLS; j++) {
+		for (int i=0; i<ROWS; i++) {
+			sum += tab[i][j];
+		}
+	}
+	return sum;
+}
 
-// omp sum
-el_type sum_omp_reduction2() {
+__declspec(noinline) int sum_sec() {
+	int sum = 0;
+	for (int j=0; j<COLS; j++)	{
+		for (int k=0; k<512; k++) {
+			for (int i=k; i<ROWS; i+=512) {
+				sum += tab[i][j];
+			}
+		}
+	}
+	return sum;
+}
+
+__declspec(noinline) int sum_pf() {
+	// TODO
+	int sum = 0;
+	int sum2 = 0;
+	for (int i=0; i<ROWS; i++) {
+		for (int j=0; j<COLS; j++) {
+			sum += tab[i][j];
+			if (i < ROWS-512) {
+				sum2 += tab[i+512][j];
+			}
+		}
+	}
+	return sum-sum2;
+}
+
+__declspec(noinline) int sum_par_ij() {
+	int sum = 0;
+	int i;
+#pragma omp parallel for default(none) shared(tab) private(i) reduction(+:sum)
+	for (i=0; i<ROWS; i++) {
+		for (int j=0; j<COLS; j++) {
+			sum += tab[i][j];
+		}
+	}
+	return sum;
+}
+
+__declspec(noinline) int sum_par_ji() {
+	int sum = 0;
 	int j;
-	el_type sum = 0;
-
-#pragma omp parallel for default(none) shared(tab) private(j) reduction(+:sum) // schedule(dynamic,8192)
-for (j = 0; j < 32; j++) {
-		for (size_t i=0; i<TAB_SIZE; i+=32) {
-			int k = i + j;
-			sum += tab[k];
+#pragma omp parallel for default(none) shared(tab) private(j) reduction(+:sum)
+	for (j=0; j<COLS; j++) {
+		for (int i=0; i<ROWS; i++) {
+			sum += tab[i][j];
 		}
 	}
-
-return sum;
+	return sum;
 }
-
-// omp sum for secetion
-el_type sum_omp_reduction() {
-	int i;
-	el_type sum = 0;
-
-#pragma omp parallel for default(none) shared(tab) private(i) reduction(+:sum) // schedule(dynamic,8192)
-for (i=0; i<TAB_SIZE; i++) {
-		sum += tab[i];
-	}
-
-return sum;
-}
-
 
 int main(int argc, char* argv[]) {
-
-	cout << "element size: " << sizeof(el_type) << endl;
-
+	
 	omp_set_num_threads(4);
 
 #pragma omp parallel
 	{
 
-#pragma omp single
+		#pragma omp single
 		{
-			cout << "num threads: " <<  omp_get_num_threads() << endl;
+			printf("num threads: %d\n", omp_get_num_threads());
 		}
-		const int liczba_procesorow = 4;
+	
+		const int processor_count = 4;
 		int th_id=omp_get_thread_num();
-		//otrzymanie własnego identyfikatora
-		DWORD_PTR mask = (1 << (th_id % liczba_procesorow ));
-		//określenie maski dla przetwarzania wątku wyłącznie na jednym procesorze\
-		przydzielanym modulo
-		DWORD_PTR result = SetThreadAffinityMask(thread_uchwyt, mask);
-		//przekazanie do systemu operacyjnego maski powinowactwa
-		if (result==0) printf("blad SetThreadAffnityMask \n");
-		else {
-			printf("maska poprzednia dla watku %d : %d\n",th_id,result);
-			printf("maska nowa dla watku %d : %d\n",th_id,SetThreadAffinityMask(
-				thread_uchwyt, mask ));
+		DWORD_PTR mask = (1 << (th_id % processor_count));
+		DWORD_PTR result = SetThreadAffinityMask(thread_handle, mask);
+		if (result==0) {
+			printf("error SetThreadAffnityMask\n");
 		}
-		//sprawdzenie poprawności ustlenia maski powinowactwa
+		else {
+			printf("previous mask for thread %d : %d\n",th_id,result);
+			printf("new mask for thread %d : %d\n",
+				th_id,SetThreadAffinityMask(thread_handle, mask));
+		}
 	}
 
-	Sleep(1000);
-
-	start = (double) clock() / CLK_TCK ;
 	init_tab();
-	cout << "init: ";
-	print_elapsed_time() ;
-
-	Sleep(1000);
-
-	#pragma omp parallel
-	{
-	clear_cache();
-	}
-	cout << "clear done\n";
 	
-	Sleep(1000);
-
-	start = (double) clock() / CLK_TCK ;
-	cout << sum_omp_reduction() << endl;
-	print_elapsed_time() ;
-
-	Sleep(1000);
-
-	#pragma omp parallel
-	{
-	clear_cache();
-	}
-	cout << "clear done\n";
-	
-	Sleep(1000);
-
-	start = (double) clock() / CLK_TCK ;
-	cout << sum_omp_reduction2() << endl;
-	print_elapsed_time() ;
-
-	Sleep(1000);
-
-	#pragma omp parallel
-	{
-	clear_cache();
-	}
-	cout << "clear done\n";
-	
-	Sleep(1000);
-
-	start = (double) clock() / CLK_TCK ;
-	cout << sums() << endl;
-	print_elapsed_time() ;
-
-	Sleep(1000);
-
-	#pragma omp parallel
-	{
-	clear_cache();
-	}
-	cout << "clear done\n";
-	
-	Sleep(1000);
-
-	start = (double) clock() / CLK_TCK ;
-	cout << sums2() << endl;
-	print_elapsed_time() ;
+	run_function(sum_ij, "sum_ij");
+	run_function(sum_ji, "sum_ji");
+	run_function(sum_sec, "sum_sec");
+	run_function(sum_pf, "sum_pf");
+	run_function(sum_par_ij, "sum_par_ij");
+	run_function(sum_par_ji, "sum_par_ji");
 
 	system("pause");
-	return 0;
 }
