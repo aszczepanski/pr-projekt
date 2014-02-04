@@ -4,11 +4,15 @@
 #include <Windows.h>
 #include <omp.h>
 
+#define CACHE_LINE 64
+#define CACHE_ALIGN __declspec(align(CACHE_LINE))
+#define CACHE_LINES_ON_PAGE 512
+
 // ROWS * COLS = 1<<28 = 256 MB (2^8 * 2^10 * 2^10)
 #define ROWS ((size_t) 1<<24)
 #define COLS ((size_t) 1<<4)
 
-int tab[ROWS][COLS];
+CACHE_ALIGN int tab[ROWS][COLS];
 double start;
 HANDLE thread_handle = GetCurrentThread();
 
@@ -70,8 +74,8 @@ __declspec(noinline) int sum_ji() {
 __declspec(noinline) int sum_sec() {
 	int sum = 0;
 	for (int j=0; j<COLS; j++)	{
-		for (int k=0; k<512; k++) {
-			for (int i=k; i<ROWS; i+=512) {
+		for (int k=0; k<CACHE_LINES_ON_PAGE; k++) {
+			for (int i=k; i<ROWS; i+=CACHE_LINES_ON_PAGE) {
 				sum += tab[i][j];
 			}
 		}
@@ -79,19 +83,22 @@ __declspec(noinline) int sum_sec() {
 	return sum;
 }
 
+int tmp;
+
 __declspec(noinline) int sum_pf() {
-	// TODO
 	int sum = 0;
-	int sum2 = 0;
-	for (int i=0; i<ROWS; i++) {
+	int i;
+	for (i=0; i<ROWS-1; i++) {
 		for (int j=0; j<COLS; j++) {
 			sum += tab[i][j];
-			if (i < ROWS-512) {
-				sum2 += tab[i+512][j];
-			}
+			tmp = tab[i+1][j];
 		}
 	}
-	return sum-sum2;
+
+	for (int j=0; j<COLS; j++) {
+		sum += tab[i][j];
+	}
+	return sum;
 }
 
 __declspec(noinline) int sum_par_ij() {
