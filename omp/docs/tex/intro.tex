@@ -4,20 +4,35 @@
 
 Głównym założeniem projektu było zapoznanie się biblioteką OpenMP na podstawie równoległego sumowania komórek tablicy. W ramach projektu zrealizowaliśmy 2 algorytmy sekwencyjne oraz 2 algorytmy zrównleglone. Celem dwóch różnych algorytmów sekwencyjnych było zbadanie wpływu sekcyjności pamięci podręcznej na czas realizacji zadania. W przypadku algorytmów zrównoleglonych badaliśmy wpływ kolejności uszeregowania pętli na końcowy rezultat.
 
-\subsection{Zastosowane algorytmy}
+\subsection{Punkt odniesienia (algorytm sekwencyjny - kolejność ij)}
 
-\subsubsection{Podstawowy algorytm sekwencyjny}
+\lstinputlisting{./code/sum_ij.cpp}
 
-\lstinputlisting{./code/sums.cpp}
 
-\subsubsection{Algorytm sekwencyjny - sekcyjność pamięci}
+\subsection{Badane algorytmy}
 
-\lstinputlisting{./code/sums2.cpp}
 
-\subsubsection{Algorytm zrównoleglony - wpierw wiersze}
+\subsubsection{Algorytm sekwencyjny - kolejność ji}
 
-\lstinputlisting{./code/omp1.cpp}
+\lstinputlisting{./code/sum_ji.cpp}
 
-\subsubsection{Algorytm zrównoleglony - wpierw kolumny}
 
-\lstinputlisting{./code/omp2.cpp}
+\subsubsection{Algorytm zrównoleglony - kolejność ij}
+
+\lstinputlisting{./code/sum_par_ij.cpp}
+
+
+\subsubsection{Algorytm zrównoleglony - kolejność jj}
+
+\lstinputlisting{./code/sum_par_ji.cpp}
+
+
+\subsubsection{Algorytm na sekcyjność pamięci}
+
+\lstinputlisting{./code/sum_sec.cpp}
+
+
+\subsubsection{Algorytm na  pobranie  z wyprzedzeniem}
+
+\lstinputlisting{./code/sum_pf.cpp}
+
