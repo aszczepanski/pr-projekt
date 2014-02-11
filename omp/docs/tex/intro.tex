@@ -53,3 +53,25 @@ Algorytm sekwencyjny w którym badaliśmy wpływ sekcyjności pamięci na czas w
 Algorytm sekwencyjny w którym badaliśmy wpływ wyprzedzającego pobrania danych do pamięci podręcznej na czas realizacji zadania. Nazywany dalej $sum\_pf$.
 \lstinputlisting{./code/sum_pf.cpp}
 
+\subsection{Maska powinowactwa}
+
+Aby wyeliminować przełączanie wykonywania wątku pomiędzy rdzeniami procesora zastosowaliśmy maski powinowactwa.
+
+\subsubsection{Kod}
+
+\lstinputlisting{./code/mask.cpp}
+
+\subsubsection{Rezultat}
+
+W rezultacie dla przetwarzania równoległego każdy wątek odpowiedzialny za sumowanie realizowany jest na oddzielnym procesorze. Co widoczne jest na poniższych wykresach:
+
+\begin{figure}[H]
+\minipage{0.5\textwidth}
+  \includegraphics{mask_parallel.png}
+  \caption{Wykres wątków dla $sum\_par\_ij$}
+\endminipage\hfill
+\minipage{0.5\textwidth}
+  \includegraphics{mask_single.png}
+  \caption{Wykres wątków dla $sum\_ij$}
+\endminipage\hfill
+\end{figure}
