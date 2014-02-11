@@ -13,4 +13,48 @@ Spodziewaliśmy się, że czas obliczeń dla Instancji B będzie kilkukrotnie kr
 
 \subsection{Wyniki}
 
+Wyniki pomiarów prezentują się następująco:
+
+\begin{table}[!ht]
+\caption{Czas realizacji kodu dla poszczególnych funkcji w $ms$.}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+
+\hline
+  Problem &
+  $sum\_ij$ &
+  $sum\_ji$ &
+  $sum\_sec$ &
+  $sum\_pf$ &
+  $sum\_par\_ij$ &
+  $sum\_par\_ji$ \\
+\hline Instancja A &
+  253 &
+  2352 &
+  19552 &
+  225 &
+  87 &
+  1189 \\
+\hline Instancja B &
+  62 &
+  59 &
+  4890 &
+  57 &
+  23 &
+  304 \\
+\hline Stosunek A/B &
+  4.081 &
+  4.003 &
+  3.998 &
+  3.947 &
+  3.783 &
+  3.911 \\
+\hline
+
+\end{tabular}
+\end{table}
+
 \subsection{Podsumowanie}
+
+Wyniki eksperymentu są bardzo zadowalające. W przypadku każdego algorytmu rozmiar danych ma liniowy wpływ na czas przetwarzania. Jest to zgodne ze złożonością algorytmu która jest liniowa wobec $n$ gdzie $n$ to $liczba\_wierszy * liczba\_kolumn$.\newline
+
+W każdym przypadku czas realizacji dla Instancji B był około $4$ razy krótszy niż dla Instancji A. Średnia tych wartości wynosi $3.954$.
