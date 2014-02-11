@@ -34,7 +34,7 @@ oraz dokonywania obliczeń na danych znajdujących się na tymże procesorze.
 Zważając na fakt, że porcje danych są liczbami całkowitymi należy mieć na uwadze konieczność synchronizacji urządzeń. \\
 
 Dla każdego z modeli minimalizowana jest wartość $T$, która jest większa bądź równa od wszystkich wartości $T_{x}$ (czas zakończenia wszystkich działań na procesorze $Px$) gdzie $x = 1, 2, 3, 4$.
- 
+
 \subsection{Analiza modelu sekwencyjnego}
 
 Przetwarzanie w systemie bez zrównoleglenia podzieliliśmy na 3 modele, w zależności od kolejności przesyłania danych na poszczególnych łączach.
@@ -138,7 +138,7 @@ Po zakończeniu tej komunikacji następują obliczenia danych. Czas zakończenia
 
 \item[Węzeł $P4$] \hfill \\
 
-W tym modelu procesor $P4$ jako ostatni otrzymuje jakiekolwiek dane. Moment ten to czas zakończenia komunikacji z procesorem $P3$ (poprzedzony komunikacją $P1 \to P2$ oraz $P2 \to P3$). Po zakończeniu odbioru danych od $P3$ procesor może rozpocząć obliczenia, ponieważ konieczna jest synchroniazacja z $P2$ (możliwe, że kosztem bezczynności). Po synchronizacji procesor $P4$ pełni rolę odbiorcy w komunikacji z $P2$. Zakończenie tej komunikacji umożliwia dalsze przetwarzanie danych na tym procesorze. 
+W tym modelu procesor $P4$ jako ostatni otrzymuje jakiekolwiek dane. Moment ten to czas zakończenia komunikacji z procesorem $P3$ (poprzedzony komunikacją $P1 \to P2$ oraz $P2 \to P3$). Po zakończeniu odbioru danych od $P3$ procesor może rozpocząć obliczenia, ponieważ konieczna jest synchroniazacja z $P2$ (możliwe, że kosztem bezczynności). Po synchronizacji procesor $P4$ pełni rolę odbiorcy w komunikacji z $P2$. Zakończenie tej komunikacji umożliwia dalsze przetwarzanie danych na tym procesorze.
 
 \end{description}
 
@@ -176,14 +176,14 @@ Działanie procesora $P1$ jest analogiczne do działania procesora $P1$ w modelu
 \item[Węzeł $P2$] \hfill \\
 
 Procesor $P2$ po otrzymaniu danych z procesora $P1$ rozpoczyna przesyłanie danych do procesora $P3$. Od razu po zakończeniu tej komunikacji kontynuuje przesyłanie danych tym razem do procesora $P4$. Jest to ostatnia komunikacja odbywająca się z udziałem procesora $P2$ -- po jej zakończeniu rozpoczyna przetwarzanie pozostałych danych.
- 
+
 \item[Węzeł $P3$] \hfill \\
 
 Procesor $P3$ standardowo otrzymuje dane z procesora $P2$ (po zakończonej komunikacji $P1 \to P2$). W tym przypadku przesyła on dane do procesora $P4$ dopiero po zakończeniu komunikacji $P2 \to P4$. Zakończenie tej komunikacji nie gwarantuje możliwości natychmiastowego startu komunikacji $P3 \to P4$ -- konieczna może okazać się synchronizacja tych procesorów. Zatem czas zakończenia działań na procesorze $P3$ to suma czasów komunikacji $P1 \to P2$, komunikacji $P2 \to P3$, synchronizacji z procesorem $P4$ ($P3$ może w tym czasie przetworzyć jakąś częsć danych), komunikacji $P3 \to P4$ oraz ostatecznie przetworzenia przez procesor $P3$ pozostałych danych.
 
 \item[Węzeł $P4$] \hfill \\
 
-Procesor $P4$ otrzymuje dane z procesora $P2$ (następuje to po zakończeniu komunikacji $P1 \to P2$ oraz $P2 \to P3$). Po zakończeniu tej komunikacji może wystąpić konieczność synchronizacji z procesorem $P3$ ($P3$ w czasie komunikacji $P2 \to $P4 rozpoczął przetwarzanie danych) przed rozpoczęciem kolejnego odbioru danych (tym razem z procesora $P3$). Zakończenie komunikacji $P3 \to P4$ pozwala na realizację dalszych obliczeń na procesorze $P4$ -- obliczenia te ograniczają od góry czas zakończenia wszystkich działań na tym procesorze. 
+Procesor $P4$ otrzymuje dane z procesora $P2$ (następuje to po zakończeniu komunikacji $P1 \to P2$ oraz $P2 \to P3$). Po zakończeniu tej komunikacji może wystąpić konieczność synchronizacji z procesorem $P3$ ($P3$ w czasie komunikacji $P2 \to $P4 rozpoczął przetwarzanie danych) przed rozpoczęciem kolejnego odbioru danych (tym razem z procesora $P3$). Zakończenie komunikacji $P3 \to P4$ pozwala na realizację dalszych obliczeń na procesorze $P4$ -- obliczenia te ograniczają od góry czas zakończenia wszystkich działań na tym procesorze.
 
 \begin{figure}[H]
 \centering

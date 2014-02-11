@@ -1,1 +1,102 @@
 \section{Pomiary efektywności}
+
+\subsection{Przyśpieszenie obliczeń równoległych}
+
+\subsubsection{Pomiary}
+
+\begin{table}[!ht]
+\caption{Porównanie szybkości wybranych algorytmów wobec $sum\_ij$}
+\begin{tabular}{|c|c|c|}
+
+\hline
+  Algorytm &
+  Czas wykonania w $ms$ &
+  Przyśpieszenie względem $sum\_ij$ \\
+
+\hline
+  $sum\_ij$ &
+  253 &
+  1.000 \\
+
+\hline
+  $sum\_ji$ &
+  2362 &
+  0.107 \\
+
+\hline
+  $sum\_par\_ij$ &
+  87 &
+  2.908 \\
+
+\hline
+  $sum\_par\_ji$ &
+  1189 &
+  0.213 \\
+
+\hline
+
+\end{tabular}
+\end{table}
+
+Warto zwrócić uwagę na fakt, że oprócz braku lub obecności zrównoleglenia znaczący wpływ na szybkość przetwarzania ma kolejność uszeregowania pętli. Zostało to szerzej omówione w sekcji \ref{sec:trafienia}. Przyśpieszenia dla poszczególnych uszeregowań pętli prezentują się następująco:
+
+\begin{table}[!ht]
+\caption{Porównanie szybkości wybranych algorytmów (o kolejności pętli $ij$) wobec $sum\_ij$}
+\begin{tabular}{|c|c|c|}
+
+\hline
+  Algorytm &
+  Czas wykonania w $ms$ &
+  Przyśpieszenie względem $sum\_ij$ \\
+
+\hline
+  $sum\_ij$ &
+  2362 &
+  1.000 \\
+
+\hline
+  $sum\_par\_ij$ &
+  87 &
+  2.908 \\
+
+\hline
+
+\end{tabular}
+\end{table}
+
+\begin{table}[!ht]
+\caption{Porównanie szybkości wybranych algorytmów (o kolejności pętli $ji$) wobec $sum\_ji$}
+\begin{tabular}{|c|c|c|}
+
+\hline
+  Algorytm &
+  Czas wykonania w $ms$ &
+  Przyśpieszenie względem $sum\_ji$ \\
+
+\hline
+  $sum\_ji$ &
+  2362 &
+  1.000 \\
+
+\hline
+  $sum\_par\_ji$ &
+  1189 &
+  1.987 \\
+
+\hline
+
+\end{tabular}
+\end{table}
+
+\subsubsection{Podsumowanie}
+
+Zrównoleglenie przetwarzania znacząco przyśpiesza jego czas przetwarzania. Znaczeny wpływ na wielkość wartości tego przyśpieszenia ma kolejność uszeregowania pętli. W przybliżeniu jest to:
+\begin{itemize}
+\item trzykrotne przyśpieszenie dla uszeregowania pętli $ij$
+\item dwukrotne przyśpieszenie dla uszeregowania pętli $ji$
+\end{itemize}
+
+\subsection{Współczynniki braku trafień do pamięci}
+\label{sec:trafienia}
+
+
