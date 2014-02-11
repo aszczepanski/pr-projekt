@@ -96,6 +96,85 @@ Zrównoleglenie przetwarzania znacząco przyśpiesza jego czas przetwarzania. Zn
 \item dwukrotne przyśpieszenie dla uszeregowania pętli $ji$
 \end{itemize}
 
+\subsection{Ilość wykonanych instrukcji na jeden cykl procesora}
+
+IPC (insructions per cycle) jest jednym z wyznaczników prędkości procesora. Oznacza on liczbę wykonywanych instrukcji przez procesor w jednym cyklu zegara. Wskaźnik IPC obliczaliśmy dla każdej funkcji na podstawie wzoru:
+\begin{equation}
+  IPC = \frac{ret\_instr}{CPU\_clocks}.
+\end{equation}
+
+CPI (cycles per instruction) jest odwrotnością CPI:
+\begin{equation}
+  CPI = \frac{CPU\_clocks}{ret\_instr}.
+\end{equation}
+
+\begin{table}[!ht]
+\caption{Wartości IPC i CPI dla poszczególnych algorytmów}
+\begin{tabular}{|c|c|c|c|c|}
+
+\hline
+  Algorytm &
+  $ret\_instr$ &
+  $CPU\_clocks$ &
+  $IPC$ &
+  $CPI$ \\
+
+\hline
+  $sum\_ij$ &
+  12640 &
+  14736 &
+  0.86 &
+  1.17 \\
+
+\hline
+  $sum\_ji$ &
+  9780 &
+  136048 &
+  0.07 &
+  13.91 \\
+
+\hline
+  $sum\_par\_ij$ &
+  12684 &
+  20096 &
+  0.63 &
+  1.58 \\
+
+\hline
+  $sum\_par\_ji$ &
+  11524 &
+  259628 &
+  0.04 &
+  22.53 \\
+
+\hline
+  $sum\_sec$ &
+  14420 &
+  1139472 &
+  0.01 &
+  79.02 \\
+
+\hline
+  $sum\_pf$ &
+  14996 &
+  13140 &
+  1.14 &
+  0.88 \\
+
+\hline
+
+\end{tabular}
+\end{table}
+
+Zgodnie z oczekiwaniami najwyższe wartości wzkaźnika IPC (a zarazem najniższe CPI) wysętpują w przypadku algorytmów, które spełniają zasadę lokalności przestrzennej, są to:
+\begin{itemize}
+\item $sum\_ij$
+\item $sum\_par\_ij$
+\item $sum\_pf$
+\end{itemize}
+
+IPC dla wyżej wymienionej grupy algorytmów jest kilkunasto a w niektórych przypadkach kilkudziesiącio krotonie większe niż dla algorytmów z pozostałej grupy.
+
 \subsection{Współczynniki braku trafień do pamięci}
 \label{sec:trafienia}
 
