@@ -16,7 +16,7 @@ Sam problem sprowadzał się do zsumowania wartości komórek w tabeli. Dla zach
 
 \subsection{Punkt odniesienia (algorytm sekwencyjny - kolejność ij)}
 
-Punktem odniesienia dla wszystkich algorytmów był podstawowy algorytm sekwencyjny w którym sumowaliśmy elementy tablicy wierszami.
+Punktem odniesienia dla wszystkich algorytmów był podstawowy algorytm sekwencyjny w którym sumowaliśmy elementy tablicy wierszami. Nazywany dalej $sum_ij$.
 
 \lstinputlisting{./code/sum_ij.cpp}
 
@@ -26,25 +26,30 @@ Punktem odniesienia dla wszystkich algorytmów był podstawowy algorytm sekwency
 
 \subsubsection{Algorytm sekwencyjny - kolejność ji}
 
+Algorytm sekwencyjny ze zmienioną kolejnością pętli (sumujemy kolumnami). Nazywany dalej $sum_ji$.
 \lstinputlisting{./code/sum_ji.cpp}
 
 
 \subsubsection{Algorytm zrównoleglony - kolejność ij}
 
+Algorytm sumujący wierszami realizowany równolegle. Nazywany dalej $sum_par_ij$.
 \lstinputlisting{./code/sum_par_ij.cpp}
 
 
 \subsubsection{Algorytm zrównoleglony - kolejność jj}
 
+Algorytm realizowany równolegle ze zmienioną kolejnością pętli (sumujemy kolumnami). Nazwywany dalej $sum_par_ji$.
 \lstinputlisting{./code/sum_par_ji.cpp}
 
 
 \subsubsection{Algorytm na sekcyjność pamięci}
 
+Algorytm sekwencyjny w którym badaliśmy wpływ sekcyjności pamięci na czas wykonania zadania. Nazywany dalej $sum_sec$.
 \lstinputlisting{./code/sum_sec.cpp}
 
 
 \subsubsection{Algorytm na  pobranie  z wyprzedzeniem}
 
+Algorytm sekwencyjny w którym badaliśmy wpływ wyprzedzającego pobrania danych do pamięci podręcznej na czas realizacji zadania. Nazywany dalej $sum_pf$.
 \lstinputlisting{./code/sum_pf.cpp}
 
