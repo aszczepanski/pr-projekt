@@ -2,9 +2,21 @@
 
 \subsection{Opis problemu}
 
-Głównym założeniem projektu było zapoznanie się biblioteką OpenMP na podstawie równoległego sumowania komórek tablicy. W ramach projektu zrealizowaliśmy 2 algorytmy sekwencyjne oraz 2 algorytmy zrównleglone. Celem dwóch różnych algorytmów sekwencyjnych było zbadanie wpływu sekcyjności pamięci podręcznej na czas realizacji zadania. W przypadku algorytmów zrównoleglonych badaliśmy wpływ kolejności uszeregowania pętli na końcowy rezultat.
+Głównym założeniem projektu było zapoznanie się biblioteką OpenMP na podstawie równoległego sumowania komórek tablicy. W ramach projektu zrealizowaliśmy 4 algorytmy sekwencyjne oraz 2 algorytmy zrównleglone. Celem zastosowania czterech różnych algorytmów sekwencyjnych było zbadanie wpływu sekcyjności pamięci podręcznej, wyprzdzającego pobrania danych do pamięcy podręcznej oraz kolejności uszeregowania pętli na czas realizacji zadania. W przypadku algorytmów zrównoleglonych badaliśmy wpływ kolejności uszeregowania pętli na końcowy rezultat.\newline
+
+Nasze badania podzieliliśmy na 3 spójne części. Kolejno badaliśmy
+\begin{itemize}
+\item rozmiar danych
+\item sekcyjność pamięci
+\item wyprzedzające pobranie
+\end{itemize}
+na czas realizacji problemu.\newline
+
+Sam problem sprowadzał się do zsumowania wartości komórek w tabeli. Dla zachowania czytelności w kolejności pętli zastosowaliśmy tablicę dwuwymiarową. Ponieważ sam problem jest prosty obliczeniowo zmuszeni byliśmy do stosowania maksymalnego rozmiaru tablicy tj $[2^{28} - wierszy]$ na $[2^{4} - kolumn]$.
 
 \subsection{Punkt odniesienia (algorytm sekwencyjny - kolejność ij)}
+
+Punktem odniesienia dla wszystkich algorytmów był podstawowy algorytm sekwencyjny w którym sumowaliśmy elementy tablicy wierszami.
 
 \lstinputlisting{./code/sum_ij.cpp}
 
