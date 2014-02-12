@@ -200,11 +200,8 @@ IPC dla wyżej wymienionej grupy algorytmów jest kilkunasto a w niektórych prz
   L2 misses &
   ilość chybień do pamięci L2 \\
 \hline
-  Read req L3 &
-  ilość odwołań do pamięci L3 \\
-\hline
-  L3 misses &
-  ilość chybień do pamięci L3 \\
+  L2 fill write &
+  zapis danych w L2 powodowany usunięciem ich z pp L1 \\
 \hline
   DRAM accesses &
   ilość odwołań do pamięci dynamicznej \\
@@ -215,6 +212,66 @@ IPC dla wyżej wymienionej grupy algorytmów jest kilkunasto a w niektórych prz
 
 
 \subsubsection{Pomiary}
+
+\begin{table}[H]
+\caption{Pomiary związane z odwołaniami do pamięci L1}
+
+\begin{tabular}{|l|c|c|c|c|}
+
+\hline
+  Algorytm &
+  DC accessess &
+  DC missess &
+  DC miss ratio &
+  DC miss rate \\
+
+\hline
+  $sum\_ij$ &
+  5792 &
+  24 &
+  $0\%$ &
+  $0\%$ \\
+
+\hline
+  $sum\_ji$ &
+  7620 &
+  4068 &
+  $53\%$ &
+  $42\%$ \\
+
+\hline
+  $sum\_par\_ij$ &
+  5188 &
+  20 &
+  $0\%$ &
+  $0\%$ \\
+
+\hline
+  $sum\_par\_ji$ &
+  7652 &
+  4456 &
+  $58\%$ &
+  $38\%$ \\
+
+\hline
+  $sum\_sec$ &
+  18808 &
+  5256 &
+  $28\%$ &
+  $36\%$ \\
+
+\hline
+  $sum\_pf$ &
+  9928 &
+  24 &
+  $0\%$ &
+  $0\%$ \\
+
+\hline
+
+\end{tabular}
+
+\end{table}
 
 
 
