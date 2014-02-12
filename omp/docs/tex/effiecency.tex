@@ -213,6 +213,16 @@ IPC dla wyżej wymienionej grupy algorytmów jest kilkunasto a w niektórych prz
 
 \subsubsection{Pomiary}
 
+Wartości $DC\_accesss$ oraz $DC\_missess$ odczytaliśmy bezpośrednio z programu CodeAnalyst. Natomiast $DC\_miss\_ratio$ oraz $DC\_miss\_rate$ obliczyliśmy w następujący sposób:
+
+\begin{equation}
+  DC\_miss\_rate = \frac{DC\_missess}{ret\_instr}
+\end{equation}
+
+\begin{equation}
+  DC\_miss\_ratio = \frac{DC\_missess}{DC\_accesss}
+\end{equation}
+
 \begin{table}[H]
 \caption{Pomiary związane z odwołaniami do pamięci L1}
 
@@ -273,5 +283,79 @@ IPC dla wyżej wymienionej grupy algorytmów jest kilkunasto a w niektórych prz
 
 \end{table}
 
+Podobnie jak w przypadku pamięci L1 wartości $L2\_requests$, $L2\_misses$ oraz $L2\_fill\_write$ odczytaliśmy bezpośrednio z programu CodeAnalyst. Natomiast $L2\_miss\_ratio$ oraz $L2\_miss\_rate$ obliczyliśmy w następujący sposób:
 
+\begin{equation}
+  L2\_miss\_rate = \frac{L2\_missess}{ret\_instr}
+\end{equation}
 
+\begin{equation}
+  L2\_miss\_ratio = \frac{L2\_missess}{L2\_requests + L2\_fill\_write}
+\end{equation}
+
+\begin{table}[H]
+\caption{Pomiary związane z odwołaniami do pamięci L2}
+
+\begin{tabular}{|l|c|c|c|c|c|}
+
+\hline
+  Algorytm &
+  L2 requests &
+  L2 missess &
+  L2 fill write &
+  L2 miss rate &
+  L2 miss ratio \\
+
+\hline
+  $sum\_ij$ &
+  663 &
+  340 &
+  684 &
+  $3\%$ &
+  $25\%$ \\
+
+\hline
+  $sum\_ji$ &
+  5452 &
+  7209 &
+  10908 &
+  $56\%$ &
+  $30\%$ \\
+
+\hline
+  $sum\_par\_ij$ &
+  1431 &
+  352 &
+  668 &
+  $3\%$ &
+  $17\%$ \\
+
+\hline
+  $sum\_par\_ji$ &
+  5472 &
+  23736 &
+  10844 &
+  $47\%$ &
+  $16\%$ \\
+
+\hline
+  $sum\_sec$ &
+  11024 &
+  15945 &
+  21668 &
+  $76\%$ &
+  $29\%$ \\
+
+\hline
+  $sum\_pf$ &
+  344 &
+  693 &
+  684 &
+  $2\%$ &
+  $25\%$ \\
+
+\hline
+
+\end{tabular}
+
+\end{table}
