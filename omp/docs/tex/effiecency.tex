@@ -359,3 +359,15 @@ Podobnie jak w przypadku pamięci L1 wartości $L2\_requests$, $L2\_misses$ oraz
 \end{tabular}
 
 \end{table}
+
+\subsubsection{Omówienie}
+
+Znowu można wyróżnić 2 grupy algorytmów. Pierwsza z nich składająca się z:
+
+\begin{itemize}
+\item $sum\_ij$
+\item $sum\_par\_ij$
+\item $sum\_pf$
+\end{itemize}
+
+cechują się one lokalnością przestrzenną. Widać to bardzo wyraźnie przy współczynnikach $DC\_miss\_ratio$ oraz $DC\_miss\_rate$. Dla wyżej wymienionej grupy wynoszą one w przybliżeniu $0\%$, a dla pozostałych algorytmów tj $sum\_ji$, $sum\_par\_ji$ oraz $sum\_sec$ po kilkadziesiąt procent. Związane to jest z faktem że grupa posiadająca cechę lokalności przestrzennej sumuje wierszami, zatem z raz wczytanej linii do pamięci podręcznej wszystkie elementy są wykorzystywane jeden po drugim.
