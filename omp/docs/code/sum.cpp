@@ -8,7 +8,6 @@
 #define CACHE_ALIGN __declspec(align(CACHE_LINE))
 #define CACHE_LINES_ON_PAGE 512
 
-// ROWS * COLS = 1<<28 = 256 MB (2^8 * 2^10 * 2^10)
 #define ROWS ((size_t) 1<<24)
 #define COLS ((size_t) 1<<4)
 

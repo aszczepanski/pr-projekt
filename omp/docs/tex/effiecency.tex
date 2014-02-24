@@ -1,96 +1,49 @@
 \section{Pomiary efektywności}
 
-\subsection{Przyśpieszenie obliczeń równoległych}
+\subsection{Przyspieszenie obliczeń równoległych}
 
 \subsubsection{Pomiary}
 
-\begin{table}[!ht]
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+Algorytm & Czas wykonania w $ms$ & Przyspieszenie względem $sum\_ij$ \\ \hline
+$sum\_ij$ & 253 & 1.000 \\ \hline
+$sum\_ji$ & 2362 & 0.107 \\ \hline
+$sum\_par\_ij$ & 87 & 2.908 \\ \hline
+$sum\_par\_ji$ & 1189 & 0.213 \\ \hline
+\end{tabular}
 \caption{Porównanie szybkości wybranych algorytmów wobec $sum\_ij$}
-\begin{tabular}{|c|c|c|}
-
-\hline
-  Algorytm &
-  Czas wykonania w $ms$ &
-  Przyśpieszenie względem $sum\_ij$ \\
-
-\hline
-  $sum\_ij$ &
-  253 &
-  1.000 \\
-
-\hline
-  $sum\_ji$ &
-  2362 &
-  0.107 \\
-
-\hline
-  $sum\_par\_ij$ &
-  87 &
-  2.908 \\
-
-\hline
-  $sum\_par\_ji$ &
-  1189 &
-  0.213 \\
-
-\hline
-
-\end{tabular}
 \end{table}
 
-Warto zwrócić uwagę na fakt, że oprócz braku lub obecności zrównoleglenia znaczący wpływ na szybkość przetwarzania ma kolejność uszeregowania pętli. Zostało to szerzej omówione w sekcji \ref{sec:trafienia}. Przyśpieszenia dla poszczególnych uszeregowań pętli prezentują się następująco:
+Warto zwrócić uwagę na fakt, że oprócz braku lub obecności zrównoleglenia znaczący wpływ na szybkość przetwarzania ma kolejność uszeregowania pętli. Zostało to szerzej omówione w sekcji \ref{sec:trafienia}. Przyspieszenia dla poszczególnych uszeregowań pętli prezentują się następująco:
 
-\begin{table}[!ht]
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+Algorytm & Czas wykonania w $ms$ & Przyspieszenie względem $sum\_ij$ \\ \hline
+$sum\_ij$ & 2362 & 1.000 \\ \hline
+$sum\_par\_ij$ & 87 & 2.908 \\ \hline
+\end{tabular}
 \caption{Porównanie szybkości wybranych algorytmów (o kolejności pętli $ij$) wobec $sum\_ij$}
-\begin{tabular}{|c|c|c|}
-
-\hline
-  Algorytm &
-  Czas wykonania w $ms$ &
-  Przyśpieszenie względem $sum\_ij$ \\
-
-\hline
-  $sum\_ij$ &
-  2362 &
-  1.000 \\
-
-\hline
-  $sum\_par\_ij$ &
-  87 &
-  2.908 \\
-
-\hline
-
-\end{tabular}
 \end{table}
 
-\begin{table}[!ht]
-\caption{Porównanie szybkości wybranych algorytmów (o kolejności pętli $ji$) wobec $sum\_ji$}
+\begin{table}[H]
+\centering
 \begin{tabular}{|c|c|c|}
-
 \hline
-  Algorytm &
-  Czas wykonania w $ms$ &
-  Przyśpieszenie względem $sum\_ji$ \\
-
-\hline
-  $sum\_ji$ &
-  2362 &
-  1.000 \\
-
-\hline
-  $sum\_par\_ji$ &
-  1189 &
-  1.987 \\
-
-\hline
-
+Algorytm & Czas wykonania w $ms$ & Przyśpieszenie względem $sum\_ji$ \\ \hline
+$sum\_ji$ & 2362 & 1.000 \\ \hline
+$sum\_par\_ji$ & 1189 & 1.987 \\ \hline
 \end{tabular}
+\caption{Porównanie szybkości wybranych algorytmów (o kolejności pętli $ji$) wobec $sum\_ji$}
 \end{table}
 
 \subsubsection{Podsumowanie}
 
-Zrównoleglenie przetwarzania znacząco przyśpiesza jego czas przetwarzania. Znaczeny wpływ na wielkość wartości tego przyśpieszenia ma kolejność uszeregowania pętli. W przybliżeniu jest to:
+Zrównoleglenie przetwarzania znacząco przyśpiesza jego czas przetwarzania. Znaczny wpływ na wielkość przyspieszenia ma kolejność uszeregowania pętli. W przybliżeniu jest to:
 \begin{itemize}
 \item trzykrotne przyśpieszenie dla uszeregowania pętli $ij$
 \item dwukrotne przyśpieszenie dla uszeregowania pętli $ji$
@@ -103,67 +56,24 @@ IPC (insructions per cycle) jest jednym z wyznaczników prędkości procesora. O
   IPC = \frac{ret\_instr}{CPU\_clocks}.
 \end{equation}
 
-CPI (cycles per instruction) jest odwrotnością CPI:
+CPI (cycles per instruction) jest odwrotnością IPC:
 \begin{equation}
   CPI = \frac{CPU\_clocks}{ret\_instr}.
 \end{equation}
 
-\begin{table}[!ht]
-\caption{Wartości IPC i CPI dla poszczególnych algorytmów}
+\begin{table}[H]
+\centering
 \begin{tabular}{|c|c|c|c|c|}
-
 \hline
-  Algorytm &
-  $ret\_instr$ &
-  $CPU\_clocks$ &
-  $IPC$ &
-  $CPI$ \\
-
-\hline
-  $sum\_ij$ &
-  12640 &
-  14736 &
-  0.86 &
-  1.17 \\
-
-\hline
-  $sum\_ji$ &
-  9780 &
-  136048 &
-  0.07 &
-  13.91 \\
-
-\hline
-  $sum\_par\_ij$ &
-  12684 &
-  20096 &
-  0.63 &
-  1.58 \\
-
-\hline
-  $sum\_par\_ji$ &
-  11524 &
-  259628 &
-  0.04 &
-  22.53 \\
-
-\hline
-  $sum\_sec$ &
-  14420 &
-  1139472 &
-  0.01 &
-  79.02 \\
-
-\hline
-  $sum\_pf$ &
-  14996 &
-  13140 &
-  1.14 &
-  0.88 \\
-
-\hline
-
+Algorytm & $ret\_instr$ & $CPU\_clocks$ & $IPC$ & $CPI$ \\ \hline
+$sum\_ij$ & 12640 & 14736 & 0.86 & 1.17 \\ \hline
+$sum\_ji$ & 9780 & 136048 & 0.07 & 13.91 \\ \hline
+$sum\_par\_ij$ & 12684 & 20096 & 0.63 & 1.58 \\ \hline
+$sum\_par\_ji$ & 11524 & 259628 & 0.04 & 22.53 \\ \hline
+$sum\_sec$ & 14420 & 1139472 & 0.01 & 79.02 \\ \hline
+$sum\_pf$ & 14996 & 13140 & 1.14 & 0.88 \\ \hline
 \end{tabular}
+\caption{Wartości IPC i CPI dla poszczególnych algorytmów}
 \end{table}
 
 Zgodnie z oczekiwaniami najwyższe wartości wzkaźnika IPC (a zarazem najniższe CPI) wysętpują w przypadku algorytmów, które spełniają zasadę lokalności przestrzennej, są to:
@@ -173,7 +83,7 @@ Zgodnie z oczekiwaniami najwyższe wartości wzkaźnika IPC (a zarazem najniższ
 \item $sum\_pf$
 \end{itemize}
 
-IPC dla wyżej wymienionej grupy algorytmów jest kilkunasto a w niektórych przypadkach kilkudziesiącio krotonie większe niż dla algorytmów z pozostałej grupy.
+IPC dla wyżej wymienionej grupy algorytmów jest kilkunasto, a w niektórych przypadkach kilkudziesiącio krotonie większe niż dla algorytmów z pozostałej grupy.
 
 \subsection{Współczynniki braku trafień do pamięci}
 \label{sec:trafienia}
@@ -181,33 +91,18 @@ IPC dla wyżej wymienionej grupy algorytmów jest kilkunasto a w niektórych prz
 \subsubsection{Znaczenie danych}
 
 \begin{table}[H]
-\caption{Badane dane}
+\centering
 \begin{tabular}{|l|l|}
-
 \hline
-  Nazwa &
-  Znaczenie \\
-\hline
-  DC acceesses &
-  ilość odwołań do pamięci podręcznej \\
-\hline
-  DC misses &
-  ilość chybień do pamięci podręcznej \\
-\hline
-  L2 requests &
-  ilość odwołań do pamięci L2 \\
-\hline
-  L2 misses &
-  ilość chybień do pamięci L2 \\
-\hline
-  L2 fill write &
-  zapis danych w L2 powodowany usunięciem ich z pp L1 \\
-\hline
-  DRAM accesses &
-  ilość odwołań do pamięci dynamicznej \\
-\hline
-
+Nazwa & Znaczenie \\ \hline
+DC acceesses & ilość odwołań do pamięci podręcznej \\ \hline
+DC misses & ilość chybień do pamięci podręcznej \\ \hline
+L2 requests & ilość odwołań do pamięci L2 \\ \hline
+L2 misses & ilość chybień do pamięci L2 \\ \hline
+L2 fill write & zapis danych w L2 powodowany usunięciem ich z pp L1 \\ \hline
+DRAM accesses & ilość odwołań do pamięci dynamicznej \\ \hline
 \end{tabular}
+\caption{Badane dane}
 \end{table}
 
 
@@ -224,63 +119,18 @@ Wartości $DC\_accesss$ oraz $DC\_missess$ odczytaliśmy bezpośrednio z program
 \end{equation}
 
 \begin{table}[H]
-\caption{Pomiary związane z odwołaniami do pamięci L1}
-
+\centering
 \begin{tabular}{|l|c|c|c|c|}
-
 \hline
-  Algorytm &
-  DC accessess &
-  DC missess &
-  DC miss ratio &
-  DC miss rate \\
-
-\hline
-  $sum\_ij$ &
-  5792 &
-  24 &
-  $0\%$ &
-  $0\%$ \\
-
-\hline
-  $sum\_ji$ &
-  7620 &
-  4068 &
-  $53\%$ &
-  $42\%$ \\
-
-\hline
-  $sum\_par\_ij$ &
-  5188 &
-  20 &
-  $0\%$ &
-  $0\%$ \\
-
-\hline
-  $sum\_par\_ji$ &
-  7652 &
-  4456 &
-  $58\%$ &
-  $38\%$ \\
-
-\hline
-  $sum\_sec$ &
-  18808 &
-  5256 &
-  $28\%$ &
-  $36\%$ \\
-
-\hline
-  $sum\_pf$ &
-  9928 &
-  24 &
-  $0\%$ &
-  $0\%$ \\
-
-\hline
-
+Algorytm & DC accessess & DC missess & DC miss ratio & DC miss rate \\ \hline
+$sum\_ij$ & 5792 & 24 & $0\%$ & $0\%$ \\ \hline
+$sum\_ji$ & 7620 & 4068 & $53\%$ & $42\%$ \\ \hline
+$sum\_par\_ij$ & 5188 & 20 & $0\%$ & $0\%$ \\ \hline
+$sum\_par\_ji$ & 7652 & 4456 & $58\%$ & $38\%$ \\ \hline
+$sum\_sec$ & 18808 & 5256 & $28\%$ & $36\%$ \\ \hline
+$sum\_pf$ & 9928 & 24 & $0\%$ & $0\%$ \\ \hline
 \end{tabular}
-
+\caption{Pomiary związane z odwołaniami do pamięci L1}
 \end{table}
 
 Podobnie jak w przypadku pamięci L1 wartości $L2\_requests$, $L2\_misses$ oraz $L2\_fill\_write$ odczytaliśmy bezpośrednio z programu CodeAnalyst. Natomiast $L2\_miss\_ratio$ oraz $L2\_miss\_rate$ obliczyliśmy w następujący sposób:
@@ -294,70 +144,18 @@ Podobnie jak w przypadku pamięci L1 wartości $L2\_requests$, $L2\_misses$ oraz
 \end{equation}
 
 \begin{table}[H]
-\caption{Pomiary związane z odwołaniami do pamięci L2}
-
+\centering
 \begin{tabular}{|l|c|c|c|c|c|}
-
 \hline
-  Algorytm &
-  L2 requests &
-  L2 missess &
-  L2 fill write &
-  L2 miss rate &
-  L2 miss ratio \\
-
-\hline
-  $sum\_ij$ &
-  663 &
-  340 &
-  684 &
-  $3\%$ &
-  $25\%$ \\
-
-\hline
-  $sum\_ji$ &
-  5452 &
-  7209 &
-  10908 &
-  $56\%$ &
-  $30\%$ \\
-
-\hline
-  $sum\_par\_ij$ &
-  1431 &
-  352 &
-  668 &
-  $3\%$ &
-  $17\%$ \\
-
-\hline
-  $sum\_par\_ji$ &
-  5472 &
-  23736 &
-  10844 &
-  $47\%$ &
-  $16\%$ \\
-
-\hline
-  $sum\_sec$ &
-  11024 &
-  15945 &
-  21668 &
-  $76\%$ &
-  $29\%$ \\
-
-\hline
-  $sum\_pf$ &
-  344 &
-  693 &
-  684 &
-  $2\%$ &
-  $25\%$ \\
-
-\hline
-
+Algorytm & L2 requests & L2 missess & L2 fill write & L2 miss rate & L2 miss ratio \\ \hline
+$sum\_ij$ & 663 & 340 & 684 & $3\%$ & $25\%$ \\ \hline
+$sum\_ji$ & 5452 & 7209 & 10908 & $56\%$ & $30\%$ \\ \hline
+$sum\_par\_ij$ & 1431 & 352 & 668 & $3\%$ & $17\%$ \\ \hline
+$sum\_par\_ji$ & 5472 & 23736 & 10844 & $47\%$ & $16\%$ \\ \hline
+$sum\_sec$ & 11024 & 15945 & 21668 & $76\%$ & $29\%$ \\ \hline
+$sum\_pf$ & 344 & 693 & 684 & $2\%$ & $25\%$ \\ \hline
 \end{tabular}
-
+\caption{Pomiary związane z odwołaniami do pamięci L2}
 \end{table}
 
 \subsubsection{Omówienie}

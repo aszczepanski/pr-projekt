@@ -5,52 +5,26 @@
 W celu sprawdzenia wpływu rozmiaru danych na czas realizacji zadania dokonaliśmy pomiarów czasów dla dwóch rozmiarów danych:
 
 \begin{itemize}
-\item Instancja A: $tab[2^{28}][2^4]$
-\item Instancja B: $tab[2^{24}][2^4]$
+\item Instancja A: $tab[2^{24}][2^4]$
+\item Instancja B: $tab[2^{22}][2^4]$
 \end{itemize}
 
-Spodziewaliśmy się, że czas obliczeń dla Instancji B będzie kilkukrotnie krótszy.
+Spodziewaliśmy się, że czas obliczeń dla Instancji B będzie w przybliżeniu czterokrotnie krótszy.
 
 \subsection{Wyniki}
 
 Wyniki pomiarów prezentują się następująco:
 
-\begin{table}[!ht]
-\caption{Czas realizacji kodu dla poszczególnych funkcji w $ms$.}
+\begin{table}[H]
+\centering
 \begin{tabular}{|c|c|c|c|c|c|c|}
-
 \hline
-  Problem &
-  $sum\_ij$ &
-  $sum\_ji$ &
-  $sum\_sec$ &
-  $sum\_pf$ &
-  $sum\_par\_ij$ &
-  $sum\_par\_ji$ \\
-\hline Instancja A &
-  253 &
-  2352 &
-  19552 &
-  225 &
-  87 &
-  1189 \\
-\hline Instancja B &
-  62 &
-  590 &
-  4890 &
-  57 &
-  23 &
-  304 \\
-\hline Stosunek A/B &
-  4.081 &
-  4.003 &
-  3.998 &
-  3.947 &
-  3.783 &
-  3.911 \\
-\hline
-
+Problem & $sum\_ij$ & $sum\_ji$ & $sum\_sec$ & $sum\_pf$ & $sum\_par\_ij$ & $sum\_par\_ji$ \\ \hline
+Instancja A & 253 & 2352 & 19552 & 225 & 87 & 1189 \\ \hline
+Instancja B & 62 & 590 & 4890 & 57 & 23 & 304 \\ \hline
+Stosunek A/B & 4.081 & 4.003 & 3.998 & 3.947 & 3.783 & 3.911 \\ \hline
 \end{tabular}
+\caption{Czas realizacji kodu dla poszczególnych funkcji w $ms$.}
 \end{table}
 
 \subsection{Podsumowanie}

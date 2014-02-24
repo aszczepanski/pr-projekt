@@ -1,10 +1,10 @@
 \section{Podsumowanie}
 
-Zrealizowane zadania pozowliły nam na lepsze poznanie przetwarzania równoległwego. Uświadomiły nas o korzyściach płynących z jego stosowania. Dwa główne wnioski jakie można wyciągnąć to:
+Zrealizowane zadania pozwoliły nam na lepsze poznanie przetwarzania równoległwego a także wagi kolejności odwołań do pamięci. Dwa główne wnioski jakie można wyciągnąć to:
 
 \begin{itemize}
 \item przetwarzanie równoległe jest szybsze od sekwencyjnego (doskonale widać poprzez porównanie algorytmów $sum\_ij$ oraz $sum\_par\_ij$)
-\item ważne podczas pisania kodu jest zaplanowanie dostępów do pamięci, zapewnienie własności lokalności przestrzennej w znaczący sposób przyśpiesza działanie progoramu ($sum\_ij$ 77 krotnie szybszy od $sum\_sec$)
+\item ważne podczas pisania kodu jest zaplanowanie dostępów do pamięci, zapewnienie własności lokalności czasowej i przestrzennej w znaczący sposób przyspiesza działanie progoramu ($sum\_ij$ 77 krotnie szybszy od $sum\_sec$)
 \end{itemize}
 
 Najszybszy algorytm ($sum\_par\_ij$) był blisko 225 razy szybszy od najwolniejszego ($sum\_sec$). Było dla nas sporym zaskoczeniem, że takie różnice można uzyskać dla wydawało by się zwykłego sumowania komórek z tablicy.\newline

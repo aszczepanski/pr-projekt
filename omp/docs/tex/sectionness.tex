@@ -9,49 +9,23 @@ W trakcie naszych badań sprawdziliśmy wpływ sekcyjności pamięci na czas prz
 \item $sum\_sec$ - algorytm sekwencyjny w którym badaliśmy sekcyjność pamięci
 \end{itemize}
 
-W wykorzystywanym systemie obliczeniowym liczba lini w pojedynczym bloku pamięci L1 wynosi $64$.\newline
+W wykorzystywanym systemie długość lini PP wynosi $64B$, a liczba lini w pojedyńczej stronie wynosi $512$.\newline
 
-W celu sprawdzenia w jaki sposób sekcyjność wpływa na czas realizacji zmodyfikowaliśmy kod w następujący sposób:
-
-\lstinputlisting{./code/sum_sec_small.cpp}
-
-Sumujemy kolumnami, wprowadzając dodatkową, środkową pętlę która sumuje co $64$ element. Dzięki temu każdy sumowany element musi być pobrany z pamięci dynamicznej.
-
-%ADAM DO SPRAWDZENIA TO JEST, NIE PAMIĘTAM JAK TO SZŁO
+W metodzie $sum\_sec$ w kolejnych iteracjach odwołujemy się do komórki tabeli z tej samej kolumny, z wiersza przesuniętego o ilość lini w stronie. Powoduje to konieczność wymiany całej lini PP w każdej iteracji.
 
 \subsection{Wyniki}
 
 Zgodnie z założeniem, powinien to być najwolniejszy algorytm, ponieważ spodziewana jest bardzo wysoka liczba odwołań do pamięci RAM or wysoki stosunek braku trafień do pamięci podręcznej.
 
 \begin{table}[H]
-\caption{Porównanie wybranych algorytmów pod kątem sekcyjności pamięci}
-
+\centering
 \begin{tabular}{|l|c|c|c|c|}
-
 \hline
-  Algorytm &
-  Czas [ms] &
-  DC missess &
-  L2 misses &
-  DRAM access \\
-
-\hline
-  $sum\_ij$ &
-  253 &
-  24 &
-  340 &
-  352 \\
-
-\hline
-  $sum\_sec$ &
-  19552 &
-  5256 &
-  11024 &
-  5920 \\
-
-\hline
-
+Algorytm & Czas [ms] & DC missess & L2 misses & DRAM access \\ \hline
+$sum\_ij$ & 253 & 24 & 340 & 352 \\ \hline
+$sum\_sec$ & 19552 & 5256 & 11024 & 5920 \\ \hline
 \end{tabular}
+\caption{Porównanie wybranych algorytmów pod kątem sekcyjności pamięci}
 \end{table}
 
 Wyniki przerosły nasze oczekiwania - $sum\_sec$ wykonał się ponad $77$ razy wolniej. Pokazuje to jest wielkie znaczenie na szybkość realizacji przetwarzania ma zachowanie cechy lokalności przestrzennej. Wyraźnie widać, że w przypadku algorytmu użytego jako punkt odniesienia liczba braków trafień do pamięci podręcznej L1 była znacznie mniejsza. Sytuacja wygląda bardzo podobnie dla pamięci podręcznej L2. Konsekwencją braku trafień do pamięci podręcznej jest konieczność większej liczby pobrań danych z pamięci dynamicznej co odzwierciedla współczynnik $DRAM\_accesses$.
