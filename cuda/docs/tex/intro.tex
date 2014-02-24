@@ -1,4 +1,18 @@
 
 \section{Wprowadzenie}
 
+Celem projektu było zapoznanie się z możliwościami przetwarzania na kartach graficznych na przykładzie technologi CUDA. \\
+
+Przygotowaliśmy 5 wersji programu, którego zadaniem było mnożenie macierzy kwadratowych o jednakowych wymiarach na GPU. Każda kolejna wersja jest modyfikacją poprzedniej. \\
+
+Efektywność programów zbadaliśmy przy pomocy profilera Nsight dla Visual Studio. Dla każdej instancji mierzyliśmy:
+\begin{itemize}
+\item czas wykonania
+\item ilość operacji zmienno przecinkowych na sekundę (GFLOPS)
+\item ilość instrukcji wykonanych na sekundę (GIPS)
+\item przepustowość pamięci globalnej
+\item stosunek operacji zmienno przecinkowych do ilości operacji odczytu/zapisu z pamięci globalnej (CGMA)
+\item zajętość warpami multiprocesorów
+\end{itemize}
+
 \newpage

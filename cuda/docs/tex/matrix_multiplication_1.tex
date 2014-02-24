@@ -1,4 +1,22 @@
 
 \subsection{Wersja 1}
 
+W pierwszej wersji programu wykorzystany został tylko jeden blok wątków. Jeśli rozmiar bloku jest równy rozmiarowi macierzy to każdy z wątków oblicza 1 element wyniku. W przeciwnym przypatku każdy z wątków oblicza $$ {\left(\frac{\text{rozmiar macierzy}}{\text{rozmiar bloku}}\right)}^{2} $$ elementów wyniku. Pamięć współdzielona nie jest wykorzystywana.
+
 \lstinputlisting[caption=Mnożenie macierzy kwadratowych na GPU -- wersja 1.]{./code/matrix_multiplication_1.cpp}
+
+Ponieważ wykorzystany jest tylko jeden blok, obliczenia przeprowadzane są na jednym SM, a co za tym idzie w danej chwili aktywny może być tylko jeden warp. \\
+Duży wpływ na prędkość przetwarzania ma wielkość bloku, dla małych bloków efektywność jest bardzo niska -- duża ilość dostępów do pamięci ogranicza prędkość przetwarzania.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+Rozmiar bloku & 8x8 & 16x16 & 22x22 \\ \hline
+Macierz 176x176 & 49.79 & 13.17 & 7.45 \\ \hline
+Macierz 352x352 & 401.35 & 103.85 & 59.70 \\ \hline
+Macierz 528x528 & 1354.40 & 349.77 & 200.36 \\ \hline
+\end{tabular}
+\caption{Czas obliczeń [ms] -- wersja 1.}
+\end{table}
+

@@ -1,4 +1,32 @@
 
 \subsection{Wersja 3}
 
+W trzecim podejściu wykorzystana została pamięć współdzielona. W kolejnych iteracjach pętli po blokach najpierw wczytywany jest blok do pamięci współdzielonej (każdy wątek wczytuje jedną komórkę), a następnie wykonywane są obliczenia na dostępnych danych. W tym podejściu niezbędne jest synchronizowanie się wątków dwukrotnie w każdej iteracji.
+
 \lstinputlisting[caption=Mnożenie macierzy kwadratowych na GPU -- wersja 3.]{./code/matrix_multiplication_3.cpp}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+Rozmiar bloku & 8x8 & 16x16 & 22x22 \\ \hline
+Macierz 176x176 & 0.31 & 0.19 & 0.32 \\ \hline
+Macierz 352x352 & 2.33 & 1.27 & 2.23 \\ \hline
+Macierz 528x528 & 7.66 & 4.07 & 7.39 \\ \hline
+\end{tabular}
+\caption{Czas obliczeń [ms] -- wersja 3.}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+Rozmiar bloku & 16x16 \\ \hline
+Macierz 64x64 & 0.02 \\ \hline
+Macierz 128x128 & 0.09 \\ \hline
+Macierz 256x256 & 0.52 \\ \hline
+Macierz 384x384 & 1.62 \\ \hline
+Macierz 512x512 & 3.76 \\ \hline
+\end{tabular}
+\caption{Czas obliczeń [ms] -- wersja 3.}
+\end{table}
