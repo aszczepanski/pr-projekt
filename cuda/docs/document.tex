@@ -1,0 +1,46 @@
+\documentclass{article}
+
+\usepackage{polski}
+\usepackage{setspace}
+\usepackage[polish]{babel}
+\usepackage[utf8]{inputenc}
+
+\usepackage{graphicx}
+\graphicspath{ {./img/} }
+
+\usepackage{listings}
+\usepackage{float}
+\usepackage{datetime}
+\usepackage{amsmath}
+\usepackage{color}
+\usepackage{subfig}
+
+\input{./tex/listings_style.tex}
+
+\setlength\parindent{0pt}
+
+\begin{document}
+
+\input{./tex/title.tex}
+
+\tableofcontents
+\newpage
+
+\input{./tex/info.tex}
+\input{./tex/intro.tex}
+\input{./tex/content.tex}
+\input{./tex/summary.tex}
+\input{./tex/attachments.tex}
+
+\newpage
+\listoffigures
+\addcontentsline{toc}{section}{Spis rysunków}
+\newpage
+\listoftables
+\addcontentsline{toc}{section}{Spis tablic}
+\newpage
+\lstlistoflistings
+\addcontentsline{toc}{section}{Spis kodów źródłowych}
+
+
+\end{document}
