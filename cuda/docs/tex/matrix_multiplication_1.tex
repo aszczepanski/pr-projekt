@@ -12,10 +12,11 @@ Duży wpływ na prędkość przetwarzania ma wielkość bloku, dla małych blok�
 \centering
 \begin{tabular}{|c|c|c|c|}
 \hline
-Rozmiar bloku & 8x8 & 16x16 & 22x22 \\ \hline
-Macierz 176x176 & 49.79 & 13.17 & 7.45 \\ \hline
-Macierz 352x352 & 401.35 & 103.85 & 59.70 \\ \hline
-Macierz 528x528 & 1354.40 & 349.77 & 200.36 \\ \hline
+\multirow{2}{*}{Rozmiar macierzy} & \multicolumn{3}{c|}{Rozmiar bloku} \\ \cline{2-4}
+& 8x8 & 16x16 & 22x22 \\ \hline
+176x176 & 49.79 & 13.17 & 7.45 \\ \hline
+352x352 & 401.35 & 103.85 & 59.70 \\ \hline
+528x528 & 1354.40 & 349.77 & 200.36 \\ \hline
 \end{tabular}
 \caption{Czas obliczeń [ms] -- wersja 1.}
 \end{table}
