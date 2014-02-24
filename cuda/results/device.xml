@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="urn:schemas-microsoft-com:office:spreadsheet">
+<Styles>
+<Style ss:ID="GeneralDate">
+<NumberFormat ss:Format="General Date"/>
+</Style>
+</Styles>
+<Worksheet ss:Name="Worksheet1">
+<Table>
+<Column ss:Width="202"></Column><Column ss:Width="119"></Column><Row>
+<Cell ss:Index="1"><Data ss:Type="String">System.Windows.Controls.TextBlock</Data></Cell><Cell ss:Index="2"><Data ss:Type="String">[0] [0x0]
+GPU 0 - GeForce GT 240
+PR_3.exe [2540]</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAX_THREADS_PER_BLOCK</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">512</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAX_BLOCK_DIM_X</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">512</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAX_BLOCK_DIM_Y</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">512</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAX_BLOCK_DIM_Z</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">64</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAX_GRID_DIM_X</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">65535</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAX_GRID_DIM_Y</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">65535</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAX_GRID_DIM_Z</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">1</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAX_SHARED_MEMORY_PER_BLOCK</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">16384</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">TOTAL_CONSTANT_MEMORY</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">65536</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">WARP_SIZE</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">32</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAX_PITCH</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">2147483647</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAX_REGISTERS_PER_BLOCK</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">16384</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">CLOCK_RATE</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">1400000</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">TEXTURE_ALIGNMENT</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">256</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">GPU_OVERLAP</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">1</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MULTIPROCESSOR_COUNT</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">12</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">KERNEL_EXEC_TIMEOUT</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">1</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">INTEGRATED</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">0</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">CAN_MAP_HOST_MEMORY</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">1</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">COMPUTE_MODE</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">0</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAXIMUM_TEXTURE1D_WIDTH</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">8192</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAXIMUM_TEXTURE2D_WIDTH</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">65536</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAXIMUM_TEXTURE2D_HEIGHT</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">32768</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAXIMUM_TEXTURE3D_WIDTH</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">2048</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAXIMUM_TEXTURE3D_HEIGHT</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">2048</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAXIMUM_TEXTURE3D_DEPTH</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">2048</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAXIMUM_TEXTURE2D_LAYERED_WIDTH</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">8192</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAXIMUM_TEXTURE2D_LAYERED_HEIGHT</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">8192</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAXIMUM_TEXTURE2D_LAYERED_LAYERS</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">512</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">SURFACE_ALIGNMENT</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">256</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">CONCURRENT_KERNELS</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">0</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">ECC_ENABLED</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">0</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">PCI_BUS_ID</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">1</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">PCI_DEVICE_ID</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">0</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">TCC_DRIVER</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">0</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MEMORY_CLOCK_RATE</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">800000</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">GLOBAL_MEMORY_BUS_WIDTH</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">128</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">L2_CACHE_SIZE</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">0</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAX_THREADS_PER_MULTIPROCESSOR</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">1024</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">ASYNC_ENGINE_COUNT</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">1</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">UNIFIED_ADDRESSING</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">0</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAXIMUM_TEXTURE1D_LAYERED_WIDTH</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">8192</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAXIMUM_TEXTURE1D_LAYERED_LAYERS</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">512</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">CAN_TEX2D_GATHER</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">0</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAXIMUM_TEXTURE2D_GATHER_WIDTH</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">0</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAXIMUM_TEXTURE2D_GATHER_HEIGHT</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">0</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAXIMUM_TEXTURE3D_WIDTH_ALTERNATE</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">0</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAXIMUM_TEXTURE3D_HEIGHT_ALTERNATE</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">0</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAXIMUM_TEXTURE3D_DEPTH_ALTERNATE</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">0</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">PCI_DOMAIN_ID</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">0</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">TEXTURE_PITCH_ALIGNMENT</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">32</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAXIMUM_TEXTURECUBEMAP_WIDTH</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">8192</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAXIMUM_TEXTURECUBEMAP_LAYERED_WIDTH</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">0</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAXIMUM_TEXTURECUBEMAP_LAYERED_LAYERS</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">0</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAXIMUM_SURFACE1D_WIDTH</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">4096</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAXIMUM_SURFACE2D_WIDTH</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">4096</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAXIMUM_SURFACE2D_HEIGHT</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">65536</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAXIMUM_SURFACE3D_WIDTH</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">0</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAXIMUM_SURFACE3D_HEIGHT</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">0</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAXIMUM_SURFACE3D_DEPTH</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">0</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAXIMUM_SURFACE1D_LAYERED_WIDTH</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">0</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAXIMUM_SURFACE1D_LAYERED_LAYERS</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">0</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAXIMUM_SURFACE2D_LAYERED_WIDTH</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">0</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAXIMUM_SURFACE2D_LAYERED_HEIGHT</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">0</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAXIMUM_SURFACE2D_LAYERED_LAYERS</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">0</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAXIMUM_SURFACECUBEMAP_WIDTH</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">0</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAXIMUM_SURFACECUBEMAP_LAYERED_WIDTH</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">0</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAXIMUM_SURFACECUBEMAP_LAYERED_LAYERS</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">0</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAXIMUM_TEXTURE1D_LINEAR_WIDTH</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">134217728</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAXIMUM_TEXTURE2D_LINEAR_WIDTH</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">65000</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAXIMUM_TEXTURE2D_LINEAR_HEIGHT</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">65000</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAXIMUM_TEXTURE2D_LINEAR_PITCH</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">1048544</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAXIMUM_TEXTURE2D_MIPMAPPED_WIDTH</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">8192</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAXIMUM_TEXTURE2D_MIPMAPPED_HEIGHT</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">8192</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">MAXIMUM_TEXTURE1D_MIPMAPPED_WIDTH</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">8192</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">STREAM_PRIORITIES_SUPPORTED</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">0</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">DISPLAY_NAME</Data></Cell><Cell  ss:Index="2"><Data ss:Type="String">GeForce GT 240</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">COMPUTE_CAPABILITY_MAJOR</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">1</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">COMPUTE_CAPABILITY_MINOR</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">2</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">TOTAL_MEMORY</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">1073741824</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">RAM_TYPE</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">7</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">RAM_LOCATION</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">1</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">GPU_PCI_DEVICE_ID</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">212013278</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">GPU_PCI_SUB_SYSTEM_ID</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">0</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">GPU_PCI_REVISION_ID</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">162</Data></Cell></Row>
+<Row>
+<Cell  ss:Index="1"><Data ss:Type="String">GPU_PCI_EXT_DEVICE_ID</Data></Cell><Cell  ss:Index="2"><Data ss:Type="Number">3235</Data></Cell></Row>
+</Table>
+<AutoFilter x:Range="R1C1:R1C2" xmlns="urn:schemas-microsoft-com:office:excel"></AutoFilter>
+</Worksheet>
+</Workbook>
