@@ -1,4 +1,4 @@
-#include "applicaton.h"
+#include "application.h"
 
 #include <stdio.h>
 
@@ -13,7 +13,8 @@ void Application::run() {
 	runTestsVariousBlockSize(multiplicatorFactory.getMultiplicator("mul3"));
 
 	runTestsConstantBlockSize(multiplicatorFactory.getMultiplicator("mul3"));
-	runTestsConstantBlockSize(multiplicatorFactory.getMultiplicator("mul4"));
+	runTestsConstantBlockSize(multiplicatorFactory.getMultiplicator("mul4a"));
+	runTestsConstantBlockSize(multiplicatorFactory.getMultiplicator("mul4b"));
 	runTestsConstantBlockSize(multiplicatorFactory.getMultiplicator("mul5"));
 
 }
@@ -22,18 +23,26 @@ void Application::runTestsVariousBlockSize(Multiplicator* multiplicator) {
 	multiplicationRunner.runTest(176, 8, multiplicator);
 	multiplicationRunner.runTest(352, 8, multiplicator);
 	multiplicationRunner.runTest(528, 8, multiplicator);
+
 	multiplicationRunner.runTest(176, 16, multiplicator);
 	multiplicationRunner.runTest(352, 16, multiplicator);
 	multiplicationRunner.runTest(528, 16, multiplicator);
+	
 	multiplicationRunner.runTest(176, 22, multiplicator);
 	multiplicationRunner.runTest(352, 22, multiplicator);
 	multiplicationRunner.runTest(528, 22, multiplicator);
 }
 
 void Application::runTestsConstantBlockSize(Multiplicator* multiplicator) {
-	multiplicationRunner.runTest(64, 16, multiplicator);
+	multiplicationRunner.runTest(128, 8, multiplicator);
+	multiplicationRunner.runTest(256, 8, multiplicator);
+	multiplicationRunner.runTest(384, 8, multiplicator);
+	multiplicationRunner.runTest(512, 8, multiplicator);
+	multiplicationRunner.runTest(640, 8, multiplicator);
+
 	multiplicationRunner.runTest(128, 16, multiplicator);
 	multiplicationRunner.runTest(256, 16, multiplicator);
 	multiplicationRunner.runTest(384, 16, multiplicator);
 	multiplicationRunner.runTest(512, 16, multiplicator);
+	multiplicationRunner.runTest(640, 16, multiplicator);
 }

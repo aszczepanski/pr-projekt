@@ -52,6 +52,15 @@ void MultiplicationRunner::synchronizeDevice() {
 void MultiplicationRunner::testResult(const size_t arraySize) {
 	float* host_C = arrayManager.pointerToHost_C();
 
+	/*
+	for (int i=0; i<arraySize; i++) {
+		for (int j=0; j<arraySize; j++) {
+			printf("%f\n", host_C[i*arraySize + j]);
+		}
+		printf("\n");
+	}
+	*/
+
 	printf("Checking computed result for correctness: ");
     bool correct = true;
 

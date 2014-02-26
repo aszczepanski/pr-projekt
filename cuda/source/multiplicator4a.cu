@@ -1,4 +1,4 @@
-#include "multiplicator4.h"
+#include "multiplicator4a.h"
 
 #include "cuda_runtime.h"
 #include "device_launch_parameters.h"
@@ -10,7 +10,7 @@
 #include "array_manager.h"
 
 template <int BLOCK_SIZE> __global__ void
-MatrixMulKernel_4(float *C, const float *A, const float *B, const int arraySize) {
+MatrixMulKernel_4a(float *C, const float *A, const float *B, const int arraySize) {
     int bx = blockIdx.x;
     int by = blockIdx.y;
 
@@ -26,8 +26,9 @@ MatrixMulKernel_4(float *C, const float *A, const float *B, const int arraySize)
 
     float Csub = 0.0f;
 	
-	float fetchA = A[aBegin + arraySize * ty + tx];
-    float fetchB = B[bBegin + arraySize * ty + tx];
+	float fetchA, fetchB;
+	fetchA = A[aBegin + arraySize * ty + tx];
+    fetchB = B[bBegin + arraySize * ty + tx];
 
     for (int a = aBegin, b = bBegin;
          a <= aEnd;
@@ -41,10 +42,8 @@ MatrixMulKernel_4(float *C, const float *A, const float *B, const int arraySize)
 
         __syncthreads();
 
-		if (a < aEnd) {
-			fetchA = A[a + aStep + arraySize * ty + tx];
-			fetchB = B[b + bStep + arraySize * ty + tx];
-		}
+		fetchA = A[a + aStep + arraySize * ty + tx];
+		fetchB = B[b + bStep + arraySize * ty + tx];
 
 #pragma unroll
         for (int k = 0; k < BLOCK_SIZE; ++k) {
@@ -58,7 +57,7 @@ MatrixMulKernel_4(float *C, const float *A, const float *B, const int arraySize)
     C[c + arraySize * ty + tx] = Csub;
 }
 
-void Multiplicator4::launchKernel(const size_t arraySize, const size_t blockSize, ArrayManager* arrayManager) {
+void Multiplicator4a::launchKernel(const size_t arraySize, const size_t blockSize, ArrayManager* arrayManager) {
 	clearErrorFlag();
 	
 	// Setup execution parameters
@@ -67,13 +66,13 @@ void Multiplicator4::launchKernel(const size_t arraySize, const size_t blockSize
 
 	// Execute the kernel
 	if (blockSize == 8) {
-        MatrixMulKernel_4<8><<< grid, threads >>>(
+        MatrixMulKernel_4a<8><<< grid, threads >>>(
 			arrayManager->pointerToDev_C(), arrayManager->pointerToDev_A(), arrayManager->pointerToDev_B(), arraySize);
 	} else if (blockSize == 16) {
-        MatrixMulKernel_4<16><<< grid, threads >>>(
+        MatrixMulKernel_4a<16><<< grid, threads >>>(
 			arrayManager->pointerToDev_C(), arrayManager->pointerToDev_A(), arrayManager->pointerToDev_B(), arraySize);
     } else if (blockSize == 22) {
-        MatrixMulKernel_4<22><<< grid, threads >>>(
+        MatrixMulKernel_4a<22><<< grid, threads >>>(
 			arrayManager->pointerToDev_C(), arrayManager->pointerToDev_A(), arrayManager->pointerToDev_B(), arraySize);
     }
 	

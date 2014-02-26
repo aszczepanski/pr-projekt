@@ -9,7 +9,7 @@
 #include "cuda_exceptions.h"
 #include "array_manager.h"
 
-__global__ void MatrixMulKernel_2(float* Ad, float* Bd, float* Cd, int WIDTH) {
+__global__ void MatrixMulKernel_2(const float* Ad, const float* Bd, float* Cd, int WIDTH) {
 	int Row = blockIdx.y * blockDim.y + threadIdx.y;
 	int Col = blockIdx.x * blockDim.x + threadIdx.x;
 	float C_local = 0.0f;

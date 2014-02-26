@@ -104,7 +104,8 @@ copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
 copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
     <CudaCompile>
-      <GenerateLineInfo>true</GenerateLineInfo>
+      <GenerateLineInfo>false</GenerateLineInfo>
+      <TargetMachinePlatform>64</TargetMachinePlatform>
     </CudaCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -147,7 +148,8 @@ copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
 copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
     <CudaCompile>
-      <GenerateLineInfo>true</GenerateLineInfo>
+      <GenerateLineInfo>false</GenerateLineInfo>
+      <TargetMachinePlatform>64</TargetMachinePlatform>
     </CudaCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -159,12 +161,13 @@ copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
     <CudaCompile Include="multiplicator1.cu" />
     <CudaCompile Include="multiplicator2.cu" />
     <CudaCompile Include="multiplicator3.cu" />
-    <CudaCompile Include="multiplicator4.cu" />
+    <CudaCompile Include="multiplicator4b.cu" />
+    <CudaCompile Include="multiplicator4a.cu" />
     <CudaCompile Include="multiplicator5.cu" />
     <CudaCompile Include="multiplicator_factory.cu" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="applicaton.h" />
+    <ClInclude Include="application.h" />
     <ClInclude Include="array_manager.h" />
     <ClInclude Include="cuda_exceptions.h" />
     <ClInclude Include="multiplication_runner.h" />
@@ -172,10 +175,11 @@ copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
     <ClInclude Include="multiplicator1.h" />
     <ClInclude Include="multiplicator2.h" />
     <ClInclude Include="multiplicator3.h" />
+    <ClInclude Include="multiplicator4a.h" />
     <ClInclude Include="multiplicator5.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="multiplicator4.h" />
+    <None Include="multiplicator4b.h" />
     <None Include="multiplicator_factory.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

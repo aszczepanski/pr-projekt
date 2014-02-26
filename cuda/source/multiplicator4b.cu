@@ -1,4 +1,4 @@
-#include "multiplicator3.h"
+#include "multiplicator4b.h"
 
 #include "cuda_runtime.h"
 #include "device_launch_parameters.h"
@@ -10,7 +10,7 @@
 #include "array_manager.h"
 
 template <int BLOCK_SIZE> __global__ void
-MatrixMulKernel_3(float *C, const float *A, const float *B, const int arraySize) {
+MatrixMulKernel_4b(float *C, const float *A, const float *B, const int arraySize) {
     int bx = blockIdx.x;
     int by = blockIdx.y;
 
@@ -25,6 +25,12 @@ MatrixMulKernel_3(float *C, const float *A, const float *B, const int arraySize)
     int bStep  = BLOCK_SIZE * arraySize;
 
     float Csub = 0.0f;
+	
+	__shared__ float fetchA[BLOCK_SIZE][BLOCK_SIZE];
+	__shared__ float fetchB[BLOCK_SIZE][BLOCK_SIZE];
+
+	fetchA[ty][tx] = A[aBegin + arraySize * ty + tx];
+    fetchB[ty][tx] = B[bBegin + arraySize * ty + tx];
 
     for (int a = aBegin, b = bBegin;
          a <= aEnd;
@@ -33,10 +39,13 @@ MatrixMulKernel_3(float *C, const float *A, const float *B, const int arraySize)
         __shared__ float As[BLOCK_SIZE][BLOCK_SIZE];
         __shared__ float Bs[BLOCK_SIZE][BLOCK_SIZE];
 
-        As[ty][tx] = A[a + arraySize * ty + tx];
-        Bs[ty][tx] = B[b + arraySize * ty + tx];
+		As[ty][tx] = fetchA[ty][tx];
+		Bs[ty][tx] = fetchB[ty][tx];
 
         __syncthreads();
+
+		fetchA[ty][tx] = A[a + aStep + arraySize * ty + tx];
+		fetchB[ty][tx] = B[b + bStep + arraySize * ty + tx];
 
 #pragma unroll
         for (int k = 0; k < BLOCK_SIZE; ++k) {
@@ -50,7 +59,7 @@ MatrixMulKernel_3(float *C, const float *A, const float *B, const int arraySize)
     C[c + arraySize * ty + tx] = Csub;
 }
 
-void Multiplicator3::launchKernel(const size_t arraySize, const size_t blockSize, ArrayManager* arrayManager) {
+void Multiplicator4b::launchKernel(const size_t arraySize, const size_t blockSize, ArrayManager* arrayManager) {
 	clearErrorFlag();
 	
 	// Setup execution parameters
@@ -59,16 +68,16 @@ void Multiplicator3::launchKernel(const size_t arraySize, const size_t blockSize
 
 	// Execute the kernel
 	if (blockSize == 8) {
-		MatrixMulKernel_3<8><<< grid, threads >>>(
+        MatrixMulKernel_4b<8><<< grid, threads >>>(
 			arrayManager->pointerToDev_C(), arrayManager->pointerToDev_A(), arrayManager->pointerToDev_B(), arraySize);
 	} else if (blockSize == 16) {
-        MatrixMulKernel_3<16><<< grid, threads >>>(
+        MatrixMulKernel_4b<16><<< grid, threads >>>(
 			arrayManager->pointerToDev_C(), arrayManager->pointerToDev_A(), arrayManager->pointerToDev_B(), arraySize);
     } else if (blockSize == 22) {
-        MatrixMulKernel_3<22><<< grid, threads >>>(
+        MatrixMulKernel_4b<22><<< grid, threads >>>(
 			arrayManager->pointerToDev_C(), arrayManager->pointerToDev_A(), arrayManager->pointerToDev_B(), arraySize);
     }
-
+	
     // Check for any errors launching the kernel
     cudaStatus = cudaGetLastError();
     if (cudaStatus != cudaSuccess) {
