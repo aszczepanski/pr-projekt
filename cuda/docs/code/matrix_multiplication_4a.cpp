@@ -1,5 +1,5 @@
 template <int BLOCK_SIZE> __global__ void
-MatrixMulKernel_3(float *C, const float *A, const float *B, const int arraySize) {
+MatrixMulKernel_4a(float *C, const float *A, const float *B, const int arraySize) {
   int bx = blockIdx.x;
   int by = blockIdx.y;
 
@@ -15,6 +15,10 @@ MatrixMulKernel_3(float *C, const float *A, const float *B, const int arraySize)
 
   float Csub = 0.0f;
 
+  float fetchA, fetchB;
+  fetchA = A[aBegin + arraySize * ty + tx];
+  fetchB = B[bBegin + arraySize * ty + tx];
+
   for (int a = aBegin, b = bBegin;
       a <= aEnd;
       a += aStep, b += bStep)
@@ -22,10 +26,13 @@ MatrixMulKernel_3(float *C, const float *A, const float *B, const int arraySize)
     __shared__ float As[BLOCK_SIZE][BLOCK_SIZE];
     __shared__ float Bs[BLOCK_SIZE][BLOCK_SIZE];
 
-    As[ty][tx] = A[a + arraySize * ty + tx];
-    Bs[ty][tx] = B[b + arraySize * ty + tx];
+    As[ty][tx] = fetchA;
+    Bs[ty][tx] = fetchB;
 
     __syncthreads();
+
+    fetchA = A[a + aStep + arraySize * ty + tx];
+    fetchB = B[b + bStep + arraySize * ty + tx];
 
 #pragma unroll
     for (int k = 0; k < BLOCK_SIZE; ++k) {
