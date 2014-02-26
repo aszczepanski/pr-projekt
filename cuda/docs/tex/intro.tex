@@ -3,16 +3,25 @@
 
 Celem projektu było zapoznanie się z możliwościami przetwarzania na kartach graficznych na przykładzie technologi CUDA. \\
 
-Przygotowaliśmy 5 wersji programu, którego zadaniem było mnożenie macierzy kwadratowych o jednakowych wymiarach na GPU. Każda kolejna wersja jest modyfikacją poprzedniej. \\
+Przygotowaliśmy 6 wersji programu, którego zadaniem było mnożenie macierzy kwadratowych na GPU. \\
 
-Efektywność programów zbadaliśmy przy pomocy profilera Nsight dla Visual Studio. Dla każdej instancji mierzyliśmy:
+Dla każdej wersji podajemy teoretyczną zajętość SM wynikającą z rozmiaru bloku, wykorzystanej liczby rejestrów, rozmiaru pamięci współdzielonej, a także z ograniczeń GPU\@.
+Dla poszczególnych parametrów podany jest w tabeli limit bloków -- oznacza on ile bloków maksymalnie można powiązać z SM przy danych parametrach. Jeśli wszystkie limity są większe od limitu bloków na SM wynikającego z ograniczeń GPU, to limit bloków GPU determinuje ilość aktywnych bloków, a co za tym idzie zajętość SM. \\
+
+Efektywność programów zbadaliśmy także przy pomocy profilera NVIDIA Visual Profiler. Dla każdej instancji podajemy:
 \begin{itemize}
 \item czas wykonania
 \item ilość operacji zmienno przecinkowych na sekundę (GFLOPS)
 \item ilość instrukcji wykonanych na sekundę (GIPS)
-\item przepustowość pamięci globalnej
 \item stosunek operacji zmienno przecinkowych do ilości operacji odczytu/zapisu z pamięci globalnej (CGMA)
-\item zajętość warpami multiprocesorów
 \end{itemize}
+
+Ze względu na zupełnie odmienne podejścia w wersjach 1, 2 i 3, oraz modyfikacje wersji 3. w wersjach 4a, 4b i 5 rozmiary macierzy i bloków podzieliliśmy na dwie grupy:
+\begin{itemize}
+\item Wersje 1, 2 i 3 -- macierze 176x176, 352x352 oraz 528x528, bloki 8x8, 16x16, 22x22 (wymiary macierzy są podzielne przez 8, 16 i 22).
+\item Wersje: 3, 4a, 4b, 5  -- macierze 128x128, 256x256, 384x384, 512x512, 640x640, bloki 8x8, 16x16.
+\end{itemize}
+
+Na zakończenie prezentujemy porównanie efektywności wszystkich badanych wersji.
 
 \newpage

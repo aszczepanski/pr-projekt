@@ -1,14 +1,42 @@
 
 \subsection{Wersja 1}
 
-W pierwszej wersji programu wykorzystany został tylko jeden blok wątków. Jeśli rozmiar bloku jest równy rozmiarowi macierzy to każdy z wątków oblicza 1 element wyniku. W przeciwnym przypatku każdy z wątków oblicza $$ {\left(\frac{\text{rozmiar macierzy}}{\text{rozmiar bloku}}\right)}^{2} $$ elementów wyniku. Pamięć współdzielona nie jest wykorzystywana.
+\subsubsection{Opis rozwiązania}
+
+W pierwszej wersji programu wykorzystany został tylko jeden blok wątków. Każdy z wątków oblicza $$ {\left(\frac{\text{rozmiar macierzy}}{\text{rozmiar bloku}}\right)}^{2} $$ elementów wyniku. Pamięć współdzielona nie jest wykorzystywana.
 
 \lstinputlisting[caption=Mnożenie macierzy kwadratowych na GPU -- wersja 1.]{./code/matrix_multiplication_1.cpp}
 
-Ponieważ wykorzystany jest tylko jeden blok, obliczenia przeprowadzane są na jednym SM, a co za tym idzie w danej chwili aktywny może być tylko jeden warp. \\
-Duży wpływ na prędkość przetwarzania ma wielkość bloku, dla małych bloków efektywność jest bardzo niska -- duża ilość dostępów do pamięci ogranicza prędkość przetwarzania.
+\subsubsection{Teoretyczna zajętość SM}
 
-\subsubsection{Czas obliczeń}
+\begin{center}
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{Kryterium}} & \multicolumn{3}{c|}{Teoretyczna wartość} & \multirow{2}{*}{Limit GPU} \\ \cline{3-5}
+\multicolumn{2}{|c|}{} & 8x8 & 16x16 & 22x22 & \\ \hline
+\multirow{4}{*}{Zajętość SM} & Aktywne bloki & 8 & 4 & 2 & 8 \\ \cline{2-6}
+& Aktywne warpy & 16 & 32 & 32 & 32 \\ \cline{2-6}
+& Aktywne wątki & 512 & 1024 & 1024 & 1024 \\ \cline{2-6}
+& Zajętość & 50\% & 100\% & 100\% & 100\% \\ \hline
+\multirow{3}{*}{Warpy} & Wątki/Blok & 64 & 256 & 484 & 512 \\ \cline{2-6}
+& Warpy/Blok & 2 & 8 & 16 & 16 \\ \cline{2-6}
+& Limit bloków & 16 & \textcolor{red}{4} & \textcolor{red}{2} & 8 \\ \hline
+\multirow{3}{*}{Rejestry} & Rejestry/Wątek & 16 & 16 & 16 & 128 \\ \cline{2-6}
+& Rejestry/Blok & 1024 & 4096 & 8192 & 16384 \\ \cline{2-6}
+& Limit bloków & 16 & \textcolor{red}{4} & \textcolor{red}{2} & 8 \\ \hline
+\multirow{2}{*}{Pamięć współdzielona} & Pamięć współdzielona/Blok & 44 & 44 & 44 & 16384 \\ \cline{2-6}
+& Limit bloków & 32 & 32 & 32 & 8 \\ \hline
+\end{tabular}
+\caption{Teoretyczna zajętość SM.}
+\end{table}
+\end{center}
+
+W przypadku rozmiaru bloku 8x8 limitem okazuje się być maksymalna ilość bloków na SM -- $ 8 $ bloków po $ 64 $ wątki oznacza wykorzystanie $ 8 \times 2 $ warpów, czyli zajętość $ 16 / 32 = 50\% $. \\
+Dla macierzy 16x16 i 22x22 limitem są warpy i rejestry. Przypada odpowiednio $ 8 $ i $ 16 $ warpów na blok, co daje limit $ 4 $ i $ 2 $ bloków. Takie same ograniczenia wynikają z ilości rejestrów. Mimo tego zajętość dla obu tych macierzy wynosi $ 100\% $.
+
+\subsubsection{Czas trwania obliczeń}
 
 \begin{table}[H]
 \centering
@@ -16,9 +44,9 @@ Duży wpływ na prędkość przetwarzania ma wielkość bloku, dla małych blok�
 \hline
 \multirow{2}{*}{Rozmiar macierzy} & \multicolumn{3}{c|}{Rozmiar bloku} \\ \cline{2-4}
 & 8x8 & 16x16 & 22x22 \\ \hline
-176x176 & 36.63 & 9.44 & 5.26 \\ \hline
-352x352 & 293.13 & 74.94 & 41.96 \\ \hline
-528x528 & 988.33 & 252.59 & 141.39 \\ \hline
+176x176 & 49.860 & 13.156 & 7.454 \\ \hline
+352x352 & 398.426 & 104.408 & 59.424 \\ \hline
+528x528 & 1345.355 & 349.936 & 200.265 \\ \hline
 \end{tabular}
 \caption{Czas obliczeń [ms] -- wersja 1.}
 \end{table}
@@ -30,23 +58,23 @@ Duży wpływ na prędkość przetwarzania ma wielkość bloku, dla małych blok�
       xlabel=Szerokość macierzy,ylabel={Czas wykonania [ms]},legend pos= north west,grid=both]
 
     \addplot[color=blue,mark=square*] coordinates {
-      (176, 36.63)
-      (352, 293.13)
-      (528, 988.33)
+      (176, 49.860)
+      (352, 398.426)
+      (528, 1345.355)
     };
     \addlegendentry{8x8}
 
     \addplot[color=green,mark=triangle*] coordinates {
-      (176, 9.44)
-      (352, 74.94)
-      (528, 252.59)
+      (176, 13.156)
+      (352, 104.408)
+      (528, 349.936)
     };
     \addlegendentry{16x16}
 
     \addplot[color=red,mark=*] coordinates {
-      (176, 5.26)
-      (352, 41.96)
-      (528, 141.39)
+      (176, 7.454)
+      (352, 59.424)
+      (528, 200.265)
     };
     \addlegendentry{22x22}
 
@@ -64,9 +92,9 @@ Duży wpływ na prędkość przetwarzania ma wielkość bloku, dla małych blok�
 \hline
 \multirow{2}{*}{Rozmiar macierzy} & \multicolumn{3}{c|}{Rozmiar bloku} \\ \cline{2-4}
 & 8x8 & 16x16 & 22x22 \\ \hline
-176x176 & 0.298 & 1.156 & 2.075 \\ \hline
-352x352 & 0.298 & 1.164 & 2.079 \\ \hline
-528x528 & 0.298 & 1.165 & 2.082 \\ \hline
+176x176 & 0.219 & 0.829 & 1.463 \\ \hline
+352x352 & 0.219 & 0.835 & 1.468 \\ \hline
+528x528 & 0.219 & 0.841 & 1.470 \\ \hline
 \end{tabular}
 \caption{Ilosc operacji zmiennoprzecinkowych na sekundę (GFLOPS) -- wersja 1.}
 \end{table}
@@ -78,23 +106,23 @@ Duży wpływ na prędkość przetwarzania ma wielkość bloku, dla małych blok�
       xlabel=Szerokość macierzy,ylabel={Czas wykonania [ms]},legend pos= north west,grid=both]
 
     \addplot[color=blue,mark=square*] coordinates {
-      (176, 0.298)
-      (352, 0.298)
-      (528, 0.298)
+      (176, 0.219)
+      (352, 0.219)
+      (528, 0.219)
     };
     \addlegendentry{8x8}
 
     \addplot[color=green,mark=triangle*] coordinates {
-      (176, 1.156)
-      (352, 1.164)
-      (528, 1.165)
+      (176, 0.829)
+      (352, 0.835)
+      (528, 0.841)
     };
     \addlegendentry{16x16}
 
     \addplot[color=red,mark=*] coordinates {
-      (176, 2.075)
-      (352, 2.079)
-      (528, 2.082)
+      (176, 1.463)
+      (352, 1.468)
+      (528, 1.470)
     };
     \addlegendentry{22x22}
 
@@ -112,9 +140,9 @@ Duży wpływ na prędkość przetwarzania ma wielkość bloku, dla małych blok�
 \hline
 \multirow{2}{*}{Rozmiar macierzy} & \multicolumn{3}{c|}{Rozmiar bloku} \\ \cline{2-4}
 & 8x8 & 16x16 & 22x22 \\ \hline
-176x176 & 0.03328 & 0.12932 & 0.24590 \\ \hline
-352x352 & 0.03290 & 0.12872 & 0.24324 \\ \hline
-528x528 & 0.03281 & 0.12840 & 0.24268 \\ \hline
+176x176 & 0.03798 & 0.14404 & 0.26910 \\ \hline
+352x352 & 0.03782 & 0.14434 & 0.26832 \\ \hline
+528x528 & 0.03774 & 0.14509 & 0.26820 \\ \hline
 \end{tabular}
 \caption{Ilość instrukcji wykonana na sekundę (GIPS) -- wersja 1.}
 \end{table}
@@ -126,23 +154,23 @@ Duży wpływ na prędkość przetwarzania ma wielkość bloku, dla małych blok�
       xlabel=Szerokość macierzy,ylabel={Czas wykonania [ms]},legend pos= north west,grid=both]
 
     \addplot[color=blue,mark=square*] coordinates {
-      (176, 0.03328)
-      (352, 0.03290)
-      (528, 0.03281)
+      (176, 0.03798)
+      (352, 0.03782)
+      (528, 0.03774)
     };
     \addlegendentry{8x8}
 
     \addplot[color=green,mark=triangle*] coordinates {
-      (176, 0.12932)
-      (352, 0.12872)
-      (528, 0.12840)
+      (176, 0.14404)
+      (352, 0.14434)
+      (528, 0.14509)
     };
     \addlegendentry{16x16}
 
     \addplot[color=red,mark=*] coordinates {
-      (176, 0.24590)
-      (352, 0.24324)
-      (528, 0.24268)
+      (176, 0.26910)
+      (352, 0.26832)
+      (528, 0.26820)
     };
     \addlegendentry{22x22}
 
@@ -159,9 +187,9 @@ Duży wpływ na prędkość przetwarzania ma wielkość bloku, dla małych blok�
 \hline
 \multirow{2}{*}{Rozmiar macierzy} & \multicolumn{3}{c|}{Rozmiar bloku} \\ \cline{2-4}
 & 8x8 & 16x16 & 22x22 \\ \hline
-176x176 & 0.03328 & 0.12932 & 0.24590 \\ \hline
-352x352 & 0.03290 & 0.12872 & 0.24324 \\ \hline
-528x528 & 0.03281 & 0.12840 & 0.24268 \\ \hline
+176x176 & 5.333 & 8.000 & 5.413 \\ \hline
+352x352 & 5.333 & 8.000 & 5.414 \\ \hline
+528x528 & 5.333 & 8.000 & 5.415 \\ \hline
 \end{tabular}
 \caption{Stosunek ilości operacji zmiennoprzecinkowych do ilości operacji odczytu/zapisu z pamięci globalnej -- wersja 1.}
 \end{table}
@@ -173,23 +201,23 @@ Duży wpływ na prędkość przetwarzania ma wielkość bloku, dla małych blok�
       xlabel=Szerokość macierzy,ylabel={Czas wykonania [ms]},legend pos= north west,grid=both]
 
     \addplot[color=blue,mark=square*] coordinates {
-      (176, 0.03328)
-      (352, 0.03290)
-      (528, 0.03281)
+      (176, 5.333)
+      (352, 5.333)
+      (528, 5.333)
     };
     \addlegendentry{8x8}
 
     \addplot[color=green,mark=triangle*] coordinates {
-      (176, 0.12932)
-      (352, 0.12872)
-      (528, 0.12840)
+      (176, 8.000)
+      (352, 8.000)
+      (528, 8.000)
     };
     \addlegendentry{16x16}
 
     \addplot[color=red,mark=*] coordinates {
-      (176, 0.24590)
-      (352, 0.24324)
-      (528, 0.24268)
+      (176, 5.413)
+      (352, 5.414)
+      (528, 5.415)
     };
     \addlegendentry{22x22}
 

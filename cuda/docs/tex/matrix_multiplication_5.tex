@@ -7,15 +7,67 @@ Ostatnia wersja rozszerza wersję 4 -- każdy wątek wykonuje większą pracę. 
 
 \begin{table}[H]
 \centering
-\begin{tabular}{|c|c|}
+\begin{tabular}{|c|c|c|}
 \hline
-\multirow{2}{*}{Rozmiar macierzy} & \multicolumn{1}{c|}{Rozmiar bloku} \\ \cline{2-2}
-& 16x16 \\ \hline
-64x64 & 0.06 \\ \hline
-128x128 & 0.22 \\ \hline
-256x256 & 1.23 \\ \hline
-384x384 & 3.66 \\ \hline
-512x512 & 8.80 \\ \hline
+\multirow{2}{*}{Rozmiar macierzy} & \multicolumn{2}{c|}{Rozmiar bloku} \\ \cline{2-3}
+& 8x8 & 16x16 \\ \hline
+128x128 & 0.118 & 0.139 \\ \hline
+256x256 & 0.877 & 0.763 \\ \hline
+384x384 & 2.622 & 2.287 \\ \hline
+512x512 & 6.248 & 5.471 \\ \hline
+640x640 & 12.047 & 10.632 \\ \hline
 \end{tabular}
-\caption{Czas obliczeń [ms] -- wersja 5.}
+\caption{Czas obliczeń [ms] -- wersja 3.}
 \end{table}
+
+\subsubsection{Ilosc operacji zmiennoprzecinkowych na sekundę}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\multirow{2}{*}{Rozmiar macierzy} & \multicolumn{2}{c|}{Rozmiar bloku} \\ \cline{2-3}
+& 8x8 & 16x16 \\ \hline
+128x128 & 35.396 & 30.229 \\ \hline
+256x256 & 38.248 & 43.995 \\ \hline
+384x384 & 43.189 & 49.512 \\ \hline
+512x512 & 42.966 & 49.063 \\ \hline
+640x640 & 43.520 & 49.314 \\ \hline
+\end{tabular}
+\caption{Ilosc operacji zmiennoprzecinkowych na sekundę (GFLOPS) -- wersja 1.}
+\end{table}
+
+\subsubsection{Ilość instrukcji wykonana na sekundę}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+\multirow{2}{*}{Rozmiar macierzy} & \multicolumn{2}{c|}{Rozmiar bloku} \\ \cline{2-3}
+& 8x8 & 16x16 \\ \hline
+128x128 & 0.1481 & 0.1856 \\ \hline
+256x256 & 0.1423 & 0.1641 \\ \hline
+384x384 & 0.1543 & 0.1951 \\ \hline
+512x512 & 0.1574 & 0.1894 \\ \hline
+640x640 & 0.1538 & 0.1909 \\ \hline
+\end{tabular}
+\caption{Ilość instrukcji wykonana na sekundę (GIPS) -- wersja 1.}
+\end{table}
+
+\subsubsection{CGMA}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+\multirow{2}{*}{Rozmiar macierzy} & \multicolumn{2}{c|}{Rozmiar bloku} \\ \cline{2-3}
+& 8x8 & 16x16 \\ \hline
+128x128 & 240.941 & 1129.931 \\ \hline
+256x256 & 256.250 & 1236.528 \\ \hline
+384x384 & 250.776 & 1276.675 \\ \hline
+512x512 & 253.050 & 1297.743 \\ \hline
+640x640 & 255.393 & 1310.720 \\ \hline
+\end{tabular}
+\caption{Stosunek ilości operacji zmiennoprzecinkowych do ilości operacji odczytu/zapisu z pamięci globalnej -- wersja 1.}
+\end{table}
+
