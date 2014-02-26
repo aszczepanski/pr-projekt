@@ -1,9 +1,17 @@
 
 \subsection{Wersja 5}
 
+\subsubsection{Opis rozwiązania}
+
 Ostatnia wersja rozszerza wersję 4 -- każdy wątek wykonuje większą pracę. Zostało to zrealizowane przez zwiększenie pobieranych i obliczanych danych z jednej do czterech.
 
 \lstinputlisting[caption=Mnożenie macierzy kwadratowych na GPU -- wersja 5.]{./code/matrix_multiplication_5.cpp}
+
+\subsubsection{Teoretyczna zajętość SM}
+
+\subsubsection{Wyniki pomiarów}
+
+\paragraph{Czas trwania obliczeń}
 
 \begin{table}[H]
 \centering
@@ -20,7 +28,7 @@ Ostatnia wersja rozszerza wersję 4 -- każdy wątek wykonuje większą pracę. 
 \caption{Czas obliczeń [ms] -- wersja 3.}
 \end{table}
 
-\subsubsection{Ilosc operacji zmiennoprzecinkowych na sekundę}
+\paragraph{Ilość operacji zmiennoprzecinkowych na sekundę}
 
 \begin{table}[H]
 \centering
@@ -37,7 +45,7 @@ Ostatnia wersja rozszerza wersję 4 -- każdy wątek wykonuje większą pracę. 
 \caption{Ilosc operacji zmiennoprzecinkowych na sekundę (GFLOPS) -- wersja 1.}
 \end{table}
 
-\subsubsection{Ilość instrukcji wykonana na sekundę}
+\paragraph{Ilość instrukcji na sekundę}
 
 \begin{table}[H]
 \centering
@@ -54,7 +62,7 @@ Ostatnia wersja rozszerza wersję 4 -- każdy wątek wykonuje większą pracę. 
 \caption{Ilość instrukcji wykonana na sekundę (GIPS) -- wersja 1.}
 \end{table}
 
-\subsubsection{CGMA}
+\paragraph{CGMA}
 
 \begin{table}[H]
 \centering

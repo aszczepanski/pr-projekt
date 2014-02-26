@@ -36,7 +36,9 @@ W pierwszej wersji programu wykorzystany został tylko jeden blok wątków. Każ
 W przypadku rozmiaru bloku 8x8 limitem okazuje się być maksymalna ilość bloków na SM -- $ 8 $ bloków po $ 64 $ wątki oznacza wykorzystanie $ 8 \times 2 $ warpów, czyli zajętość $ 16 / 32 = 50\% $. \\
 Dla macierzy 16x16 i 22x22 limitem są warpy i rejestry. Przypada odpowiednio $ 8 $ i $ 16 $ warpów na blok, co daje limit $ 4 $ i $ 2 $ bloków. Takie same ograniczenia wynikają z ilości rejestrów. Mimo tego zajętość dla obu tych macierzy wynosi $ 100\% $.
 
-\subsubsection{Czas trwania obliczeń}
+\subsubsection{Wyniki pomiarów}
+
+\paragraph{Czas trwania obliczeń}
 
 \begin{table}[H]
 \centering
@@ -84,7 +86,7 @@ Dla macierzy 16x16 i 22x22 limitem są warpy i rejestry. Przypada odpowiednio $ 
 \end{figure}
 
 
-\subsubsection{Ilosc operacji zmiennoprzecinkowych na sekundę}
+\paragraph{Ilość operacji zmiennoprzecinkowych na sekundę}
 
 \begin{table}[H]
 \centering
@@ -96,14 +98,14 @@ Dla macierzy 16x16 i 22x22 limitem są warpy i rejestry. Przypada odpowiednio $ 
 352x352 & 0.219 & 0.835 & 1.468 \\ \hline
 528x528 & 0.219 & 0.841 & 1.470 \\ \hline
 \end{tabular}
-\caption{Ilosc operacji zmiennoprzecinkowych na sekundę (GFLOPS) -- wersja 1.}
+\caption{Ilość operacji zmiennoprzecinkowych na sekundę (GFLOPS) -- wersja 1.}
 \end{table}
 
 \begin{figure}[H]
 \centering
   \begin{tikzpicture}
     \begin{axis}[
-      xlabel=Szerokość macierzy,ylabel={Czas wykonania [ms]},legend pos= north west,grid=both]
+      xlabel=Szerokość macierzy,ylabel={GFLOPS},legend pos= north west,grid=both]
 
     \addplot[color=blue,mark=square*] coordinates {
       (176, 0.219)
@@ -132,7 +134,7 @@ Dla macierzy 16x16 i 22x22 limitem są warpy i rejestry. Przypada odpowiednio $ 
 \end{figure}
 
 
-\subsubsection{Ilość instrukcji wykonana na sekundę}
+\paragraph{Ilość instrukcji wykonanych na sekundę}
 
 \begin{table}[H]
 \centering
@@ -151,7 +153,7 @@ Dla macierzy 16x16 i 22x22 limitem są warpy i rejestry. Przypada odpowiednio $ 
 \centering
   \begin{tikzpicture}
     \begin{axis}[
-      xlabel=Szerokość macierzy,ylabel={Czas wykonania [ms]},legend pos= north west,grid=both]
+      xlabel=Szerokość macierzy,ylabel={GIPS},legend pos= north west,grid=both]
 
     \addplot[color=blue,mark=square*] coordinates {
       (176, 0.03798)
@@ -179,7 +181,7 @@ Dla macierzy 16x16 i 22x22 limitem są warpy i rejestry. Przypada odpowiednio $ 
 \caption{Zależność pomiędzy ilością instrukcji wykonanych na sekundę a rozmiarem macierzy -- wersja 1.}
 \end{figure}
 
-\subsubsection{CGMA}
+\paragraph{CGMA}
 
 \begin{table}[H]
 \centering
@@ -198,7 +200,7 @@ Dla macierzy 16x16 i 22x22 limitem są warpy i rejestry. Przypada odpowiednio $ 
 \centering
   \begin{tikzpicture}
     \begin{axis}[
-      xlabel=Szerokość macierzy,ylabel={Czas wykonania [ms]},legend pos= north west,grid=both]
+      xlabel=Szerokość macierzy,ylabel={CGMA},legend pos= north west,grid=both]
 
     \addplot[color=blue,mark=square*] coordinates {
       (176, 5.333)
