@@ -6,7 +6,7 @@
 \usepackage[utf8]{inputenc}
 
 \usepackage{graphicx}
-\graphicspath{ {./img/} }
+\graphicspath{{./img/}}
 
 \usepackage{listings}
 \usepackage{enumerate}
@@ -28,19 +28,23 @@
 
 \setlength\parindent{0pt}
 
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\sectionmark}[1]{\markboth{#1}{}}
+\renewcommand{\subsectionmark}[1]{\markright{#1}{}}
+\fancyfoot[C]{Strona \thepage}
+\fancypagestyle{plain}{%
+  \fancyhead{} % get rid of headers
+  \renewcommand{\headrulewidth}{0pt} % and the line
+}
+
 \usepackage{titlesec}
-
-\setcounter{secnumdepth}{4}
-
-\titleformat{\paragraph}
-{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
-\titlespacing*{\paragraph}
-{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
 
 \begin{document}
 
 \input{./tex/title.tex}
 
+\thispagestyle{plain}
 \tableofcontents
 \newpage
 
@@ -50,6 +54,7 @@
 \input{./tex/summary.tex}
 \input{./tex/attachments.tex}
 
+\pagestyle{plain}
 \newpage
 \listoffigures
 \addcontentsline{toc}{section}{Spis rysunków}

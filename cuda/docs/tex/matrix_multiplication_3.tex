@@ -22,10 +22,10 @@ W trzecim podejściu wykorzystana została pamięć współdzielona. W kolejnych
 & Zajętość & 50\% & 100\% & 100\% & 100\% \\ \hline
 \multirow{3}{*}{Warpy} & Wątki/Blok & 64 & 256 & 484 & 512 \\ \cline{2-6}
 & Warpy/Blok & 2 & 8 & 16 & 16 \\ \cline{2-6}
-& Limit bloków & 16 & \textcolor{red}{4} & \textcolor{red}{2} & 8 \\ \hline
+& Limit bloków & 16 & \textcolor{red}{\textbf{4}} & \textcolor{red}{\textbf{2}} & 8 \\ \hline
 \multirow{3}{*}{Rejestry} & Rejestry/Wątek & 12 & 12 & 13 & 128 \\ \cline{2-6}
 & Rejestry/Blok & 1024 & 3072 & 6656 & 16384 \\ \cline{2-6}
-& Limit bloków & 16 & 5 & \textcolor{red}{2} & 8 \\ \hline
+& Limit bloków & 16 & 5 & \textcolor{red}{\textbf{2}} & 8 \\ \hline
 \multirow{2}{*}{Pamięć współdzielona} & Pamięć współdzielona/Blok & 556 & 2092 & 3916 & 16384 \\ \cline{2-6}
 & Limit bloków & 16 & 6 & 4 & 8 \\ \hline
 \end{tabular}
@@ -61,6 +61,52 @@ Dla macierzy 22x22 limitem są zarówno warpy jak i rejestry. Przypada $ 16 $ wa
 \caption{Czas obliczeń [ms] -- wersja 3.}
 \end{table}
 
+\begin{figure}[H]
+\centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel=Szerokość macierzy,
+      ylabel={Czas wykonania [ms]},
+      legend pos=north west,
+      grid=both
+    ]
+
+    \addplot[color=blue,mark=square*] coordinates {
+      (128, 0.140)
+      (176, 0.316)
+      (256, 0.930)
+      (352, 2.351)
+      (384, 3.034)
+      (512, 7.001)
+      (528, 7.666)
+      (640, 13.820)
+    };
+    \addlegendentry{8x8}
+
+    \addplot[color=green,mark=triangle*] coordinates {
+      (128, 0.093)
+      (176, 0.181)
+      (256, 0.519)
+      (352, 1.297)
+      (384, 1.642)
+      (512, 3.764)
+      (528, 4.075)
+      (640, 7.301)
+    };
+    \addlegendentry{16x16}
+
+    \addplot[color=red,mark=*] coordinates {
+      (176, 0.374)
+      (352, 2.343)
+      (528, 7.389)
+    };
+    \addlegendentry{22x22}
+
+    \end{axis}%
+  \end{tikzpicture}%
+\caption{Zależność pomiędzy czasem obliczeń a rozmiarem macierzy -- wersja 3.}
+\end{figure}
+
 \item \textbf{Ilość operacji zmiennoprzecinkowych na sekundę} \newline
 
 \begin{table}[H]
@@ -80,6 +126,52 @@ Dla macierzy 22x22 limitem są zarówno warpy jak i rejestry. Przypada $ 16 $ wa
 \end{tabular}
 \caption{Ilosc operacji zmiennoprzecinkowych na sekundę (GFLOPS) -- wersja 3.}
 \end{table}
+
+\begin{figure}[H]
+\centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel=Szerokość macierzy,
+      ylabel={Czas wykonania [ms]},
+      legend pos=north west,
+      grid=both
+    ]
+
+    \addplot[color=blue,mark=square*] coordinates {
+      (128, 29.857)
+      (176, 34.491)
+      (256, 36.086)
+      (352, 37.106)
+      (384, 37.322)
+      (512, 38.341)
+      (528, 38.402)
+      (640, 37.938)
+    };
+    \addlegendentry{8x8}
+
+    \addplot[color=green,mark=triangle*] coordinates {
+      (128, 45.291)
+      (176, 60.169)
+      (256, 64.603)
+      (352, 67.273)
+      (384, 68.970)
+      (512, 71.314)
+      (528, 72.246)
+      (640, 71.812)
+    };
+    \addlegendentry{16x16}
+
+    \addplot[color=red,mark=*] coordinates {
+      (176, 29.138)
+      (352, 37.231)
+      (528, 39.844)
+    };
+    \addlegendentry{22x22}
+
+    \end{axis}%
+  \end{tikzpicture}%
+\caption{Zależność pomiędzy ilością operacji zmiennoprzecinkowychna sekundę a rozmiarem macierzy -- wersja 3.}
+\end{figure}
 
 \item \textbf{Ilość instrukcji wykonanych na sekundę} \newline
 

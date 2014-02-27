@@ -25,7 +25,7 @@ Ostatnia wersja rozszerza wersję 4 -- każdy wątek wykonuje większą pracę. 
 & Limit bloków & 16 & 4 & 8 \\ \hline
 \multirow{3}{*}{Rejestry} & Rejestry/Wątek & 23 & 34 & 128 \\ \cline{2-5}
 & Rejestry/Blok & 1536 & 8704 & 16384 \\ \cline{2-5}
-& Limit bloków & 10 & \textcolor{red}{1} & 8 \\ \hline
+& Limit bloków & 10 & \textcolor{red}{\textbf{1}} & 8 \\ \hline
 \multirow{2}{*}{Pamięć współdzielona} & Pamięć współdzielona/Blok & 1068 & 4140 & 16384 \\ \cline{2-5}
 & Limit bloków & 10 & 3 & 8 \\ \hline
 \end{tabular}
@@ -57,6 +57,39 @@ Dla macierzy 16x16 limitem są rejestry. $8704$ rejestrów na blok daje limit $1
 \caption{Czas obliczeń [ms] -- wersja 5.}
 \end{table}
 
+\begin{figure}[H]
+\centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel=Szerokość macierzy,
+      ylabel={Czas wykonania [ms]},
+      legend pos=north west,
+      grid=both
+    ]
+
+    \addplot[color=blue,mark=square*] coordinates {
+      (128, 0.118)
+      (256, 0.877)
+      (384, 2.622)
+      (512, 6.248)
+      (640, 12.047)
+    };
+    \addlegendentry{8x8}
+
+    \addplot[color=green,mark=triangle*] coordinates {
+      (128, 0.139)
+      (256, 0.763)
+      (384, 2.287)
+      (512, 5.471)
+      (640, 10.632)
+    };
+    \addlegendentry{16x16}
+
+    \end{axis}%
+  \end{tikzpicture}%
+\caption{Zależność pomiędzy czasem obliczeń a rozmiarem macierzy -- wersja 5.}
+\end{figure}
+
 \item \textbf{Ilość operacji zmiennoprzecinkowych na sekundę} \newline
 
 \begin{table}[H]
@@ -73,6 +106,39 @@ Dla macierzy 16x16 limitem są rejestry. $8704$ rejestrów na blok daje limit $1
 \end{tabular}
 \caption{Ilosc operacji zmiennoprzecinkowych na sekundę (GFLOPS) -- wersja 5.}
 \end{table}
+
+\begin{figure}[H]
+\centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel=Szerokość macierzy,
+      ylabel={Czas wykonania [ms]},
+      legend pos=north west,
+      grid=both
+    ]
+
+    \addplot[color=blue,mark=square*] coordinates {
+      (128, 35.396)
+      (256, 38.248)
+      (384, 43.189)
+      (512, 42.966)
+      (640, 43.520)
+    };
+    \addlegendentry{8x8}
+
+    \addplot[color=green,mark=triangle*] coordinates {
+      (128, 30.229)
+      (256, 43.995)
+      (384, 49.512)
+      (512, 49.063)
+      (640, 49.314)
+    };
+    \addlegendentry{16x16}
+
+    \end{axis}%
+  \end{tikzpicture}%
+\caption{Zależność pomiędzy ilością operacji zmiennoprzecinkowychna sekundę a rozmiarem macierzy -- wersja 5.}
+\end{figure}
 
 \item \textbf{Ilość instrukcji na sekundę} \newline
 

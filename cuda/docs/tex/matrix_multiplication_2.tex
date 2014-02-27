@@ -24,7 +24,7 @@ Każdy wątek oblicza jeden element macierzy wynikowej. Pamięć współdzielona
 & Zajętość & 50\% & 100\% & 100\% & 100\% \\ \hline
 \multirow{3}{*}{Warpy} & Wątki/Blok & 64 & 256 & 484 & 512 \\ \cline{2-6}
 & Warpy/Blok & 2 & 8 & 16 & 16 \\ \cline{2-6}
-& Limit bloków & 16 & \textcolor{red}{4} & \textcolor{red}{2} & 8 \\ \hline
+& Limit bloków & 16 & \textcolor{red}{\textbf{4}} & \textcolor{red}{\textbf{2}} & 8 \\ \hline
 \multirow{3}{*}{Rejestry} & Rejestry/Wątek & 10 & 10 & 10 & 128 \\ \cline{2-6}
 & Rejestry/Blok & 1024 & 2560 & 5120 & 16384 \\ \cline{2-6}
 & Limit bloków & 16 & 6 & 3 & 8 \\ \hline
@@ -57,6 +57,42 @@ Dla macierzy 16x16 i 22x22 limitem są warpy. Przypada odpowiednio $ 8 $ i $ 16 
 \caption{Czas obliczeń [ms] -- wersja 2.}
 \end{table}
 
+\begin{figure}[H]
+\centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel=Szerokość macierzy,
+      ylabel={Czas wykonania [ms]},
+      legend pos=north west,
+      grid=both
+    ]
+
+    \addplot[color=blue,mark=square*] coordinates {
+      (176, 1.466)
+      (352, 12.934)
+      (528, 38.574)
+    };
+    \addlegendentry{8x8}
+
+    \addplot[color=green,mark=triangle*] coordinates {
+      (176, 1.381)
+      (352, 11.713)
+      (528, 36.721)
+    };
+    \addlegendentry{16x16}
+
+    \addplot[color=red,mark=*] coordinates {
+      (176, 2.552)
+      (352, 21.462)
+      (528, 66.967)
+    };
+    \addlegendentry{22x22}
+
+    \end{axis}%
+  \end{tikzpicture}%
+\caption{Zależność pomiędzy czasem obliczeń a rozmiarem macierzy -- wersja 2.}
+\end{figure}
+
 \item \textbf{Ilość operacji zmiennoprzecinkowych na sekundę} \newline
 
 \begin{table}[H]
@@ -71,6 +107,38 @@ Dla macierzy 16x16 i 22x22 limitem są warpy. Przypada odpowiednio $ 8 $ i $ 16 
 \end{tabular}
 \caption{Ilosc operacji zmiennoprzecinkowych na sekundę (GFLOPS) -- wersja 2.}
 \end{table}
+
+\begin{figure}[H]
+\centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel=Szerokość macierzy,ylabel={GFLOPS},legend pos= north west,grid=both]
+
+    \addplot[color=blue,mark=square*] coordinates {
+      (176, 7.440)
+      (352, 6.744)
+      (528, 7.632)
+    };
+    \addlegendentry{8x8}
+
+    \addplot[color=green,mark=triangle*] coordinates {
+      (176, 7.897)
+      (352, 7.447)
+      (528, 8.017)
+    };
+    \addlegendentry{16x16}
+
+    \addplot[color=red,mark=*] coordinates {
+      (176, 4.273)
+      (352, 4.064)
+      (528, 4.396)
+    };
+    \addlegendentry{22x22}
+
+    \end{axis}%
+  \end{tikzpicture}%
+\caption{Zależność pomiędzy ilością operacji zmiennoprzecinkowychna sekundę a rozmiarem macierzy -- wersja 2.}
+\end{figure}
 
 \item \textbf{Ilość instrukcji wykonanych na sekundę} \newline
 
@@ -87,6 +155,38 @@ Dla macierzy 16x16 i 22x22 limitem są warpy. Przypada odpowiednio $ 8 $ i $ 16 
 \caption{Ilość instrukcji wykonana na sekundę (GIPS) -- wersja 2.}
 \end{table}
 
+\begin{figure}[H]
+\centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel=Szerokość macierzy,ylabel={GIPS},legend pos= north west,grid=both]
+
+    \addplot[color=blue,mark=square*] coordinates {
+      (176, 0.07851)
+      (352, 0.07085)
+      (528, 0.08095)
+    };
+    \addlegendentry{8x8}
+
+    \addplot[color=green,mark=triangle*] coordinates {
+      (176, 0.08334)
+      (352, 0.07776)
+      (528, 0.08248)
+    };
+    \addlegendentry{16x16}
+
+    \addplot[color=red,mark=*] coordinates {
+      (176, 0.04509)
+      (352, 0.04455)
+      (528, 0.04777)
+    };
+    \addlegendentry{22x22}
+
+    \end{axis}%
+  \end{tikzpicture}%
+\caption{Zależność pomiędzy ilością instrukcji wykonanych na sekundę a rozmiarem macierzy -- wersja 2.}
+\end{figure}
+
 \item \textbf{CGMA} \newline
 
 \begin{table}[H]
@@ -101,5 +201,37 @@ Dla macierzy 16x16 i 22x22 limitem są warpy. Przypada odpowiednio $ 8 $ i $ 16 
 \end{tabular}
 \caption{Stosunek ilości operacji zmiennoprzecinkowych do ilości operacji odczytu/zapisu z pamięci globalnej -- wersja 2.}
 \end{table}
+
+\begin{figure}[H]
+\centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel=Szerokość macierzy,ylabel={CGMA},legend pos= north west,grid=both]
+
+    \addplot[color=blue,mark=square*] coordinates {
+      (176, 21.511)
+      (352, 21.422)
+      (528, 21.178)
+    };
+    \addlegendentry{8x8}
+
+    \addplot[color=green,mark=triangle*] coordinates {
+      (176, 35.852)
+      (352, 32.538)
+      (528, 32.267)
+    };
+    \addlegendentry{16x16}
+
+    \addplot[color=red,mark=*] coordinates {
+      (176, 23.178)
+      (352, 21.322)
+      (528, 21.768)
+    };
+    \addlegendentry{22x22}
+
+    \end{axis}%
+  \end{tikzpicture}%
+\caption{Zależność CGMA od rozmiaru macierzy -- wersja 2.}
+\end{figure}
 
 \end{enumerate}

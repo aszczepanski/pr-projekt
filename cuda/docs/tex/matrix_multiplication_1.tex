@@ -62,21 +62,21 @@ Wykorzystywany jest 1 blok, zatem zajętość SM warpami jest zależna tylko od 
       grid=both
     ]
 
-    \addplot[color=blue,mark=square*] coordinates {
+    \addplot[color=blue,mark=square*] coordinates {%
       (176, 49.860)
       (352, 398.426)
       (528, 1345.355)
     };
     \addlegendentry{8x8}
 
-    \addplot[color=green,mark=triangle*] coordinates {
+    \addplot[color=green,mark=triangle*] coordinates {%
       (176, 13.156)
       (352, 104.408)
       (528, 349.936)
     };
     \addlegendentry{16x16}
 
-    \addplot[color=red,mark=*] coordinates {
+    \addplot[color=red,mark=*] coordinates {%
       (176, 7.454)
       (352, 59.424)
       (528, 200.265)
@@ -85,7 +85,7 @@ Wykorzystywany jest 1 blok, zatem zajętość SM warpami jest zależna tylko od 
 
     \end{axis}%
   \end{tikzpicture}%
-\caption{Zależność pomiędzy czasem obliczeń a rozmiarem macierzy -- wersja 1.}
+\caption{Zależność pomiędzy ilością operacji zmiennoprzecinkowychna sekundę a rozmiarem macierzy -- wersja 3.}
 \end{figure}
 
 
@@ -110,21 +110,21 @@ Wykorzystywany jest 1 blok, zatem zajętość SM warpami jest zależna tylko od 
     \begin{axis}[
       xlabel=Szerokość macierzy,ylabel={GFLOPS},legend pos= north west,grid=both]
 
-    \addplot[color=blue,mark=square*] coordinates {
+    \addplot[color=blue,mark=square*] coordinates {%
       (176, 0.219)
       (352, 0.219)
       (528, 0.219)
     };
     \addlegendentry{8x8}
 
-    \addplot[color=green,mark=triangle*] coordinates {
+    \addplot[color=green,mark=triangle*] coordinates {%
       (176, 0.829)
       (352, 0.835)
       (528, 0.841)
     };
     \addlegendentry{16x16}
 
-    \addplot[color=red,mark=*] coordinates {
+    \addplot[color=red,mark=*] coordinates {%
       (176, 1.463)
       (352, 1.468)
       (528, 1.470)
@@ -158,21 +158,21 @@ Wykorzystywany jest 1 blok, zatem zajętość SM warpami jest zależna tylko od 
     \begin{axis}[
       xlabel=Szerokość macierzy,ylabel={GIPS},legend pos= north west,grid=both]
 
-    \addplot[color=blue,mark=square*] coordinates {
+    \addplot[color=blue,mark=square*] coordinates {%
       (176, 0.03798)
       (352, 0.03782)
       (528, 0.03774)
     };
     \addlegendentry{8x8}
 
-    \addplot[color=green,mark=triangle*] coordinates {
+    \addplot[color=green,mark=triangle*] coordinates {%
       (176, 0.14404)
       (352, 0.14434)
       (528, 0.14509)
     };
     \addlegendentry{16x16}
 
-    \addplot[color=red,mark=*] coordinates {
+    \addplot[color=red,mark=*] coordinates {%
       (176, 0.26910)
       (352, 0.26832)
       (528, 0.26820)
@@ -205,21 +205,21 @@ Wykorzystywany jest 1 blok, zatem zajętość SM warpami jest zależna tylko od 
     \begin{axis}[
       xlabel=Szerokość macierzy,ylabel={CGMA},legend pos= north west,grid=both]
 
-    \addplot[color=blue,mark=square*] coordinates {
+    \addplot[color=blue,mark=square*] coordinates {%
       (176, 5.333)
       (352, 5.333)
       (528, 5.333)
     };
     \addlegendentry{8x8}
 
-    \addplot[color=green,mark=triangle*] coordinates {
+    \addplot[color=green,mark=triangle*] coordinates {%
       (176, 8.000)
       (352, 8.000)
       (528, 8.000)
     };
     \addlegendentry{16x16}
 
-    \addplot[color=red,mark=*] coordinates {
+    \addplot[color=red,mark=*] coordinates {%
       (176, 5.413)
       (352, 5.414)
       (528, 5.415)
