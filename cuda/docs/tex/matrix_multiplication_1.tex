@@ -16,29 +16,27 @@ W pierwszej wersji programu wykorzystany został tylko jeden blok wątków. Każ
 \hline
 \multicolumn{2}{|c|}{\multirow{2}{*}{Kryterium}} & \multicolumn{3}{c|}{Teoretyczna wartość} & \multirow{2}{*}{Limit GPU} \\ \cline{3-5}
 \multicolumn{2}{|c|}{} & 8x8 & 16x16 & 22x22 & \\ \hline
-\multirow{4}{*}{Zajętość SM} & Aktywne bloki & 8 & 4 & 2 & 8 \\ \cline{2-6}
-& Aktywne warpy & 16 & 32 & 32 & 32 \\ \cline{2-6}
-& Aktywne wątki & 512 & 1024 & 1024 & 1024 \\ \cline{2-6}
-& Zajętość & 50\% & 100\% & 100\% & 100\% \\ \hline
-\multirow{3}{*}{Warpy} & Wątki/Blok & 64 & 256 & 484 & 512 \\ \cline{2-6}
-& Warpy/Blok & 2 & 8 & 16 & 16 \\ \cline{2-6}
-& Limit bloków & 16 & \textcolor{red}{4} & \textcolor{red}{2} & 8 \\ \hline
-\multirow{3}{*}{Rejestry} & Rejestry/Wątek & 16 & 16 & 16 & 128 \\ \cline{2-6}
-& Rejestry/Blok & 1024 & 4096 & 8192 & 16384 \\ \cline{2-6}
-& Limit bloków & 16 & \textcolor{red}{4} & \textcolor{red}{2} & 8 \\ \hline
-\multirow{2}{*}{Pamięć współdzielona} & Pamięć współdzielona/Blok & 44 & 44 & 44 & 16384 \\ \cline{2-6}
-& Limit bloków & 32 & 32 & 32 & 8 \\ \hline
+\multirow{4}{*}{Zajętość SM} & Aktywne bloki & 1 & 1 & 1 & 8 \\ \cline{2-6}
+& Aktywne warpy & 2 & 8 & 16 & 32 \\ \cline{2-6}
+& Aktywne wątki & 64 & 256 & 484 & 1024 \\ \cline{2-6}
+& Zajętość & 6.25\% & 25.00\% & 50.00\% & 100.00\% \\ \hline
+\multirow{2}{*}{Warpy} & Wątki/Blok & 64 & 256 & 484 & 512 \\ \cline{2-6}
+& Warpy/Blok & 2 & 8 & 16 & 16 \\ \hline
+\multirow{2}{*}{Rejestry} & Rejestry/Wątek & 16 & 16 & 16 & 128 \\ \cline{2-6}
+& Rejestry/Blok & 1024 & 4096 & 8192 & 16384 \\ \hline
+\multirow{1}{*}{Pamięć współdzielona} & Pamięć współdzielona/Blok & 44 & 44 & 44 & 16384 \\ \hline
 \end{tabular}
-\caption{Teoretyczna zajętość SM.}
+\caption{Teoretyczna zajętość SM -- wersja 1.}
 \end{table}
 \end{center}
 
-W przypadku rozmiaru bloku 8x8 limitem okazuje się być maksymalna ilość bloków na SM -- $ 8 $ bloków po $ 64 $ wątki oznacza wykorzystanie $ 8 \times 2 $ warpów, czyli zajętość $ 16 / 32 = 50\% $. \\
-Dla macierzy 16x16 i 22x22 limitem są warpy i rejestry. Przypada odpowiednio $ 8 $ i $ 16 $ warpów na blok, co daje limit $ 4 $ i $ 2 $ bloków. Takie same ograniczenia wynikają z ilości rejestrów. Mimo tego zajętość dla obu tych macierzy wynosi $ 100\% $.
+Wykorzystywany jest 1 blok, zatem zajętość jest zależna tylko od rozmiaru tego bloku. \\
 
 \subsubsection{Wyniki pomiarów}
 
-\paragraph{Czas trwania obliczeń}
+\begin{enumerate}
+
+\item \textbf{Czas trwania obliczeń} \newline
 
 \begin{table}[H]
 \centering
@@ -86,7 +84,7 @@ Dla macierzy 16x16 i 22x22 limitem są warpy i rejestry. Przypada odpowiednio $ 
 \end{figure}
 
 
-\paragraph{Ilość operacji zmiennoprzecinkowych na sekundę}
+\item \textbf{Ilość operacji zmiennoprzecinkowych na sekundę} \newline
 
 \begin{table}[H]
 \centering
@@ -134,7 +132,7 @@ Dla macierzy 16x16 i 22x22 limitem są warpy i rejestry. Przypada odpowiednio $ 
 \end{figure}
 
 
-\paragraph{Ilość instrukcji wykonanych na sekundę}
+\item \textbf{Ilość instrukcji wykonanych na sekundę} \newline
 
 \begin{table}[H]
 \centering
@@ -181,7 +179,7 @@ Dla macierzy 16x16 i 22x22 limitem są warpy i rejestry. Przypada odpowiednio $ 
 \caption{Zależność pomiędzy ilością instrukcji wykonanych na sekundę a rozmiarem macierzy -- wersja 1.}
 \end{figure}
 
-\paragraph{CGMA}
+\item \textbf{CGMA} \newline
 
 \begin{table}[H]
 \centering
@@ -227,3 +225,5 @@ Dla macierzy 16x16 i 22x22 limitem są warpy i rejestry. Przypada odpowiednio $ 
   \end{tikzpicture}%
 \caption{Zależność CGMA od rozmiaru macierzy -- wersja 1.}
 \end{figure}
+
+\end{enumerate}

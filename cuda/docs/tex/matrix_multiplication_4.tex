@@ -5,38 +5,112 @@
 
 Jest to rozszerzona wersja 3 o równoległe z obliczeniami pobranie kolejnych danych (na poziomie bloku). Ma to spowodować złagodzenie kosztów synchronizacji.
 
-\subsubsection{Pobranie do rejestru}
+\begin{enumerate}[(a)]
+
+\item \textbf{Pobranie do rejestru} \newline
 
 \lstinputlisting[caption=Mnożenie macierzy kwadratowych na GPU -- wersja 4 z pobraniem do rejestru.]{./code/matrix_multiplication_4a.cpp}
 
-\begin{table}[H]
-\centering
-\begin{tabular}{|c|c|}
-\hline
-\multirow{2}{*}{Rozmiar macierzy} & \multicolumn{1}{c|}{Rozmiar bloku} \\ \cline{2-2}
-& 16x16 \\ \hline
-64x64 & 0.02 \\ \hline
-128x128 & 0.10 \\ \hline
-256x256 & 0.60 \\ \hline
-384x384 & 1.89 \\ \hline
-512x512 & 4.44 \\ \hline
-\end{tabular}
-\caption{Czas obliczeń [ms] -- wersja 4.}
-\end{table}
-
-\subsubsection{Pobranie do pamięci współdzielonej}
+\item \textbf{Pobranie do pamięci współdzielonej} \newline
 
 \lstinputlisting[caption=Mnożenie macierzy kwadratowych na GPU -- wersja 4 z pobraniem do pamięci współdzielonej.]{./code/matrix_multiplication_4b.cpp}
 
+\end{enumerate}
+
 \subsubsection{Teoretyczna zajętość SM}
+
+\begin{enumerate}[(a)]
+
+\item \textbf{Pobranie do rejestru} \newline
+
+\begin{center}
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{Kryterium}} & \multicolumn{2}{c|}{Teoretyczna wartość} & \multirow{2}{*}{Limit GPU} \\ \cline{3-4}
+\multicolumn{2}{|c|}{} & 8x8 & 16x16 & \\ \hline
+\multirow{4}{*}{Zajętość SM} & Aktywne bloki & 8 & 4 & 8 \\ \cline{2-5}
+& Aktywne warpy & 16 & 32 & 32 \\ \cline{2-5}
+& Aktywne wątki & 512 & 1024 & 1024 \\ \cline{2-5}
+& Zajętość & 50\% & 100\% & 100\% \\ \hline
+\multirow{3}{*}{Warpy} & Wątki/Blok & 64 & 256 & 512 \\ \cline{2-5}
+& Warpy/Blok & 2 & 8 & 16 \\ \cline{2-5}
+& Limit bloków & 16 & \textcolor{red}{4} & 8 \\ \hline
+\multirow{3}{*}{Rejestry} & Rejestry/Wątek & 13 & 13 & 128 \\ \cline{2-5}
+& Rejestry/Blok & 1024 & 3584 & 16384 \\ \cline{2-5}
+& Limit bloków & 16 & \textcolor{red}{4} & 8 \\ \hline
+\multirow{2}{*}{Pamięć współdzielona} & Pamięć współdzielona/Blok & 556 & 2092 & 16384 \\ \cline{2-5}
+& Limit bloków & 16 & 6 & 8 \\ \hline
+\end{tabular}
+\caption{Teoretyczna zajętość SM -- wersja 4. z pobraniem do rejestru.}
+\end{table}
+\end{center}
+
+Podobnie jak dla poprzednich wersji, dla bloku 8x8 limitem okazuje się być maksymalna ilość bloków na SM, stąd zajętość $ 16 / 32 = 50\% $. \\
+Dla macierzy 16x16 limitem są warpy i rejestry. Przypada odpowiednio $ 8 $ warpów na blok, co daje limit $ 4 $ aktywnych bloków. $ 3584 $ rejestrów na blok również daje limit $ 4 $ aktywnych bloków. Zajętość dla bloku 16x16 wynosi $ 100\% $. \\
+
+\item \textbf{Pobranie do pamięci współdzielonej} \newline
+
+\begin{center}
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{Kryterium}} & \multicolumn{2}{c|}{Teoretyczna wartość} & \multirow{2}{*}{Limit GPU} \\ \cline{3-4}
+\multicolumn{2}{|c|}{} & 8x8 & 16x16 & \\ \hline
+\multirow{4}{*}{Zajętość SM} & Aktywne bloki & 8 & 3 & 8 \\ \cline{2-5}
+& Aktywne warpy & 16 & 24 & 32 \\ \cline{2-5}
+& Aktywne wątki & 512 & 768 & 1024 \\ \cline{2-5}
+& Zajętość & 50\% & 75\% & 100\% \\ \hline
+\multirow{3}{*}{Warpy} & Wątki/Blok & 64 & 256 & 512 \\ \cline{2-5}
+& Warpy/Blok & 2 & 8 & 16 \\ \cline{2-5}
+& Limit bloków & 16 & 4 & 8 \\ \hline
+\multirow{3}{*}{Rejestry} & Rejestry/Wątek & 14 & 14 & 128 \\ \cline{2-5}
+& Rejestry/Blok & 1024 & 3584 & 16384 \\ \cline{2-5}
+& Limit bloków & 16 & 4 & 8 \\ \hline
+\multirow{2}{*}{Pamięć współdzielona} & Pamięć współdzielona/Blok & 1068 & 4140 & 16384 \\ \cline{2-5}
+& Limit bloków & 16 & \textcolor{red}{3} & 8 \\ \hline
+\end{tabular}
+\caption{Teoretyczna zajętość SM -- wersja 4. z pobraniem do pamięci współdzielonej.}
+\end{table}
+\end{center}
+
+Podobnie jak dla poprzednich wersji, dla bloku 8x8 limitem okazuje się być maksymalna ilość bloków na SM, stąd zajętość $ 16 / 32 = 50\% $. \\
+Dla macierzy 16x16 limitem jest pamięć współdzielona. $4140$ bajtów na blok daje limit $3$ aktywnych bloków. W porównaniu z poprzednimi wersjami zajętość SM dla bloku 16x16 spada i wynosi $ 75\% $. \\
+
+\end{enumerate}
 
 \subsubsection{Wyniki pomiarów}
 
-\paragraph{Czas trwania obliczeń}
+\begin{enumerate}[(a)]
 
-\paragraph{Ilość operacji zmiennoprzecinkowych na sekundę}
+\item \textbf{Pobranie do rejestru} \newline
 
-\paragraph{Ilość instrukcji na sekundę}
+\begin{enumerate}[1.]
 
-\paragraph{CGMA}
+\item \textbf{Czas trwania obliczeń} \newline
 
+\item \textbf{Ilość operacji zmiennoprzecinkowych na sekundę} \newline
+
+\item \textbf{Ilość instrukcji na sekundę} \newline
+
+\item \textbf{CGMA} \newline
+
+\end{enumerate}
+
+\item \textbf{Pobranie do pamięci współdzielonej} \newline
+
+\begin{enumerate}[1.]
+
+\item \textbf{Czas trwania obliczeń} \newline
+
+\item \textbf{Ilość operacji zmiennoprzecinkowych na sekundę} \newline
+
+\item \textbf{Ilość instrukcji na sekundę} \newline
+
+\item \textbf{CGMA} \newline
+
+\end{enumerate}
+
+\end{enumerate}

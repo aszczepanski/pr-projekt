@@ -9,9 +9,38 @@ Ostatnia wersja rozszerza wersję 4 -- każdy wątek wykonuje większą pracę. 
 
 \subsubsection{Teoretyczna zajętość SM}
 
+\begin{center}
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{Kryterium}} & \multicolumn{2}{c|}{Teoretyczna wartość} & \multirow{2}{*}{Limit GPU} \\ \cline{3-4}
+\multicolumn{2}{|c|}{} & 8x8 & 16x16 & \\ \hline
+\multirow{4}{*}{Zajętość SM} & Aktywne bloki & 8 & 1 & 8 \\ \cline{2-5}
+& Aktywne warpy & 16 & 8 & 32 \\ \cline{2-5}
+& Aktywne wątki & 512 & 256 & 1024 \\ \cline{2-5}
+& Zajętość & 50\% & 25\% & 100\% \\ \hline
+\multirow{3}{*}{Warpy} & Wątki/Blok & 64 & 256 & 512 \\ \cline{2-5}
+& Warpy/Blok & 2 & 8 & 16 \\ \cline{2-5}
+& Limit bloków & 16 & 4 & 8 \\ \hline
+\multirow{3}{*}{Rejestry} & Rejestry/Wątek & 23 & 34 & 128 \\ \cline{2-5}
+& Rejestry/Blok & 1536 & 8704 & 16384 \\ \cline{2-5}
+& Limit bloków & 10 & \textcolor{red}{1} & 8 \\ \hline
+\multirow{2}{*}{Pamięć współdzielona} & Pamięć współdzielona/Blok & 1068 & 4140 & 16384 \\ \cline{2-5}
+& Limit bloków & 10 & 3 & 8 \\ \hline
+\end{tabular}
+\caption{Teoretyczna zajętość SM -- wersja 5.}
+\end{table}
+\end{center}
+
+Podobnie jak dla poprzednich wersji, dla bloku 8x8 limitem okazuje się być maksymalna ilość bloków na SM, stąd zajętość $ 16 / 32 = 50\% $. \\
+Dla macierzy 16x16 limitem są rejestry. $8704$ rejestrów na blok daje limit $1$ aktywnych bloków. Zajętość dla bloku 16x16 wynosi zaledwie $ 25\% $. \\
+
 \subsubsection{Wyniki pomiarów}
 
-\paragraph{Czas trwania obliczeń}
+\begin{enumerate}
+
+\item \textbf{Czas trwania obliczeń} \newline
 
 \begin{table}[H]
 \centering
@@ -25,10 +54,10 @@ Ostatnia wersja rozszerza wersję 4 -- każdy wątek wykonuje większą pracę. 
 512x512 & 6.248 & 5.471 \\ \hline
 640x640 & 12.047 & 10.632 \\ \hline
 \end{tabular}
-\caption{Czas obliczeń [ms] -- wersja 3.}
+\caption{Czas obliczeń [ms] -- wersja 5.}
 \end{table}
 
-\paragraph{Ilość operacji zmiennoprzecinkowych na sekundę}
+\item \textbf{Ilość operacji zmiennoprzecinkowych na sekundę} \newline
 
 \begin{table}[H]
 \centering
@@ -42,10 +71,10 @@ Ostatnia wersja rozszerza wersję 4 -- każdy wątek wykonuje większą pracę. 
 512x512 & 42.966 & 49.063 \\ \hline
 640x640 & 43.520 & 49.314 \\ \hline
 \end{tabular}
-\caption{Ilosc operacji zmiennoprzecinkowych na sekundę (GFLOPS) -- wersja 1.}
+\caption{Ilosc operacji zmiennoprzecinkowych na sekundę (GFLOPS) -- wersja 5.}
 \end{table}
 
-\paragraph{Ilość instrukcji na sekundę}
+\item \textbf{Ilość instrukcji na sekundę} \newline
 
 \begin{table}[H]
 \centering
@@ -59,10 +88,10 @@ Ostatnia wersja rozszerza wersję 4 -- każdy wątek wykonuje większą pracę. 
 512x512 & 0.1574 & 0.1894 \\ \hline
 640x640 & 0.1538 & 0.1909 \\ \hline
 \end{tabular}
-\caption{Ilość instrukcji wykonana na sekundę (GIPS) -- wersja 1.}
+\caption{Ilość instrukcji wykonana na sekundę (GIPS) -- wersja 5.}
 \end{table}
 
-\paragraph{CGMA}
+\item \textbf{CGMA} \newline
 
 \begin{table}[H]
 \centering
@@ -76,6 +105,7 @@ Ostatnia wersja rozszerza wersję 4 -- każdy wątek wykonuje większą pracę. 
 512x512 & 253.050 & 1297.743 \\ \hline
 640x640 & 255.393 & 1310.720 \\ \hline
 \end{tabular}
-\caption{Stosunek ilości operacji zmiennoprzecinkowych do ilości operacji odczytu/zapisu z pamięci globalnej -- wersja 1.}
+\caption{Stosunek ilości operacji zmiennoprzecinkowych do ilości operacji odczytu/zapisu z pamięci globalnej -- wersja 5.}
 \end{table}
 
+\end{enumerate}
