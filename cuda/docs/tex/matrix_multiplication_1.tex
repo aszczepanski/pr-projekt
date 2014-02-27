@@ -1,4 +1,4 @@
-
+\newpage
 \subsection{Wersja 1}
 
 \subsubsection{Opis rozwiązania}
@@ -8,6 +8,7 @@ W pierwszej wersji programu wykorzystany został tylko jeden blok wątków. Każ
 
 \lstinputlisting[caption=Mnożenie macierzy kwadratowych na GPU -- wersja 1.]{./code/matrix_multiplication_1.cpp}
 
+\newpage
 \subsubsection{Teoretyczna zajętość SM}
 
 \begin{center}
@@ -33,12 +34,12 @@ W pierwszej wersji programu wykorzystany został tylko jeden blok wątków. Każ
 
 Wykorzystywany jest 1 blok, zatem zajętość SM warpami jest zależna tylko od jego rozmiaru.
 
+\newpage
 \subsubsection{Wyniki pomiarów}
 
 \begin{enumerate}
 
 \item \textbf{Czas trwania obliczeń} \newline
-
 \begin{table}[H]
 \centering
 \begin{tabular}{|c|c|c|c|}
@@ -88,7 +89,7 @@ Wykorzystywany jest 1 blok, zatem zajętość SM warpami jest zależna tylko od 
 \caption{Zależność pomiędzy ilością operacji zmiennoprzecinkowychna sekundę a rozmiarem macierzy -- wersja 3.}
 \end{figure}
 
-
+\newpage
 \item \textbf{Ilość operacji zmiennoprzecinkowych na sekundę} \newline
 
 \begin{table}[H]
@@ -136,7 +137,7 @@ Wykorzystywany jest 1 blok, zatem zajętość SM warpami jest zależna tylko od 
 \caption{Zależność pomiędzy ilością operacji zmiennoprzecinkowychna sekundę a rozmiarem macierzy -- wersja 1.}
 \end{figure}
 
-
+\newpage
 \item \textbf{Ilość instrukcji wykonanych na sekundę} \newline
 
 \begin{table}[H]
@@ -184,6 +185,7 @@ Wykorzystywany jest 1 blok, zatem zajętość SM warpami jest zależna tylko od 
 \caption{Zależność pomiędzy ilością instrukcji wykonanych na sekundę a rozmiarem macierzy -- wersja 1.}
 \end{figure}
 
+\newpage
 \item \textbf{CGMA} \newline
 
 \begin{table}[H]

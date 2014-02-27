@@ -1,8 +1,7 @@
 
 \section{Wprowadzenie}
 
-Celem projektu było zapoznanie się z możliwościami przetwarzania na kartach graficznych na przykładzie technologi CUDA. \\
-
+Celem projektu było zapoznanie się z możliwościami przetwarzania na kartach graficznych na przykładzie technologi CUDA.\\
 Przygotowaliśmy 6 wersji programu, którego zadaniem było mnożenie macierzy kwadratowych na GPU:
 \begin{enumerate}
 \item wykorzystanie 1 bloku wątków
@@ -16,9 +15,8 @@ Przygotowaliśmy 6 wersji programu, którego zadaniem było mnożenie macierzy k
 \item wykorzystanie gridu wieloblokowego wątków i pamięci współdzielonej, zrównoleglone pobranie danych i obliczenia, powiększona ilość pracy każdego wątku
 \end{enumerate}
 
-Dla każdej wersji podajemy teoretyczną zajętość SM wynikającą z rozmiaru bloku, wykorzystanej liczby rejestrów, rozmiaru pamięci współdzielonej, a także z ograniczeń GPU\@. Wyjątkiem jest wersja 1. w której wykorzystany jest tylko 1 blok, zatem zajętość SM wynika tylko z jego rozmiaru. \\
-W przypadku pozostałych wersji, dla poszczególnych parametrów podany jest w tabeli limit bloków -- oznacza on ile bloków maksymalnie można powiązać z SM przy danych parametrach. Jeśli wszystkie limity są większe od limitu bloków na SM wynikającego z ograniczeń GPU, to limit bloków GPU determinuje ilość aktywnych bloków, a co za tym idzie zajętość SM. \\
-
+Dla każdej wersji podajemy teoretyczną zajętość SM wynikającą z rozmiaru bloku, wykorzystanej liczby rejestrów, rozmiaru pamięci współdzielonej, a także z ograniczeń GPU\@. Wyjątkiem jest wersja 1. w której wykorzystany jest tylko 1 blok, zatem zajętość SM wynika tylko z jego rozmiaru.\\
+W przypadku pozostałych wersji, dla poszczególnych parametrów podany jest w tabeli limit bloków -- oznacza on ile bloków maksymalnie można powiązać z SM przy danych parametrach. Jeśli wszystkie limity są większe od limitu bloków na SM wynikającego z ograniczeń GPU, to limit bloków GPU determinuje ilość aktywnych bloków, a co za tym idzie zajętość SM.\\
 Efektywność programów zbadaliśmy także przy pomocy profilera NVIDIA Visual Profiler. Dla każdej instancji podajemy:
 \begin{itemize}
 \item czas wykonania
@@ -34,5 +32,3 @@ Ze względu na zupełnie odmienne podejścia w wersjach 1, 2 i 3, oraz modyfikac
 \end{itemize}
 
 Na zakończenie prezentujemy porównanie efektywności wszystkich badanych wersji.
-
-\newpage

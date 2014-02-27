@@ -1,4 +1,4 @@
-
+\newpage
 \subsection{Wersja 5}
 
 \subsubsection{Opis rozwiązania}
@@ -7,6 +7,7 @@ Ostatnia wersja rozszerza wersję 4 -- każdy wątek wykonuje większą pracę. 
 
 \lstinputlisting[caption=Mnożenie macierzy kwadratowych na GPU -- wersja 5.]{./code/matrix_multiplication_5.cpp}
 
+\newpage
 \subsubsection{Teoretyczna zajętość SM}
 
 \begin{center}
@@ -36,6 +37,7 @@ Ostatnia wersja rozszerza wersję 4 -- każdy wątek wykonuje większą pracę. 
 Podobnie jak dla poprzednich wersji, dla bloku 8x8 limitem okazuje się być maksymalna ilość bloków na SM, stąd zajętość $ 16 / 32 = 50\% $. \\
 Dla macierzy 16x16 limitem są rejestry. $8704$ rejestrów na blok daje limit $1$ aktywnych bloków. Zajętość dla bloku 16x16 wynosi zaledwie $ 25\% $. \\
 
+\newpage
 \subsubsection{Wyniki pomiarów}
 
 \begin{enumerate}
@@ -67,7 +69,7 @@ Dla macierzy 16x16 limitem są rejestry. $8704$ rejestrów na blok daje limit $1
       grid=both
     ]
 
-    \addplot[color=blue,mark=square*] coordinates {
+    \addplot[color=blue,mark=square*] coordinates {%
       (128, 0.118)
       (256, 0.877)
       (384, 2.622)
@@ -76,7 +78,7 @@ Dla macierzy 16x16 limitem są rejestry. $8704$ rejestrów na blok daje limit $1
     };
     \addlegendentry{8x8}
 
-    \addplot[color=green,mark=triangle*] coordinates {
+    \addplot[color=green,mark=triangle*] coordinates {%
       (128, 0.139)
       (256, 0.763)
       (384, 2.287)
@@ -90,6 +92,7 @@ Dla macierzy 16x16 limitem są rejestry. $8704$ rejestrów na blok daje limit $1
 \caption{Zależność pomiędzy czasem obliczeń a rozmiarem macierzy -- wersja 5.}
 \end{figure}
 
+\newpage
 \item \textbf{Ilość operacji zmiennoprzecinkowych na sekundę} \newline
 
 \begin{table}[H]
@@ -117,7 +120,7 @@ Dla macierzy 16x16 limitem są rejestry. $8704$ rejestrów na blok daje limit $1
       grid=both
     ]
 
-    \addplot[color=blue,mark=square*] coordinates {
+    \addplot[color=blue,mark=square*] coordinates {%
       (128, 35.396)
       (256, 38.248)
       (384, 43.189)
@@ -126,7 +129,7 @@ Dla macierzy 16x16 limitem są rejestry. $8704$ rejestrów na blok daje limit $1
     };
     \addlegendentry{8x8}
 
-    \addplot[color=green,mark=triangle*] coordinates {
+    \addplot[color=green,mark=triangle*] coordinates {%
       (128, 30.229)
       (256, 43.995)
       (384, 49.512)
@@ -140,6 +143,7 @@ Dla macierzy 16x16 limitem są rejestry. $8704$ rejestrów na blok daje limit $1
 \caption{Zależność pomiędzy ilością operacji zmiennoprzecinkowychna sekundę a rozmiarem macierzy -- wersja 5.}
 \end{figure}
 
+\newpage
 \item \textbf{Ilość instrukcji na sekundę} \newline
 
 \begin{table}[H]
@@ -157,6 +161,40 @@ Dla macierzy 16x16 limitem są rejestry. $8704$ rejestrów na blok daje limit $1
 \caption{Ilość instrukcji wykonana na sekundę (GIPS) -- wersja 5.}
 \end{table}
 
+\begin{figure}[H]
+\centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel=Szerokość macierzy,
+      ylabel={GIPS},
+      legend pos=north west,
+      grid=both
+    ]
+
+    \addplot[color=blue,mark=square*] coordinates {%
+      (128, 0.1481)
+      (256, 0.1423)
+      (384, 0.1543)
+      (512, 0.1574)
+      (640, 0.1538)
+    };
+    \addlegendentry{8x8}
+
+    \addplot[color=green,mark=triangle*] coordinates {%
+      (128, 0.1856)
+      (256, 0.1641)
+      (384, 0.1951)
+      (512, 0.1894)
+      (640, 0.1909)
+    };
+    \addlegendentry{16x16}
+
+    \end{axis}%
+  \end{tikzpicture}%
+\caption{Zależność pomiędzy ilością instrukcji wykonanych na sekundę a rozmiarem macierzy -- wersja 5.}
+\end{figure}
+
+\newpage
 \item \textbf{CGMA} \newline
 
 \begin{table}[H]
@@ -173,5 +211,38 @@ Dla macierzy 16x16 limitem są rejestry. $8704$ rejestrów na blok daje limit $1
 \end{tabular}
 \caption{Stosunek ilości operacji zmiennoprzecinkowych do ilości operacji odczytu/zapisu z pamięci globalnej -- wersja 5.}
 \end{table}
+
+\begin{figure}[H]
+\centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel=Szerokość macierzy,
+      ylabel={CGMA},
+      legend pos=north west,
+      grid=both
+    ]
+
+    \addplot[color=blue,mark=square*] coordinates {%
+      (128, 240.941)
+      (256, 256.250)
+      (384, 250.776)
+      (512, 253.050)
+      (640, 255.393)
+    };
+    \addlegendentry{8x8}
+
+    \addplot[color=green,mark=triangle*] coordinates {%
+      (128, 1129.931)
+      (256, 1236.528)
+      (384, 1276.675)
+      (512, 1297.743)
+      (640, 1310.720)
+    };
+    \addlegendentry{16x16}
+
+    \end{axis}%
+  \end{tikzpicture}%
+\caption{Zależność CGMA od rozmiaru macierzy -- wersja 4.}
+\end{figure}
 
 \end{enumerate}

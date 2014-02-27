@@ -1,4 +1,4 @@
-
+\newpage
 \subsection{Wersja 3}
 
 \subsubsection{Opis rozwiązania}
@@ -71,7 +71,7 @@ Dla macierzy 22x22 limitem są zarówno warpy jak i rejestry. Przypada $ 16 $ wa
       grid=both
     ]
 
-    \addplot[color=blue,mark=square*] coordinates {
+    \addplot[color=blue,mark=square*] coordinates {%
       (128, 0.140)
       (176, 0.316)
       (256, 0.930)
@@ -83,7 +83,7 @@ Dla macierzy 22x22 limitem są zarówno warpy jak i rejestry. Przypada $ 16 $ wa
     };
     \addlegendentry{8x8}
 
-    \addplot[color=green,mark=triangle*] coordinates {
+    \addplot[color=green,mark=triangle*] coordinates {%
       (128, 0.093)
       (176, 0.181)
       (256, 0.519)
@@ -95,7 +95,7 @@ Dla macierzy 22x22 limitem są zarówno warpy jak i rejestry. Przypada $ 16 $ wa
     };
     \addlegendentry{16x16}
 
-    \addplot[color=red,mark=*] coordinates {
+    \addplot[color=red,mark=*] coordinates {%
       (176, 0.374)
       (352, 2.343)
       (528, 7.389)
@@ -132,12 +132,12 @@ Dla macierzy 22x22 limitem są zarówno warpy jak i rejestry. Przypada $ 16 $ wa
   \begin{tikzpicture}
     \begin{axis}[
       xlabel=Szerokość macierzy,
-      ylabel={Czas wykonania [ms]},
+      ylabel={GFLOPS},
       legend pos=north west,
       grid=both
     ]
 
-    \addplot[color=blue,mark=square*] coordinates {
+    \addplot[color=blue,mark=square*] coordinates {%
       (128, 29.857)
       (176, 34.491)
       (256, 36.086)
@@ -149,7 +149,7 @@ Dla macierzy 22x22 limitem są zarówno warpy jak i rejestry. Przypada $ 16 $ wa
     };
     \addlegendentry{8x8}
 
-    \addplot[color=green,mark=triangle*] coordinates {
+    \addplot[color=green,mark=triangle*] coordinates {%
       (128, 45.291)
       (176, 60.169)
       (256, 64.603)
@@ -161,7 +161,7 @@ Dla macierzy 22x22 limitem są zarówno warpy jak i rejestry. Przypada $ 16 $ wa
     };
     \addlegendentry{16x16}
 
-    \addplot[color=red,mark=*] coordinates {
+    \addplot[color=red,mark=*] coordinates {%
       (176, 29.138)
       (352, 37.231)
       (528, 39.844)
@@ -181,17 +181,63 @@ Dla macierzy 22x22 limitem są zarówno warpy jak i rejestry. Przypada $ 16 $ wa
 \hline
 \multirow{2}{*}{Rozmiar macierzy} & \multicolumn{3}{c|}{Rozmiar bloku} \\ \cline{2-4}
 & 8x8 & 16x16 & 22x22 \\ \hline
-128x128 & 0.1639 & 0.1562 & \textcolor{gray}{n/d}\\ \hline
+128x128 & 0.16386 & 0.15619 & \textcolor{gray}{n/d}\\ \hline
 176x176 & 0.16910 & 0.23896 & 0.12664 \\ \hline
-256x256 & 0.1754 & 0.2622 & \textcolor{gray}{n/d} \\ \hline
+256x256 & 0.17538 & 0.26221 & \textcolor{gray}{n/d} \\ \hline
 352x352 & 0.17807 & 0.28408 & 0.15949 \\ \hline
-384x384 & 0.1767 & 0.2926 & \textcolor{gray}{n/d} \\ \hline
-512x512 & 0.1802 & 0.2948 & \textcolor{gray}{n/d} \\ \hline
+384x384 & 0.17667 & 0.29259 & \textcolor{gray}{n/d} \\ \hline
+512x512 & 0.18015 & 0.29476 & \textcolor{gray}{n/d} \\ \hline
 528x528 & 0.18043 & 0.30390 & 0.17317 \\ \hline
-640x640 & 0.1775 & 0.2989 & \textcolor{gray}{n/d} \\ \hline
+640x640 & 0.17746 & 0.29891 & \textcolor{gray}{n/d} \\ \hline
 \end{tabular}
 \caption{Ilość instrukcji wykonana na sekundę (GIPS) -- wersja 3.}
 \end{table}
+
+\begin{figure}[H]
+\centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel=Szerokość macierzy,
+      ylabel={GIPS},
+      legend pos=north west,
+      grid=both
+    ]
+
+    \addplot[color=blue,mark=square*] coordinates {%
+      (128, 0.16386)
+      (176, 0.16910)
+      (256, 0.17538)
+      (352, 0.17807)
+      (384, 0.17667)
+      (512, 0.18015)
+      (528, 0.18043)
+      (640, 0.17746)
+    };
+    \addlegendentry{8x8}
+
+    \addplot[color=green,mark=triangle*] coordinates {%
+      (128, 0.15619)
+      (176, 0.23896)
+      (256, 0.26221)
+      (352, 0.28408)
+      (384, 0.29259)
+      (512, 0.29476)
+      (528, 0.30390)
+      (640, 0.29891)
+    };
+    \addlegendentry{16x16}
+
+    \addplot[color=red,mark=*] coordinates {%
+      (176, 0.12664)
+      (352, 0.15949)
+      (528, 0.17317)
+    };
+    \addlegendentry{22x22}
+
+    \end{axis}%
+  \end{tikzpicture}%
+\caption{Zależność pomiędzy ilością instrukcji wykonanych na sekundę a rozmiarem macierzy -- wersja 3.}
+\end{figure}
 
 \item \textbf{CGMA} \newline
 
@@ -212,5 +258,51 @@ Dla macierzy 22x22 limitem są zarówno warpy jak i rejestry. Przypada $ 16 $ wa
 \end{tabular}
 \caption{Stosunek ilości operacji zmiennoprzecinkowych do ilości operacji odczytu/zapisu z pamięci globalnej -- wersja 3.}
 \end{table}
+
+\begin{figure}[H]
+\centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel=Szerokość macierzy,
+      ylabel={CGMA},
+      legend pos=north west,
+      grid=both
+    ]
+
+    \addplot[color=blue,mark=square*] coordinates {%
+      (128, 120.471)
+      (176, 129.067)
+      (256, 128.502)
+      (352, 128.000)
+      (384, 128.000)
+      (512, 127.626)
+      (528, 127.765)
+      (640, 127.760)
+    };
+    \addlegendentry{8x8}
+
+    \addplot[color=green,mark=triangle*] coordinates {%
+      (128, 546.133)
+      (176, 516.267)
+      (256, 520.127)
+      (352, 507.803)
+      (384, 515.580)
+      (512, 514.008)
+      (528, 510.593)
+      (640, 510.723)
+    };
+    \addlegendentry{16x16}
+
+    \addplot[color=red,mark=*] coordinates {%
+      (176, 354.253)
+      (352, 382.302)
+      (528, 380.668)
+    };
+    \addlegendentry{22x22}
+
+    \end{axis}%
+  \end{tikzpicture}%
+\caption{Zależność CGMA od rozmiaru macierzy -- wersja 3.}
+\end{figure}
 
 \end{enumerate}

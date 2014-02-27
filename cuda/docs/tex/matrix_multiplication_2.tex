@@ -1,4 +1,4 @@
-
+\newpage
 \subsection{Wersja 2}
 
 \subsubsection{Opis rozwiązania}
@@ -9,6 +9,7 @@ Każdy wątek oblicza jeden element macierzy wynikowej. Pamięć współdzielona
 
 \lstinputlisting[caption=Mnożenie macierzy kwadratowych na GPU -- wersja 2.]{./code/matrix_multiplication_2.cpp}
 
+\newpage
 \subsubsection{Teoretyczna zajętość SM}
 
 \begin{center}
@@ -38,6 +39,7 @@ Każdy wątek oblicza jeden element macierzy wynikowej. Pamięć współdzielona
 Podobnie jak w 1. wersji, dla bloku 8x8 limitem okazuje się być maksymalna ilość bloków na SM, stąd zajętość $ 16 / 32 = 50\% $. \\
 Dla macierzy 16x16 i 22x22 limitem są warpy. Przypada odpowiednio $ 8 $ i $ 16 $ warpów na blok, co daje limit $ 4 $ i $ 2 $ aktywnych bloków. Zajętość dla obu tych wielkości bloków ponownie wynosi $ 100\% $.
 
+\newpage
 \subsubsection{Wyniki pomiarów}
 
 \begin{enumerate}
@@ -67,21 +69,21 @@ Dla macierzy 16x16 i 22x22 limitem są warpy. Przypada odpowiednio $ 8 $ i $ 16 
       grid=both
     ]
 
-    \addplot[color=blue,mark=square*] coordinates {
+    \addplot[color=blue,mark=square*] coordinates {%
       (176, 1.466)
       (352, 12.934)
       (528, 38.574)
     };
     \addlegendentry{8x8}
 
-    \addplot[color=green,mark=triangle*] coordinates {
+    \addplot[color=green,mark=triangle*] coordinates {%
       (176, 1.381)
       (352, 11.713)
       (528, 36.721)
     };
     \addlegendentry{16x16}
 
-    \addplot[color=red,mark=*] coordinates {
+    \addplot[color=red,mark=*] coordinates {%
       (176, 2.552)
       (352, 21.462)
       (528, 66.967)
@@ -93,6 +95,7 @@ Dla macierzy 16x16 i 22x22 limitem są warpy. Przypada odpowiednio $ 8 $ i $ 16 
 \caption{Zależność pomiędzy czasem obliczeń a rozmiarem macierzy -- wersja 2.}
 \end{figure}
 
+\newpage
 \item \textbf{Ilość operacji zmiennoprzecinkowych na sekundę} \newline
 
 \begin{table}[H]
@@ -114,21 +117,21 @@ Dla macierzy 16x16 i 22x22 limitem są warpy. Przypada odpowiednio $ 8 $ i $ 16 
     \begin{axis}[
       xlabel=Szerokość macierzy,ylabel={GFLOPS},legend pos= north west,grid=both]
 
-    \addplot[color=blue,mark=square*] coordinates {
+    \addplot[color=blue,mark=square*] coordinates {%
       (176, 7.440)
       (352, 6.744)
       (528, 7.632)
     };
     \addlegendentry{8x8}
 
-    \addplot[color=green,mark=triangle*] coordinates {
+    \addplot[color=green,mark=triangle*] coordinates {%
       (176, 7.897)
       (352, 7.447)
       (528, 8.017)
     };
     \addlegendentry{16x16}
 
-    \addplot[color=red,mark=*] coordinates {
+    \addplot[color=red,mark=*] coordinates {%
       (176, 4.273)
       (352, 4.064)
       (528, 4.396)
@@ -140,6 +143,7 @@ Dla macierzy 16x16 i 22x22 limitem są warpy. Przypada odpowiednio $ 8 $ i $ 16 
 \caption{Zależność pomiędzy ilością operacji zmiennoprzecinkowychna sekundę a rozmiarem macierzy -- wersja 2.}
 \end{figure}
 
+\newpage
 \item \textbf{Ilość instrukcji wykonanych na sekundę} \newline
 
 \begin{table}[H]
@@ -161,21 +165,21 @@ Dla macierzy 16x16 i 22x22 limitem są warpy. Przypada odpowiednio $ 8 $ i $ 16 
     \begin{axis}[
       xlabel=Szerokość macierzy,ylabel={GIPS},legend pos= north west,grid=both]
 
-    \addplot[color=blue,mark=square*] coordinates {
+    \addplot[color=blue,mark=square*] coordinates {%
       (176, 0.07851)
       (352, 0.07085)
       (528, 0.08095)
     };
     \addlegendentry{8x8}
 
-    \addplot[color=green,mark=triangle*] coordinates {
+    \addplot[color=green,mark=triangle*] coordinates {%
       (176, 0.08334)
       (352, 0.07776)
       (528, 0.08248)
     };
     \addlegendentry{16x16}
 
-    \addplot[color=red,mark=*] coordinates {
+    \addplot[color=red,mark=*] coordinates {%
       (176, 0.04509)
       (352, 0.04455)
       (528, 0.04777)
@@ -187,6 +191,7 @@ Dla macierzy 16x16 i 22x22 limitem są warpy. Przypada odpowiednio $ 8 $ i $ 16 
 \caption{Zależność pomiędzy ilością instrukcji wykonanych na sekundę a rozmiarem macierzy -- wersja 2.}
 \end{figure}
 
+\newpage
 \item \textbf{CGMA} \newline
 
 \begin{table}[H]
@@ -208,21 +213,21 @@ Dla macierzy 16x16 i 22x22 limitem są warpy. Przypada odpowiednio $ 8 $ i $ 16 
     \begin{axis}[
       xlabel=Szerokość macierzy,ylabel={CGMA},legend pos= north west,grid=both]
 
-    \addplot[color=blue,mark=square*] coordinates {
+    \addplot[color=blue,mark=square*] coordinates {%
       (176, 21.511)
       (352, 21.422)
       (528, 21.178)
     };
     \addlegendentry{8x8}
 
-    \addplot[color=green,mark=triangle*] coordinates {
+    \addplot[color=green,mark=triangle*] coordinates {%
       (176, 35.852)
       (352, 32.538)
       (528, 32.267)
     };
     \addlegendentry{16x16}
 
-    \addplot[color=red,mark=*] coordinates {
+    \addplot[color=red,mark=*] coordinates {%
       (176, 23.178)
       (352, 21.322)
       (528, 21.768)
