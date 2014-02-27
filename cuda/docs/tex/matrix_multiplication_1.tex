@@ -3,7 +3,8 @@
 
 \subsubsection{Opis rozwiązania}
 
-W pierwszej wersji programu wykorzystany został tylko jeden blok wątków. Każdy z wątków oblicza $$ {\left(\frac{\text{rozmiar macierzy}}{\text{rozmiar bloku}}\right)}^{2} $$ elementów wyniku. Pamięć współdzielona nie jest wykorzystywana.
+W pierwszej wersji programu wykorzystany został tylko jeden blok wątków. Każdy z wątków oblicza\footnotemark $$\frac{\text{szerokość macierzy}}{\text{szerokość bloku}} \times \frac{\text{wysokość macierzy}}{\text{wysokość bloku}}$$ elementów wyniku. Pamięć współdzielona nie jest wykorzystywana.
+\footnotetext{W analizowanych przypadkach wysokość macierzy jest równa szerokości macierzy, wysokość bloku jest równa szerokości bloku.}
 
 \lstinputlisting[caption=Mnożenie macierzy kwadratowych na GPU -- wersja 1.]{./code/matrix_multiplication_1.cpp}
 
@@ -30,7 +31,7 @@ W pierwszej wersji programu wykorzystany został tylko jeden blok wątków. Każ
 \end{table}
 \end{center}
 
-Wykorzystywany jest 1 blok, zatem zajętość jest zależna tylko od rozmiaru tego bloku. \\
+Wykorzystywany jest 1 blok, zatem zajętość SM warpami jest zależna tylko od jego rozmiaru.
 
 \subsubsection{Wyniki pomiarów}
 
@@ -55,7 +56,11 @@ Wykorzystywany jest 1 blok, zatem zajętość jest zależna tylko od rozmiaru te
 \centering
   \begin{tikzpicture}
     \begin{axis}[
-      xlabel=Szerokość macierzy,ylabel={Czas wykonania [ms]},legend pos= north west,grid=both]
+      xlabel=Szerokość macierzy,
+      ylabel={Czas wykonania [ms]},
+      legend pos=north west,
+      grid=both
+    ]
 
     \addplot[color=blue,mark=square*] coordinates {
       (176, 49.860)

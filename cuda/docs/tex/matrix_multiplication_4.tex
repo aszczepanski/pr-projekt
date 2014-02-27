@@ -91,11 +91,71 @@ Dla macierzy 16x16 limitem jest pamięć współdzielona. $4140$ bajtów na blok
 
 \item \textbf{Czas trwania obliczeń} \newline
 
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\multirow{2}{*}{Rozmiar macierzy} & \multicolumn{2}{c|}{Rozmiar bloku} \\ \cline{2-3}
+& 8x8 & 16x16 \\ \hline
+128x128 & 0.145 & 0.091 \\ \hline
+256x256 & 0.940 & 0.525 \\ \hline
+384x384 & 3.062 & 1.632 \\ \hline
+512x512 & 7.093 & 3.809 \\ \hline
+640x640 & 13.950 & 7.356 \\ \hline
+\end{tabular}
+\caption{Czas obliczeń [ms] -- wersja 4. z pobraniem do rejestru.}
+\end{table}
+
 \item \textbf{Ilość operacji zmiennoprzecinkowych na sekundę} \newline
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\multirow{2}{*}{Rozmiar macierzy} & \multicolumn{2}{c|}{Rozmiar bloku} \\ \cline{2-3}
+& 8x8 & 16x16 \\ \hline
+128x128 & 28.953 & 45.894 \\ \hline
+256x256 & 35.697 & 63.856 \\ \hline
+384x384 & 36.987 & 69.405 \\ \hline
+512x512 & 37.844 & 70.472 \\ \hline
+640x640 & 37.583 & 71.269 \\ \hline
+\end{tabular}
+\caption{Ilość operacji zmiennoprzecinkowych na sekundę (GFLOPS) -- wersja 4. z pobraniem do rejestru.}
+\end{table}
 
 \item \textbf{Ilość instrukcji na sekundę} \newline
 
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+\multirow{2}{*}{Rozmiar macierzy} & \multicolumn{2}{c|}{Rozmiar bloku} \\ \cline{2-3}
+& 8x8 & 16x16 \\ \hline
+128x128 & 0.1448 & 0.1639 \\ \hline
+256x256 & 0.1787 & 0.2665 \\ \hline
+384x384 & 0.1821 & 0.3020 \\ \hline
+512x512 & 0.1848 & 0.2983 \\ \hline
+640x640 & 0.1815 & 0.3013 \\ \hline
+\end{tabular}
+\caption{Ilość instrukcji wykonana na sekundę (GIPS) -- wersja 4. z pobraniem do rejestru.}
+\end{table}
+
 \item \textbf{CGMA} \newline
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+\multirow{2}{*}{Rozmiar macierzy} & \multicolumn{2}{c|}{Rozmiar bloku} \\ \cline{2-3}
+& 8x8 & 16x16 \\ \hline
+128x128 & 120.471 & 485.452 \\ \hline
+256x256 & 124.121 & 489.531 \\ \hline
+384x384 & 125.388 & 491.520 \\ \hline
+512x512 & 125.908 & 498.432 \\ \hline
+640x640 & 126.499 & 500.764 \\ \hline
+\end{tabular}
+\caption{Stosunek ilości operacji zmiennoprzecinkowych do ilości operacji odczytu/zapisu z pamięci globalnej -- wersja 4. z pobraniem do rejestru.}
+\end{table}
 
 \end{enumerate}
 
@@ -105,11 +165,71 @@ Dla macierzy 16x16 limitem jest pamięć współdzielona. $4140$ bajtów na blok
 
 \item \textbf{Czas trwania obliczeń} \newline
 
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\multirow{2}{*}{Rozmiar macierzy} & \multicolumn{2}{c|}{Rozmiar bloku} \\ \cline{2-3}
+& 8x8 & 16x16 \\ \hline
+128x128 & 0.156 & 0.093 \\ \hline
+256x256 & 1.069 & 0.610 \\ \hline
+384x384 & 3.461 & 1.956 \\ \hline
+512x512 & 8.023 & 4.430 \\ \hline
+640x640 & 15.838 & 8.606 \\ \hline
+\end{tabular}
+\caption{Czas obliczeń [ms] -- wersja 4. z pobraniem do pamięci współdzielonej.}
+\end{table}
+
 \item \textbf{Ilość operacji zmiennoprzecinkowych na sekundę} \newline
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\multirow{2}{*}{Rozmiar macierzy} & \multicolumn{2}{c|}{Rozmiar bloku} \\ \cline{2-3}
+& 8x8 & 16x16 \\ \hline
+128x128 & 26.892 & 45.291 \\ \hline
+256x256 & 31.394 & 55.012 \\ \hline
+384x384 & 32.723 & 57.902 \\ \hline
+512x512 & 33.458 & 60.593 \\ \hline
+640x640 & 33.103 & 60.919 \\ \hline
+\end{tabular}
+\caption{Ilość operacji zmiennoprzecinkowych na sekundę (GFLOPS) -- wersja 4. z pobraniem do pamięci współdzielonej.}
+\end{table}
 
 \item \textbf{Ilość instrukcji na sekundę} \newline
 
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+\multirow{2}{*}{Rozmiar macierzy} & \multicolumn{2}{c|}{Rozmiar bloku} \\ \cline{2-3}
+& 8x8 & 16x16 \\ \hline
+128x128 & 0.1918 & 0.2248 \\ \hline
+256x256 & 0.1904 & 0.2944 \\ \hline
+384x384 & 0.1934 & 0.2812 \\ \hline
+512x512 & 0.1958 & 0.2932 \\ \hline
+640x640 & 0.1927 & 0.2920 \\ \hline
+\end{tabular}
+\caption{Ilość instrukcji wykonana na sekundę (GIPS) -- wersja 4. z pobraniem do pamięci współdzielonej.}
+\end{table}
+
 \item \textbf{CGMA} \newline
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+\multirow{2}{*}{Rozmiar macierzy} & \multicolumn{2}{c|}{Rozmiar bloku} \\ \cline{2-3}
+& 8x8 & 16x16 \\ \hline
+128x128 & 115.076 & 520.127 \\ \hline
+256x256 & 124.608 & 481.882 \\ \hline
+384x384 & 125.388 & 494.957 \\ \hline
+512x512 & 126.031 & 496.485 \\ \hline
+640x640 & 126.657 & 498.267 \\ \hline
+\end{tabular}
+\caption{Stosunek ilości operacji zmiennoprzecinkowych do ilości operacji odczytu/zapisu z pamięci globalnej -- wersja 4. z pobraniem do rejestru.}
+\end{table}
 
 \end{enumerate}
 
