@@ -1,4 +1,3 @@
-\newpage
 \subsection{Wersja 3}
 
 \subsubsection{Opis rozwiązania}
@@ -9,9 +8,9 @@ W trzecim podejściu wykorzystana została pamięć współdzielona. W kolejnych
 
 \subsubsection{Teoretyczna zajętość SM}
 
-\begin{center}
 \begin{table}[H]
 \centering
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{|c|c|c|c|c|c|}
 \hline
 \multicolumn{2}{|c|}{\multirow{2}{*}{Kryterium}} & \multicolumn{3}{c|}{Teoretyczna wartość} & \multirow{2}{*}{Limit GPU} \\ \cline{3-5}
@@ -26,12 +25,12 @@ W trzecim podejściu wykorzystana została pamięć współdzielona. W kolejnych
 \multirow{3}{*}{Rejestry} & Rejestry/Wątek & 12 & 12 & 13 & 128 \\ \cline{2-6}
 & Rejestry/Blok & 1024 & 3072 & 6656 & 16384 \\ \cline{2-6}
 & Limit bloków & 16 & 5 & \textcolor{red}{\textbf{2}} & 8 \\ \hline
-\multirow{2}{*}{Pamięć współdzielona} & Pamięć współdzielona/Blok & 556 & 2092 & 3916 & 16384 \\ \cline{2-6}
-& Limit bloków & 16 & 6 & 4 & 8 \\ \hline
+Pamięć & Pamięć współdzielona/Blok & 556 & 2092 & 3916 & 16384 \\ \cline{2-6}
+współdzielona & Limit bloków & 16 & 6 & 4 & 8 \\ \hline
 \end{tabular}
+}
 \caption{Teoretyczna zajętość SM -- wersja 3.}
 \end{table}
-\end{center}
 
 Podobnie jak dla 1. i 2. wersji, dla bloku 8x8 limitem okazuje się być maksymalna ilość bloków na SM, stąd zajętość $ 16 / 32 = 50\% $. \\
 Dla macierzy 16x16 limitem są warpy. Przypada odpowiednio $ 8 $ warpów na blok, co daje limit $ 4 $ i $ 2 $ aktywnych bloków. Zajętość dla tej wielkości bloku wynosi $ 100\% $. \\
@@ -39,30 +38,34 @@ Dla macierzy 22x22 limitem są zarówno warpy jak i rejestry. Przypada $ 16 $ wa
 
 \subsubsection{Wyniki pomiarów}
 
-\begin{enumerate}
-
-\item \textbf{Czas trwania obliczeń} \newline
-
-\begin{table}[H]
-\centering
-\begin{tabular}{|c|c|c|c|}
-\hline
-\multirow{2}{*}{Rozmiar macierzy} & \multicolumn{3}{c|}{Rozmiar bloku} \\ \cline{2-4}
-& 8x8 & 16x16 & 22x22 \\ \hline
-128x128 & 0.140 & 0.093 & \textcolor{gray}{n/d} \\ \hline
-176x176 & 0.316 & 0.181 & 0.374 \\ \hline
-256x256 & 0.930 & 0.519 & \textcolor{gray}{n/d} \\ \hline
-352x352 & 2.351 & 1.297 & 2.343 \\ \hline
-384x384 & 3.034 & 1.642 & \textcolor{gray}{n/d} \\ \hline
-512x512 & 7.001 & 3.764 & \textcolor{gray}{n/d} \\ \hline
-528x528 & 7.666 & 4.075 & 7.389 \\ \hline
-640x640 & 13.820 & 7.301 & \textcolor{gray}{n/d} \\ \hline
-\end{tabular}
-\caption{Czas obliczeń [ms] -- wersja 3.}
-\end{table}
-
+\paragraph{Czas trwania obliczeń}
 \begin{figure}[H]
-\centering
+
+  \begin{minipage}[c]{0.46\textwidth}
+  \centering
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{|c|c|c|c|}
+  \hline
+  \multirow{2}{*}{Rozmiar macierzy} & \multicolumn{3}{c|}{Rozmiar bloku} \\ \cline{2-4}
+  & 8x8 & 16x16 & 22x22 \\ \hline
+  128x128 & 0.140 & 0.093 & \textcolor{gray}{n/d} \\ \hline
+  176x176 & 0.316 & 0.181 & 0.374 \\ \hline
+  256x256 & 0.930 & 0.519 & \textcolor{gray}{n/d} \\ \hline
+  352x352 & 2.351 & 1.297 & 2.343 \\ \hline
+  384x384 & 3.034 & 1.642 & \textcolor{gray}{n/d} \\ \hline
+  512x512 & 7.001 & 3.764 & \textcolor{gray}{n/d} \\ \hline
+  528x528 & 7.666 & 4.075 & 7.389 \\ \hline
+  640x640 & 13.820 & 7.301 & \textcolor{gray}{n/d} \\ \hline
+  \end{tabular}
+  \captionlistentry[table]{Czas obliczeń [ms] -- wersja 3.}
+  }
+
+  \end{minipage}
+  \qquad
+  \begin{minipage}[c]{0.46\textwidth}
+  \centering
+
+  \resizebox{\textwidth}{!}{%
   \begin{tikzpicture}
     \begin{axis}[
       xlabel=Szerokość macierzy,
@@ -104,31 +107,44 @@ Dla macierzy 22x22 limitem są zarówno warpy jak i rejestry. Przypada $ 16 $ wa
 
     \end{axis}%
   \end{tikzpicture}%
-\caption{Zależność pomiędzy czasem obliczeń a rozmiarem macierzy -- wersja 3.}
+  }
+
+  \end{minipage}
+
+  \captionsetup{labelformat=andtable}
+  \caption{Zależność pomiędzy czasem obliczeń a rozmiarem macierzy -- wersja 3.}
 \end{figure}
 
-\item \textbf{Ilość operacji zmiennoprzecinkowych na sekundę} \newline
-
-\begin{table}[H]
-\centering
-\begin{tabular}{|c|c|c|c|}
-\hline
-\multirow{2}{*}{Rozmiar macierzy} & \multicolumn{3}{c|}{Rozmiar bloku} \\ \cline{2-4}
-& 8x8 & 16x16 & 22x22 \\ \hline
-128x128 & 29.857 & 45.291 & \textcolor{gray}{n/d}\\ \hline
-176x176 & 34.491 & 60.169 & 29.138 \\ \hline
-256x256 & 36.086 & 64.603 & \textcolor{gray}{n/d} \\ \hline
-352x352 & 37.106 & 67.273 & 37.231 \\ \hline
-384x384 & 37.322 & 68.970 & \textcolor{gray}{n/d} \\ \hline
-512x512 & 38.341 & 71.314 & \textcolor{gray}{n/d} \\ \hline
-528x528 & 38.402 & 72.246 & 39.844 \\ \hline
-640x640 & 37.938 & 71.812 & \textcolor{gray}{n/d} \\ \hline
-\end{tabular}
-\caption{Ilosc operacji zmiennoprzecinkowych na sekundę (GFLOPS) -- wersja 3.}
-\end{table}
+\paragraph{Ilość operacji zmiennoprzecinkowych na sekundę}
 
 \begin{figure}[H]
-\centering
+
+  \begin{minipage}[c]{0.46\textwidth}
+  \centering
+
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{|c|c|c|c|}
+  \hline
+  \multirow{2}{*}{Rozmiar macierzy} & \multicolumn{3}{c|}{Rozmiar bloku} \\ \cline{2-4}
+  & 8x8 & 16x16 & 22x22 \\ \hline
+  128x128 & 29.857 & 45.291 & \textcolor{gray}{n/d}\\ \hline
+  176x176 & 34.491 & 60.169 & 29.138 \\ \hline
+  256x256 & 36.086 & 64.603 & \textcolor{gray}{n/d} \\ \hline
+  352x352 & 37.106 & 67.273 & 37.231 \\ \hline
+  384x384 & 37.322 & 68.970 & \textcolor{gray}{n/d} \\ \hline
+  512x512 & 38.341 & 71.314 & \textcolor{gray}{n/d} \\ \hline
+  528x528 & 38.402 & 72.246 & 39.844 \\ \hline
+  640x640 & 37.938 & 71.812 & \textcolor{gray}{n/d} \\ \hline
+  \end{tabular}
+  \captionlistentry[table]{Ilosc operacji zmiennoprzecinkowych na sekundę (GFLOPS) -- wersja 3.}
+  }
+
+  \end{minipage}
+  \qquad
+  \begin{minipage}[c]{0.46\textwidth}
+  \centering
+
+  \resizebox{\textwidth}{!}{%
   \begin{tikzpicture}
     \begin{axis}[
       xlabel=Szerokość macierzy,
@@ -170,31 +186,42 @@ Dla macierzy 22x22 limitem są zarówno warpy jak i rejestry. Przypada $ 16 $ wa
 
     \end{axis}%
   \end{tikzpicture}%
-\caption{Zależność pomiędzy ilością operacji zmiennoprzecinkowychna sekundę a rozmiarem macierzy -- wersja 3.}
+  }
+
+  \end{minipage}
+
+  \captionsetup{labelformat=andtable}
+  \caption{Zależność pomiędzy ilością operacji zmiennoprzecinkowychna sekundę a rozmiarem macierzy -- wersja 3.}
 \end{figure}
 
-\item \textbf{Ilość instrukcji wykonanych na sekundę} \newline
-
-\begin{table}[H]
-\centering
-\begin{tabular}{|c|c|c|c|}
-\hline
-\multirow{2}{*}{Rozmiar macierzy} & \multicolumn{3}{c|}{Rozmiar bloku} \\ \cline{2-4}
-& 8x8 & 16x16 & 22x22 \\ \hline
-128x128 & 0.16386 & 0.15619 & \textcolor{gray}{n/d}\\ \hline
-176x176 & 0.16910 & 0.23896 & 0.12664 \\ \hline
-256x256 & 0.17538 & 0.26221 & \textcolor{gray}{n/d} \\ \hline
-352x352 & 0.17807 & 0.28408 & 0.15949 \\ \hline
-384x384 & 0.17667 & 0.29259 & \textcolor{gray}{n/d} \\ \hline
-512x512 & 0.18015 & 0.29476 & \textcolor{gray}{n/d} \\ \hline
-528x528 & 0.18043 & 0.30390 & 0.17317 \\ \hline
-640x640 & 0.17746 & 0.29891 & \textcolor{gray}{n/d} \\ \hline
-\end{tabular}
-\caption{Ilość instrukcji wykonana na sekundę (GIPS) -- wersja 3.}
-\end{table}
-
+\paragraph{Ilość instrukcji wykonanych na sekundę}
 \begin{figure}[H]
-\centering
+
+  \begin{minipage}[c]{0.46\textwidth}
+  \centering
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{|c|c|c|c|}
+  \hline
+  \multirow{2}{*}{Rozmiar macierzy} & \multicolumn{3}{c|}{Rozmiar bloku} \\ \cline{2-4}
+  & 8x8 & 16x16 & 22x22 \\ \hline
+  128x128 & 0.16386 & 0.15619 & \textcolor{gray}{n/d}\\ \hline
+  176x176 & 0.16910 & 0.23896 & 0.12664 \\ \hline
+  256x256 & 0.17538 & 0.26221 & \textcolor{gray}{n/d} \\ \hline
+  352x352 & 0.17807 & 0.28408 & 0.15949 \\ \hline
+  384x384 & 0.17667 & 0.29259 & \textcolor{gray}{n/d} \\ \hline
+  512x512 & 0.18015 & 0.29476 & \textcolor{gray}{n/d} \\ \hline
+  528x528 & 0.18043 & 0.30390 & 0.17317 \\ \hline
+  640x640 & 0.17746 & 0.29891 & \textcolor{gray}{n/d} \\ \hline
+  \end{tabular}
+  \captionlistentry[table]{Ilość instrukcji wykonana na sekundę (GIPS) -- wersja 3.}
+  }
+
+  \end{minipage}
+  \qquad
+  \begin{minipage}[c]{0.46\textwidth}
+  \centering
+
+  \resizebox{\textwidth}{!}{%
   \begin{tikzpicture}
     \begin{axis}[
       xlabel=Szerokość macierzy,
@@ -236,31 +263,42 @@ Dla macierzy 22x22 limitem są zarówno warpy jak i rejestry. Przypada $ 16 $ wa
 
     \end{axis}%
   \end{tikzpicture}%
-\caption{Zależność pomiędzy ilością instrukcji wykonanych na sekundę a rozmiarem macierzy -- wersja 3.}
+  }
+
+  \end{minipage}
+
+  \captionsetup{labelformat=andtable}
+  \caption{Zależność pomiędzy ilością instrukcji wykonanych na sekundę a rozmiarem macierzy -- wersja 3.}
 \end{figure}
 
-\item \textbf{CGMA} \newline
-
-\begin{table}[H]
-\centering
-\begin{tabular}{|c|c|c|c|}
-\hline
-\multirow{2}{*}{Rozmiar macierzy} & \multicolumn{3}{c|}{Rozmiar bloku} \\ \cline{2-4}
-& 8x8 & 16x16 & 22x22 \\ \hline
-128x128 & 120.471 & 546.133 & \textcolor{gray}{n/d} \\ \hline
-176x176 & 129.067 & 516.267 & 354.253 \\ \hline
-256x256 & 128.502 & 520.127 & \textcolor{gray}{n/d} \\ \hline
-352x352 & 128.000 & 507.803 & 382.302 \\ \hline
-384x384 & 128.000 & 515.580 & \textcolor{gray}{n/d} \\ \hline
-512x512 & 127.626 & 514.008 & \textcolor{gray}{n/d} \\ \hline
-528x528 & 127.765 & 510.593 & 380.668 \\ \hline
-640x640 & 127.760 & 510.723 & \textcolor{gray}{n/d} \\ \hline
-\end{tabular}
-\caption{Stosunek ilości operacji zmiennoprzecinkowych do ilości operacji odczytu/zapisu z pamięci globalnej -- wersja 3.}
-\end{table}
-
+\paragraph{CGMA}
 \begin{figure}[H]
-\centering
+
+  \begin{minipage}[c]{0.46\textwidth}
+  \centering
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{|c|c|c|c|}
+  \hline
+  \multirow{2}{*}{Rozmiar macierzy} & \multicolumn{3}{c|}{Rozmiar bloku} \\ \cline{2-4}
+  & 8x8 & 16x16 & 22x22 \\ \hline
+  128x128 & 120.471 & 546.133 & \textcolor{gray}{n/d} \\ \hline
+  176x176 & 129.067 & 516.267 & 354.253 \\ \hline
+  256x256 & 128.502 & 520.127 & \textcolor{gray}{n/d} \\ \hline
+  352x352 & 128.000 & 507.803 & 382.302 \\ \hline
+  384x384 & 128.000 & 515.580 & \textcolor{gray}{n/d} \\ \hline
+  512x512 & 127.626 & 514.008 & \textcolor{gray}{n/d} \\ \hline
+  528x528 & 127.765 & 510.593 & 380.668 \\ \hline
+  640x640 & 127.760 & 510.723 & \textcolor{gray}{n/d} \\ \hline
+  \end{tabular}
+  \captionlistentry[table]{Stosunek ilości operacji zmiennoprzecinkowych do ilości operacji odczytu/zapisu z pamięci globalnej -- wersja 3.}
+  }
+
+  \end{minipage}
+  \qquad
+  \begin{minipage}[c]{0.46\textwidth}
+  \centering
+
+  \resizebox{\textwidth}{!}{%
   \begin{tikzpicture}
     \begin{axis}[
       xlabel=Szerokość macierzy,
@@ -302,7 +340,10 @@ Dla macierzy 22x22 limitem są zarówno warpy jak i rejestry. Przypada $ 16 $ wa
 
     \end{axis}%
   \end{tikzpicture}%
-\caption{Zależność CGMA od rozmiaru macierzy -- wersja 3.}
-\end{figure}
+  }
 
-\end{enumerate}
+  \end{minipage}
+
+  \captionsetup{labelformat=andtable}
+  \caption{Zależność CGMA od rozmiaru macierzy -- wersja 3.}
+\end{figure}

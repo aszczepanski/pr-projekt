@@ -1,32 +1,20 @@
-\newpage
 \subsection{Wersja 4}
 
-\subsubsection{Opis rozwiązania}
+\subsubsection{Pobranie do rejestru}
+
+\paragraph{Opis rozwiązania}
 
 Jest to rozszerzona wersja 3 o równoległe z obliczeniami pobranie kolejnych danych (na poziomie bloku). Ma to spowodować złagodzenie kosztów synchronizacji.
 
-\begin{enumerate}[(a)]
-
-\item \textbf{Pobranie do rejestru} \newline
-
 \lstinputlisting[caption=Mnożenie macierzy kwadratowych na GPU -- wersja 4 z pobraniem do rejestru.]{./code/matrix_multiplication_4a.cpp}
 
-\item \textbf{Pobranie do pamięci współdzielonej} \newline
-
-\lstinputlisting[caption=Mnożenie macierzy kwadratowych na GPU -- wersja 4 z pobraniem do pamięci współdzielonej.]{./code/matrix_multiplication_4b.cpp}
-
-\end{enumerate}
-
 \newpage
-\subsubsection{Teoretyczna zajętość SM}
-
-\begin{enumerate}[(a)]
-
-\item \textbf{Pobranie do rejestru} \newline
+\paragraph{Teoretyczna zajętość SM}
 
 \begin{center}
 \begin{table}[H]
 \centering
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{|c|c|c|c|c|}
 \hline
 \multicolumn{2}{|c|}{\multirow{2}{*}{Kryterium}} & \multicolumn{2}{c|}{Teoretyczna wartość} & \multirow{2}{*}{Limit GPU} \\ \cline{3-4}
@@ -41,9 +29,10 @@ Jest to rozszerzona wersja 3 o równoległe z obliczeniami pobranie kolejnych da
 \multirow{3}{*}{Rejestry} & Rejestry/Wątek & 13 & 13 & 128 \\ \cline{2-5}
 & Rejestry/Blok & 1024 & 3584 & 16384 \\ \cline{2-5}
 & Limit bloków & 16 & \textcolor{red}{\textbf{4}} & 8 \\ \hline
-\multirow{2}{*}{Pamięć współdzielona} & Pamięć współdzielona/Blok & 556 & 2092 & 16384 \\ \cline{2-5}
-& Limit bloków & 16 & 6 & 8 \\ \hline
+Pamięć & Pamięć współdzielona/Blok & 556 & 2092 & 16384 \\ \cline{2-5}
+współdzielona & Limit bloków & 16 & 6 & 8 \\ \hline
 \end{tabular}
+}
 \caption{Teoretyczna zajętość SM -- wersja 4. z pobraniem do rejestru.}
 \end{table}
 \end{center}
@@ -51,44 +40,10 @@ Jest to rozszerzona wersja 3 o równoległe z obliczeniami pobranie kolejnych da
 Podobnie jak dla poprzednich wersji, dla bloku 8x8 limitem okazuje się być maksymalna ilość bloków na SM, stąd zajętość $ 16 / 32 = 50\% $. \\
 Dla macierzy 16x16 limitem są warpy i rejestry. Przypada odpowiednio $ 8 $ warpów na blok, co daje limit $ 4 $ aktywnych bloków. $ 3584 $ rejestrów na blok również daje limit $ 4 $ aktywnych bloków. Zajętość dla bloku 16x16 wynosi $ 100\% $. \\
 
-\item \textbf{Pobranie do pamięci współdzielonej} \newline
 
-\begin{center}
-\begin{table}[H]
-\centering
-\begin{tabular}{|c|c|c|c|c|}
-\hline
-\multicolumn{2}{|c|}{\multirow{2}{*}{Kryterium}} & \multicolumn{2}{c|}{Teoretyczna wartość} & \multirow{2}{*}{Limit GPU} \\ \cline{3-4}
-\multicolumn{2}{|c|}{} & 8x8 & 16x16 & \\ \hline
-\multirow{4}{*}{Zajętość SM} & Aktywne bloki & 8 & 3 & 8 \\ \cline{2-5}
-& Aktywne warpy & 16 & 24 & 32 \\ \cline{2-5}
-& Aktywne wątki & 512 & 768 & 1024 \\ \cline{2-5}
-& Zajętość & 50\% & 75\% & 100\% \\ \hline
-\multirow{3}{*}{Warpy} & Wątki/Blok & 64 & 256 & 512 \\ \cline{2-5}
-& Warpy/Blok & 2 & 8 & 16 \\ \cline{2-5}
-& Limit bloków & 16 & 4 & 8 \\ \hline
-\multirow{3}{*}{Rejestry} & Rejestry/Wątek & 14 & 14 & 128 \\ \cline{2-5}
-& Rejestry/Blok & 1024 & 3584 & 16384 \\ \cline{2-5}
-& Limit bloków & 16 & 4 & 8 \\ \hline
-\multirow{2}{*}{Pamięć współdzielona} & Pamięć współdzielona/Blok & 1068 & 4140 & 16384 \\ \cline{2-5}
-& Limit bloków & 16 & \textcolor{red}{\textbf{3}} & 8 \\ \hline
-\end{tabular}
-\caption{Teoretyczna zajętość SM -- wersja 4. z pobraniem do pamięci współdzielonej.}
-\end{table}
-\end{center}
+\paragraph{Wyniki pomiarów}
 
-Podobnie jak dla poprzednich wersji, dla bloku 8x8 limitem okazuje się być maksymalna ilość bloków na SM, stąd zajętość $ 16 / 32 = 50\% $. \\
-Dla macierzy 16x16 limitem jest pamięć współdzielona. $4140$ bajtów na blok daje limit $3$ aktywnych bloków. W porównaniu z poprzednimi wersjami zajętość SM dla bloku 16x16 spada i wynosi $ 75\% $. \\
-
-\end{enumerate}
-
-\subsubsection{Wyniki pomiarów}
-
-\begin{enumerate}[(a)]
-
-\item \textbf{Pobranie do rejestru} \newline
-
-\begin{enumerate}[1.]
+\begin{enumerate}
 
 \item \textbf{Czas trwania obliczeń} \newline
 
@@ -160,9 +115,47 @@ Dla macierzy 16x16 limitem jest pamięć współdzielona. $4140$ bajtów na blok
 
 \end{enumerate}
 
-\item \textbf{Pobranie do pamięci współdzielonej} \newline
 
-\begin{enumerate}[1.]
+\subsubsection{Pobranie do pamięci współdzielonej}
+
+\paragraph{Opis rozwiązania}
+
+\lstinputlisting[caption=Mnożenie macierzy kwadratowych na GPU -- wersja 4 z pobraniem do pamięci współdzielonej.]{./code/matrix_multiplication_4b.cpp}
+
+\paragraph{Teoretyczna zajętość SM}
+
+\begin{center}
+\begin{table}[H]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{Kryterium}} & \multicolumn{2}{c|}{Teoretyczna wartość} & \multirow{2}{*}{Limit GPU} \\ \cline{3-4}
+\multicolumn{2}{|c|}{} & 8x8 & 16x16 & \\ \hline
+\multirow{4}{*}{Zajętość SM} & Aktywne bloki & 8 & 3 & 8 \\ \cline{2-5}
+& Aktywne warpy & 16 & 24 & 32 \\ \cline{2-5}
+& Aktywne wątki & 512 & 768 & 1024 \\ \cline{2-5}
+& Zajętość & 50\% & 75\% & 100\% \\ \hline
+\multirow{3}{*}{Warpy} & Wątki/Blok & 64 & 256 & 512 \\ \cline{2-5}
+& Warpy/Blok & 2 & 8 & 16 \\ \cline{2-5}
+& Limit bloków & 16 & 4 & 8 \\ \hline
+\multirow{3}{*}{Rejestry} & Rejestry/Wątek & 14 & 14 & 128 \\ \cline{2-5}
+& Rejestry/Blok & 1024 & 3584 & 16384 \\ \cline{2-5}
+& Limit bloków & 16 & 4 & 8 \\ \hline
+Pamięć & Pamięć współdzielona/Blok & 1068 & 4140 & 16384 \\ \cline{2-5}
+współdzielona & Limit bloków & 16 & \textcolor{red}{\textbf{3}} & 8 \\ \hline
+\end{tabular}
+}
+\caption{Teoretyczna zajętość SM -- wersja 4. z pobraniem do pamięci współdzielonej.}
+\end{table}
+\end{center}
+
+Podobnie jak dla poprzednich wersji, dla bloku 8x8 limitem okazuje się być maksymalna ilość bloków na SM, stąd zajętość $ 16 / 32 = 50\% $. \\
+Dla macierzy 16x16 limitem jest pamięć współdzielona. $4140$ bajtów na blok daje limit $3$ aktywnych bloków. W porównaniu z poprzednimi wersjami zajętość SM dla bloku 16x16 spada i wynosi $ 75\% $. \\
+
+\paragraph{Wyniki pomiarów}
+
+\begin{enumerate}
 
 \item \textbf{Czas trwania obliczeń} \newline
 
@@ -231,7 +224,5 @@ Dla macierzy 16x16 limitem jest pamięć współdzielona. $4140$ bajtów na blok
 \end{tabular}
 \caption{Stosunek ilości operacji zmiennoprzecinkowych do ilości operacji odczytu/zapisu z pamięci globalnej -- wersja 4. z pobraniem do rejestru.}
 \end{table}
-
-\end{enumerate}
 
 \end{enumerate}

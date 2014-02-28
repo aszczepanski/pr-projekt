@@ -13,6 +13,7 @@ Ostatnia wersja rozszerza wersję 4 -- każdy wątek wykonuje większą pracę. 
 \begin{center}
 \begin{table}[H]
 \centering
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{|c|c|c|c|c|}
 \hline
 \multicolumn{2}{|c|}{\multirow{2}{*}{Kryterium}} & \multicolumn{2}{c|}{Teoretyczna wartość} & \multirow{2}{*}{Limit GPU} \\ \cline{3-4}
@@ -27,9 +28,10 @@ Ostatnia wersja rozszerza wersję 4 -- każdy wątek wykonuje większą pracę. 
 \multirow{3}{*}{Rejestry} & Rejestry/Wątek & 23 & 34 & 128 \\ \cline{2-5}
 & Rejestry/Blok & 1536 & 8704 & 16384 \\ \cline{2-5}
 & Limit bloków & 10 & \textcolor{red}{\textbf{1}} & 8 \\ \hline
-\multirow{2}{*}{Pamięć współdzielona} & Pamięć współdzielona/Blok & 1068 & 4140 & 16384 \\ \cline{2-5}
-& Limit bloków & 10 & 3 & 8 \\ \hline
+Pamięć & Pamięć współdzielona/Blok & 1068 & 4140 & 16384 \\ \cline{2-5}
+współdzielona & Limit bloków & 10 & 3 & 8 \\ \hline
 \end{tabular}
+}
 \caption{Teoretyczna zajętość SM -- wersja 5.}
 \end{table}
 \end{center}

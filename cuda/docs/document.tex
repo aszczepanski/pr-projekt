@@ -1,21 +1,24 @@
-\documentclass{article}
+\documentclass[12pt,a4paper,oneside]{article}
 
 \usepackage{polski}
-\usepackage{setspace}
 \usepackage[polish]{babel}
 \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
 
 \usepackage{graphicx}
 \graphicspath{{./img/}}
 
+\usepackage{setspace}
 \usepackage{listings}
-\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
 \usepackage{float}
 \usepackage{datetime}
 \usepackage{amsmath}
 \usepackage{color}
 \usepackage{subfig}
 \usepackage{multirow}
+\usepackage{hyperref}
 \usepackage{colortbl}
 \usepackage{tikz}
 \usetikzlibrary{plotmarks}
@@ -24,7 +27,23 @@
 \pgfplotsset{major grid style={dashed,gray}}
 \pgfplotsset{minor grid style={dotted,gray}}
 
+\usepackage[margin=10pt,font=small,labelformat=simple,labelfont=bf]{caption}
+\DeclareCaptionLabelFormat{andtable}%
+{\tablename~\thetable , #1~#2}
+
 \input{./tex/listings_style.tex}
+
+\setlist[enumerate]{leftmargin=*}
+
+\usepackage{titlesec}
+
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus.2ex}{1.5ex plus.2ex}
 
 \setlength\parindent{0pt}
 
