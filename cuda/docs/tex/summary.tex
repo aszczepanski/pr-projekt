@@ -151,6 +151,16 @@ Rozwiązanie & Rozmiar bloku & Czas & GFLOPS & GIPS & CGMA \\ \hline
 
 \end{figure}
 
+\begin{description}
+
+\item[Wersja 1.] charakteryzuje się zdecydowanie najdłuższym czasem obliczeń. Wykorzystanie jednego bloku w znacznym stopniu ogranicza równoległość przetwarzania, szczególnie dla bloków o małym rozmiarze. Przetwarzanie jest w tym przypadku ograniczone dostępem do pamięci -- obniżona jest ilość operacji zmiennoprzecinkowych, które mogłyby być wykonane w danym czasie.
+
+\item[Wersja 2.] jest bardziej wydajna dzięki równoległości na poziomie między blokami. Ciekawy jest przypadek bloku 22x22, który daje czas przetwarzań porównywalny z czasem przetwarzania dla bloku 8x8, a jest gorszy od czasu przetwarzania dla bloku 16x16. Podejrzewamy, że wynika to z gorszej zajętości SM wątkami.
+
+\item[Wersja 3.] jest najlepszą wersją kodu. Czas dostępu do pamięci współdzielonej jest setki razy szybszy niż czas dostępu do pamięci globalnej. Ponadto wątki równolegle ładują potrzebne do pamięci współdzielonej.
+
+\end{description}
+
 \begin{table}[H]
 \centering
 \begin{tabular}{|c|c|c|c|c|c|}
@@ -299,3 +309,11 @@ Rozwiązanie & Rozmiar bloku & Czas & GFLOPS & GIPS & CGMA \\ \hline
 \caption{Porównanie drugiej grupy rozwiązań -- macierz 640x640.}
 
 \end{figure}
+
+\begin{description}
+
+\item[Wersja 4.] nie spełniła naszych oczekiwań. Wprowadzone zmiany w porównaniu z wersją 3. nie przyniosły większych zmian, co więcej czas obliczeń w większości przypadków nieznacznie się pogorszył. W przypadku pobrania do pamięci współdzielonej spadek wydajności jest wiekszy, dla bloku o rozmiarze 16x16 ograniczeniem stała się pamięć współdzielona -- zajętość SM warpami spadła do $75\%$.
+
+\item[Wersja 5.] w przypadku bloku o rozmiarze 8x8 spowodowała zauważalne poprawienie wydajności. Dla bloku 16x16 spadła zajętość -- zbyt duża liczba wykorzystanych rejestrów spowodowała spadek zajętości do $25\%$\footnote{Duża ilość rejestrów była spowodowana optymalizacjami kompilatora.}.
+
+\end{description}

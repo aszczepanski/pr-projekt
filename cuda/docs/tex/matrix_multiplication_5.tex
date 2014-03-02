@@ -1,13 +1,13 @@
-\newpage
 \subsection{Wersja 5}
 
 \subsubsection{Opis rozwiązania}
 
-Ostatnia wersja rozszerza wersję 4 -- każdy wątek wykonuje większą pracę. Zostało to zrealizowane przez zwiększenie obliczanych danych z jednej do czterech.
+Ostatnia wersja rozszerza wersję 4 -- każdy wątek wykonuje większą pracę. Zostało to zrealizowane przez zwiększenie obliczanych danych z jednej do czterech (2x2 elementy macierzy wynikowej).
 
 \lstinputlisting[caption=Mnożenie macierzy kwadratowych na GPU -- wersja 5.]{./code/matrix_multiplication_5.cpp}
 
-\newpage
+Konieczne okazało się wykorzystanie zmiennych \emph{fetchA0} i \emph{fetchA1} oraz \emph{fetchB0} i \emph{fetchB1} zamiast tablic, gdyż w przypadku tablic były ona alokowana w "local memory", co powodowało długi czas dostępu.
+
 \subsubsection{Teoretyczna zajętość SM}
 
 \begin{center}
@@ -36,8 +36,8 @@ współdzielona & Limit bloków & 10 & 3 & 8 \\ \hline
 \end{table}
 \end{center}
 
-Podobnie jak dla poprzednich wersji, dla bloku 8x8 limitem okazuje się być maksymalna ilość bloków na SM, stąd zajętość $ 16 / 32 = 50\% $. \\
-Dla macierzy 16x16 limitem są rejestry. $8704$ rejestrów na blok daje limit $1$ aktywnych bloków. Zajętość dla bloku 16x16 wynosi zaledwie $ 25\% $. \\
+Podobnie jak dla poprzednich wersji, dla bloku 8x8 limitem okazuje się być maksymalna ilość warpów na SM, stąd zajętość $ 16 / 32 = 50\% $. \\
+Dla macierzy 16x16 limitem są rejestry. $8704$ rejestrów na blok daje limit $1$ aktywnych bloków. Zajętość warpami dla bloku 16x16 wynosi zaledwie $ 25\% $. \\
 
 \subsubsection{Wyniki pomiarów}
 

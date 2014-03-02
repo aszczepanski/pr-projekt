@@ -19,10 +19,11 @@ MatrixMulKernel_3(float *C, const float *A, const float *B, const int arraySize)
       a <= aEnd;
       a += aStep, b += bStep)
   {
-    \textbf{__shared__ float As[BLOCK_SIZE][BLOCK_SIZE];}
+    __shared__ float As[BLOCK_SIZE][BLOCK_SIZE];
     __shared__ float Bs[BLOCK_SIZE][BLOCK_SIZE];
 
     // ładowanie kolejnego bloku danych do pamięci współdzielonej
+    // każdy wątek ładuje jeden element
     As[ty][tx] = A[a + arraySize * ty + tx];
     Bs[ty][tx] = B[b + arraySize * ty + tx];
 

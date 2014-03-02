@@ -15,9 +15,11 @@ MatrixMulKernel_4b(float *C, const float *A, const float *B, const int arraySize
 
   float Csub = 0.0f;
 
+  // dodatkowa pamięć współdzielona:
   __shared__ float fetchA[BLOCK_SIZE][BLOCK_SIZE];
   __shared__ float fetchB[BLOCK_SIZE][BLOCK_SIZE];
 
+  // pobranie pierwszego bloku danych z pamięci globalnej
   fetchA[ty][tx] = A[aBegin + arraySize * ty + tx];
   fetchB[ty][tx] = B[bBegin + arraySize * ty + tx];
 
@@ -28,19 +30,24 @@ MatrixMulKernel_4b(float *C, const float *A, const float *B, const int arraySize
     __shared__ float As[BLOCK_SIZE][BLOCK_SIZE];
     __shared__ float Bs[BLOCK_SIZE][BLOCK_SIZE];
 
+    // przepisanie danych do pamięci współdzielonej
     As[ty][tx] = fetchA[ty][tx];
     Bs[ty][tx] = fetchB[ty][tx];
 
+    // synchronizacja
     __syncthreads();
 
+    // pobranie kolejnego bloku danych z pamięci globalnej
     fetchA[ty][tx] = A[a + aStep + arraySize * ty + tx];
     fetchB[ty][tx] = B[b + bStep + arraySize * ty + tx];
 
+    // obliczenia
 #pragma unroll
     for (int k = 0; k < BLOCK_SIZE; ++k) {
       Csub += As[ty][k] * Bs[k][tx];
     }
 
+    // synchronizacja
     __syncthreads();
   }
 

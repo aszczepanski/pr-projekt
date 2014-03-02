@@ -14,14 +14,14 @@ Przygotowaliśmy 6 wersji programu, którego zadaniem było mnożenie macierzy k
 \item wykorzystanie gridu wieloblokowego wątków i pamięci współdzielonej, zrównoleglone pobranie danych i obliczenia, powiększona ilość pracy każdego wątku
 \end{enumerate}
 
-Dla każdej wersji podajemy teoretyczną zajętość SM wynikającą z rozmiaru bloku, wykorzystanej liczby rejestrów, rozmiaru pamięci współdzielonej, a także z ograniczeń GPU\@. Wyjątkiem jest wersja 1. w której wykorzystany jest tylko 1 blok, zatem zajętość SM wynika tylko z jego rozmiaru.\\
+Dla każdej wersji podajemy teoretyczną zajętość SM warpami wynikającą z rozmiaru bloku, wykorzystanej liczby rejestrów, rozmiaru pamięci współdzielonej, a także z ograniczeń GPU\@. Wyjątkiem jest wersja 1. w której wykorzystany jest tylko 1 blok, zatem zajętość SM wynika tylko z jego rozmiaru.\\
 W przypadku pozostałych wersji, dla poszczególnych parametrów podany jest w tabeli limit bloków -- oznacza on ile bloków maksymalnie można powiązać z SM przy danych parametrach. Jeśli wszystkie limity są większe od limitu bloków na SM wynikającego z ograniczeń GPU, to limit bloków GPU determinuje ilość aktywnych bloków, a co za tym idzie zajętość SM.\\
 Efektywność programów zbadaliśmy także przy pomocy profilera NVIDIA Visual Profiler. Dla każdej instancji podajemy:
 \begin{itemize}
 \item czas wykonania
-\item ilość operacji zmienno przecinkowych na sekundę (GFLOPS)
+\item ilość operacji zmiennoprzecinkowych na sekundę (GFLOPS)
 \item ilość instrukcji wykonanych na sekundę (GIPS)
-\item stosunek operacji zmienno przecinkowych do ilości operacji odczytu/zapisu z pamięci globalnej (CGMA)
+\item stosunek operacji zmiennoprzecinkowych do ilości operacji odczytu/zapisu z pamięci globalnej (CGMA)
 \end{itemize}
 
 Ze względu na zupełnie odmienne podejścia w wersjach 1, 2 i 3, oraz modyfikacje wersji 3. w wersjach 4a, 4b i 5 rozmiary macierzy i bloków podzieliliśmy na dwie grupy:

@@ -32,8 +32,8 @@ współdzielona & Limit bloków & 16 & 6 & 4 & 8 \\ \hline
 \caption{Teoretyczna zajętość SM -- wersja 3.}
 \end{table}
 
-Podobnie jak dla 1. i 2. wersji, dla bloku 8x8 limitem okazuje się być maksymalna ilość bloków na SM, stąd zajętość $ 16 / 32 = 50\% $. \\
-Dla macierzy 16x16 limitem są warpy. Przypada odpowiednio $ 8 $ warpów na blok, co daje limit $ 4 $ i $ 2 $ aktywnych bloków. Zajętość dla tej wielkości bloku wynosi $ 100\% $. \\
+Podobnie jak dla 2. wersji, dla bloku 8x8 limitem okazuje się być maksymalna ilość warpów na SM, stąd zajętość $ 16 / 32 = 50\% $. \\
+Dla macierzy 16x16 limitem również są warpy. Przypada odpowiednio $ 8 $ warpów na blok, co daje limit $ 4 $ aktywnych bloków. Zajętość dla tej wielkości bloku wynosi $ 100\% $. \\
 Dla macierzy 22x22 limitem są zarówno warpy jak i rejestry. Przypada $ 16 $ warpów na blok, co daje limit $ 2 $ aktywnych bloków. $ 6656 $ rejestrów na blok również daje limit $ 2 $ aktywnych bloków. Zajętość dla tej wielkości bloku wynosi $ 100\% $.
 
 \subsubsection{Wyniki pomiarów}
@@ -136,7 +136,7 @@ Dla macierzy 22x22 limitem są zarówno warpy jak i rejestry. Przypada $ 16 $ wa
   528x528 & 38.402 & 72.246 & 39.844 \\ \hline
   640x640 & 37.938 & 71.812 & \textcolor{gray}{n/d} \\ \hline
   \end{tabular}
-  \captionlistentry[table]{Ilosc operacji zmiennoprzecinkowych na sekundę (GFLOPS) -- wersja 3.}
+  \captionlistentry[table]{Ilość operacji zmiennoprzecinkowych na sekundę (GFLOPS) -- wersja 3.}
   }
 
   \end{minipage}
@@ -191,7 +191,7 @@ Dla macierzy 22x22 limitem są zarówno warpy jak i rejestry. Przypada $ 16 $ wa
   \end{minipage}
 
   \captionsetup{labelformat=andtable}
-  \caption{Zależność pomiędzy ilością operacji zmiennoprzecinkowychna sekundę a rozmiarem macierzy -- wersja 3.}
+  \caption{Zależność pomiędzy ilością operacji zmiennoprzecinkowych na sekundę a rozmiarem macierzy -- wersja 3.}
 \end{figure}
 
 \paragraph{Ilość instrukcji wykonanych na sekundę}

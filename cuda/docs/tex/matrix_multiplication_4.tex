@@ -2,7 +2,8 @@
 
 \subsubsection{Opis rozwiązania}
 
-Jest to rozszerzona wersja 3 o równoległe (na poziomie bloku) z obliczeniami pobranie kolejnych danych. Ma to spowodować złagodzenie kosztów synchronizacji.
+Jest to rozszerzona wersja 3 o równoległe (na poziomie bloku) z obliczeniami pobranie kolejnych danych. Ma to spowodować złagodzenie kosztów synchronizacji -- kosztem większej ilości operacji i wymagań zasobowych.\\
+Przygotowaliśmy 2 alternatywne wersje wyprzedzającego pobrania:
 
 \begin{enumerate}[(a)]
 
@@ -54,7 +55,7 @@ współdzielona & Limit bloków & 16 & 6 & 8 \\ \hline
 \end{table}
 \end{center}
 
-Podobnie jak dla poprzednich wersji, dla bloku 8x8 limitem okazuje się być maksymalna ilość bloków na SM, stąd zajętość $ 16 / 32 = 50\% $. \\
+Podobnie jak dla poprzednich wersji, dla bloku 8x8 limitem okazuje się być maksymalna ilość warpów na SM, stąd zajętość $ 16 / 32 = 50\% $. \\
 Dla macierzy 16x16 limitem są warpy i rejestry. Przypada odpowiednio $ 8 $ warpów na blok, co daje limit $ 4 $ aktywnych bloków. $ 3584 $ rejestrów na blok również daje limit $ 4 $ aktywnych bloków. Zajętość dla bloku 16x16 wynosi $ 100\% $. \\
 
 \end{minipage}
@@ -89,7 +90,7 @@ współdzielona & Limit bloków & 16 & \textcolor{red}{\textbf{3}} & 8 \\ \hline
 \end{table}
 \end{center}
 
-Podobnie jak dla poprzednich wersji, dla bloku 8x8 limitem okazuje się być maksymalna ilość bloków na SM, stąd zajętość $ 16 / 32 = 50\% $. \\
+Również w tym przypadku dla bloku 8x8 limitem okazuje się być maksymalna ilość warpów na SM, stąd zajętość $ 16 / 32 = 50\% $. \\
 Dla macierzy 16x16 limitem jest pamięć współdzielona. $4140$ bajtów na blok daje limit $3$ aktywnych bloków. W porównaniu z poprzednimi wersjami zajętość SM dla bloku 16x16 spada i wynosi $ 75\% $. \\
 
 \end{minipage}
