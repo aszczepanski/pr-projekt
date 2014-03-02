@@ -14,7 +14,7 @@ Ostatnia wersja rozszerza wersję 4 -- każdy wątek wykonuje większą pracę. 
 \begin{table}[H]
 \centering
 \resizebox{\textwidth}{!}{%
-\begin{tabular}{|c|c|c|c|c|}
+\begin{tabularx}{1.1\textwidth}{|c|c|>{\centering}X|>{\centering}X|c|}
 \hline
 \multicolumn{2}{|c|}{\multirow{2}{*}{Kryterium}} & \multicolumn{2}{c|}{Teoretyczna wartość} & \multirow{2}{*}{Limit GPU} \\ \cline{3-4}
 \multicolumn{2}{|c|}{} & 8x8 & 16x16 & \\ \hline
@@ -30,7 +30,7 @@ Ostatnia wersja rozszerza wersję 4 -- każdy wątek wykonuje większą pracę. 
 & Limit bloków & 10 & \textcolor{red}{\textbf{1}} & 8 \\ \hline
 Pamięć & Pamięć współdzielona/Blok & 1068 & 4140 & 16384 \\ \cline{2-5}
 współdzielona & Limit bloków & 10 & 3 & 8 \\ \hline
-\end{tabular}
+\end{tabularx}
 }
 \caption{Teoretyczna zajętość SM -- wersja 5.}
 \end{table}
@@ -39,30 +39,34 @@ współdzielona & Limit bloków & 10 & 3 & 8 \\ \hline
 Podobnie jak dla poprzednich wersji, dla bloku 8x8 limitem okazuje się być maksymalna ilość bloków na SM, stąd zajętość $ 16 / 32 = 50\% $. \\
 Dla macierzy 16x16 limitem są rejestry. $8704$ rejestrów na blok daje limit $1$ aktywnych bloków. Zajętość dla bloku 16x16 wynosi zaledwie $ 25\% $. \\
 
-\newpage
 \subsubsection{Wyniki pomiarów}
 
-\begin{enumerate}
-
-\item \textbf{Czas trwania obliczeń} \newline
-
-\begin{table}[H]
-\centering
-\begin{tabular}{|c|c|c|}
-\hline
-\multirow{2}{*}{Rozmiar macierzy} & \multicolumn{2}{c|}{Rozmiar bloku} \\ \cline{2-3}
-& 8x8 & 16x16 \\ \hline
-128x128 & 0.118 & 0.139 \\ \hline
-256x256 & 0.877 & 0.763 \\ \hline
-384x384 & 2.622 & 2.287 \\ \hline
-512x512 & 6.248 & 5.471 \\ \hline
-640x640 & 12.047 & 10.632 \\ \hline
-\end{tabular}
-\caption{Czas obliczeń [ms] -- wersja 5.}
-\end{table}
+\paragraph{Czas trwania obliczeń}
 
 \begin{figure}[H]
-\centering
+
+  \begin{minipage}[c]{0.46\textwidth}
+  \centering
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{|c|c|c|}
+  \hline
+  \multirow{2}{*}{Rozmiar macierzy} & \multicolumn{2}{c|}{Rozmiar bloku} \\ \cline{2-3}
+  & 8x8 & 16x16 \\ \hline
+  128x128 & 0.118 & 0.139 \\ \hline
+  256x256 & 0.877 & 0.763 \\ \hline
+  384x384 & 2.622 & 2.287 \\ \hline
+  512x512 & 6.248 & 5.471 \\ \hline
+  640x640 & 12.047 & 10.632 \\ \hline
+  \end{tabular}
+  \captionlistentry[table]{Czas obliczeń [ms] -- wersja 5.}
+  }
+
+  \end{minipage}
+  \qquad
+  \begin{minipage}[c]{0.46\textwidth}
+  \centering
+
+  \resizebox{\textwidth}{!}{%
   \begin{tikzpicture}
     \begin{axis}[
       xlabel=Szerokość macierzy,
@@ -91,29 +95,40 @@ Dla macierzy 16x16 limitem są rejestry. $8704$ rejestrów na blok daje limit $1
 
     \end{axis}%
   \end{tikzpicture}%
-\caption{Zależność pomiędzy czasem obliczeń a rozmiarem macierzy -- wersja 5.}
+  }
+
+  \end{minipage}
+
+  \captionsetup{labelformat=andtable}
+  \caption{Zależność pomiędzy czasem obliczeń a rozmiarem macierzy -- wersja 5.}
 \end{figure}
 
-\newpage
-\item \textbf{Ilość operacji zmiennoprzecinkowych na sekundę} \newline
-
-\begin{table}[H]
-\centering
-\begin{tabular}{|c|c|c|}
-\hline
-\multirow{2}{*}{Rozmiar macierzy} & \multicolumn{2}{c|}{Rozmiar bloku} \\ \cline{2-3}
-& 8x8 & 16x16 \\ \hline
-128x128 & 35.396 & 30.229 \\ \hline
-256x256 & 38.248 & 43.995 \\ \hline
-384x384 & 43.189 & 49.512 \\ \hline
-512x512 & 42.966 & 49.063 \\ \hline
-640x640 & 43.520 & 49.314 \\ \hline
-\end{tabular}
-\caption{Ilosc operacji zmiennoprzecinkowych na sekundę (GFLOPS) -- wersja 5.}
-\end{table}
+\paragraph{Ilość operacji zmiennoprzecinkowych na sekundę}
 
 \begin{figure}[H]
-\centering
+
+  \begin{minipage}[c]{0.46\textwidth}
+  \centering
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{|c|c|c|}
+  \hline
+  \multirow{2}{*}{Rozmiar macierzy} & \multicolumn{2}{c|}{Rozmiar bloku} \\ \cline{2-3}
+  & 8x8 & 16x16 \\ \hline
+  128x128 & 35.396 & 30.229 \\ \hline
+  256x256 & 38.248 & 43.995 \\ \hline
+  384x384 & 43.189 & 49.512 \\ \hline
+  512x512 & 42.966 & 49.063 \\ \hline
+  640x640 & 43.520 & 49.314 \\ \hline
+  \end{tabular}
+  \captionlistentry[table]{Ilosc operacji zmiennoprzecinkowych na sekundę (GFLOPS) -- wersja 5.}
+  }
+
+  \end{minipage}
+  \qquad
+  \begin{minipage}[c]{0.46\textwidth}
+  \centering
+
+  \resizebox{\textwidth}{!}{%
   \begin{tikzpicture}
     \begin{axis}[
       xlabel=Szerokość macierzy,
@@ -142,29 +157,40 @@ Dla macierzy 16x16 limitem są rejestry. $8704$ rejestrów na blok daje limit $1
 
     \end{axis}%
   \end{tikzpicture}%
-\caption{Zależność pomiędzy ilością operacji zmiennoprzecinkowychna sekundę a rozmiarem macierzy -- wersja 5.}
+  }
+
+  \end{minipage}
+
+  \captionsetup{labelformat=andtable}
+  \caption{Zależność pomiędzy ilością operacji zmiennoprzecinkowychna sekundę a rozmiarem macierzy -- wersja 5.}
 \end{figure}
 
-\newpage
-\item \textbf{Ilość instrukcji na sekundę} \newline
-
-\begin{table}[H]
-\centering
-\begin{tabular}{|c|c|c|c|}
-\hline
-\multirow{2}{*}{Rozmiar macierzy} & \multicolumn{2}{c|}{Rozmiar bloku} \\ \cline{2-3}
-& 8x8 & 16x16 \\ \hline
-128x128 & 0.1481 & 0.1856 \\ \hline
-256x256 & 0.1423 & 0.1641 \\ \hline
-384x384 & 0.1543 & 0.1951 \\ \hline
-512x512 & 0.1574 & 0.1894 \\ \hline
-640x640 & 0.1538 & 0.1909 \\ \hline
-\end{tabular}
-\caption{Ilość instrukcji wykonana na sekundę (GIPS) -- wersja 5.}
-\end{table}
+\paragraph{Ilość instrukcji na sekundę}
 
 \begin{figure}[H]
-\centering
+
+  \begin{minipage}[c]{0.46\textwidth}
+  \centering
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{|c|c|c|c|}
+  \hline
+  \multirow{2}{*}{Rozmiar macierzy} & \multicolumn{2}{c|}{Rozmiar bloku} \\ \cline{2-3}
+  & 8x8 & 16x16 \\ \hline
+  128x128 & 0.1481 & 0.1856 \\ \hline
+  256x256 & 0.1423 & 0.1641 \\ \hline
+  384x384 & 0.1543 & 0.1951 \\ \hline
+  512x512 & 0.1574 & 0.1894 \\ \hline
+  640x640 & 0.1538 & 0.1909 \\ \hline
+  \end{tabular}
+  \captionlistentry[table]{Ilość instrukcji wykonana na sekundę (GIPS) -- wersja 5.}
+  }
+
+  \end{minipage}
+  \qquad
+  \begin{minipage}[c]{0.46\textwidth}
+  \centering
+
+  \resizebox{\textwidth}{!}{%
   \begin{tikzpicture}
     \begin{axis}[
       xlabel=Szerokość macierzy,
@@ -193,29 +219,40 @@ Dla macierzy 16x16 limitem są rejestry. $8704$ rejestrów na blok daje limit $1
 
     \end{axis}%
   \end{tikzpicture}%
-\caption{Zależność pomiędzy ilością instrukcji wykonanych na sekundę a rozmiarem macierzy -- wersja 5.}
+  }
+
+  \end{minipage}
+
+  \captionsetup{labelformat=andtable}
+  \caption{Zależność pomiędzy ilością instrukcji wykonanych na sekundę a rozmiarem macierzy -- wersja 5.}
 \end{figure}
 
-\newpage
-\item \textbf{CGMA} \newline
-
-\begin{table}[H]
-\centering
-\begin{tabular}{|c|c|c|c|}
-\hline
-\multirow{2}{*}{Rozmiar macierzy} & \multicolumn{2}{c|}{Rozmiar bloku} \\ \cline{2-3}
-& 8x8 & 16x16 \\ \hline
-128x128 & 240.941 & 1129.931 \\ \hline
-256x256 & 256.250 & 1236.528 \\ \hline
-384x384 & 250.776 & 1276.675 \\ \hline
-512x512 & 253.050 & 1297.743 \\ \hline
-640x640 & 255.393 & 1310.720 \\ \hline
-\end{tabular}
-\caption{Stosunek ilości operacji zmiennoprzecinkowych do ilości operacji odczytu/zapisu z pamięci globalnej -- wersja 5.}
-\end{table}
+\paragraph{CGMA}
 
 \begin{figure}[H]
-\centering
+
+  \begin{minipage}[c]{0.46\textwidth}
+  \centering
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{|c|c|c|c|}
+  \hline
+  \multirow{2}{*}{Rozmiar macierzy} & \multicolumn{2}{c|}{Rozmiar bloku} \\ \cline{2-3}
+  & 8x8 & 16x16 \\ \hline
+  128x128 & 240.941 & 1129.931 \\ \hline
+  256x256 & 256.250 & 1236.528 \\ \hline
+  384x384 & 250.776 & 1276.675 \\ \hline
+  512x512 & 253.050 & 1297.743 \\ \hline
+  640x640 & 255.393 & 1310.720 \\ \hline
+  \end{tabular}
+  \captionlistentry[table]{Stosunek ilości operacji zmiennoprzecinkowych do ilości operacji odczytu/zapisu z pamięci globalnej -- wersja 5.}
+  }
+
+  \end{minipage}
+  \qquad
+  \begin{minipage}[c]{0.46\textwidth}
+  \centering
+
+  \resizebox{\textwidth}{!}{%
   \begin{tikzpicture}
     \begin{axis}[
       xlabel=Szerokość macierzy,
@@ -244,7 +281,10 @@ Dla macierzy 16x16 limitem są rejestry. $8704$ rejestrów na blok daje limit $1
 
     \end{axis}%
   \end{tikzpicture}%
-\caption{Zależność CGMA od rozmiaru macierzy -- wersja 4.}
-\end{figure}
+  }
 
-\end{enumerate}
+  \end{minipage}
+
+  \captionsetup{labelformat=andtable}
+  \caption{Zależność CGMA od rozmiaru macierzy -- wersja 4.}
+\end{figure}
